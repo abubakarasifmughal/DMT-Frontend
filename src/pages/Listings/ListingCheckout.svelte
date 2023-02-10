@@ -19,7 +19,7 @@
     if (id === "listing") {
       return;
     }
-    fetch(`${config.SERVER_IP}:${config.SERVER_PORT}/listings/${pathname}`, {
+    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/listings/${pathname}`, {
       method: "GET",
     })
       .then((response) => response.text())
@@ -107,7 +107,7 @@
       redirect: "follow",
     };
 
-    fetch(`${config.SERVER_IP}:${config.SERVER_PORT}/bookings`, requestOptions)
+    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/bookings`, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         if (JSON.parse(result).statusCode === 400) {
@@ -133,7 +133,7 @@
           redirect: "follow",
         };
         fetch(
-          `${config.SERVER_IP}:${config.SERVER_PORT}/mailer/send`,
+          `${config.SERVER_IP}${config.SERVER_PORT}/mailer/send`,
           requestOptions
         )
           .then((response) => response.text())

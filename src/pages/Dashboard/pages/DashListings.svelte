@@ -38,7 +38,7 @@
       body: raw,
     };
 
-    fetch(`${config.SERVER_IP}:${config.SERVER_PORT}/listings/${user_id}`, {
+    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/listings/${user_id}`, {
       ...requestOptions,
     })
       .then((response) => response.text())

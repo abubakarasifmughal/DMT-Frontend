@@ -27,7 +27,7 @@
       headers: myHeaders,
       body: raw,
     };
-    fetch(`${config.SERVER_IP}:${config.SERVER_PORT}/user`, requestOptions)
+    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/user`, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         navigate("/login");

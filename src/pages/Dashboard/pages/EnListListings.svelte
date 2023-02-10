@@ -140,7 +140,7 @@
       body: JSON.stringify(listingToBeEdited),
     };
 
-    fetch(`${config.SERVER_IP}:${config.SERVER_PORT}/listings`, requestOptions)
+    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/listings`, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         listingToBeEdited = {};
@@ -173,7 +173,7 @@
     };
 
     fetch(
-      `${config.SERVER_IP}:${config.SERVER_PORT}/room/add/${listingToBeEdited.id}`,
+      `${config.SERVER_IP}${config.SERVER_PORT}/room/add/${listingToBeEdited.id}`,
       requestOptions
     )
       .then((response) => response.text())
@@ -199,7 +199,7 @@
       body: JSON.stringify(listingToBeEdited),
     };
 
-    fetch(`${config.SERVER_IP}:${config.SERVER_PORT}/listings`, requestOptions)
+    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/listings`, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         listingToBeEdited = {};
@@ -211,7 +211,7 @@
 
   let loadData = () => {
     fetch(
-      `${config.SERVER_IP}:${config.SERVER_PORT}/listings/${userid}`,
+      `${config.SERVER_IP}${config.SERVER_PORT}/listings/${userid}`,
       requestOptions
     )
       .then((response) => response.text())
@@ -229,7 +229,7 @@
     };
 
     fetch(
-      `${config.SERVER_IP}:${config.SERVER_PORT}/bookings/${listing.id}`,
+      `${config.SERVER_IP}${config.SERVER_PORT}/bookings/${listing.id}`,
       requestOptions
     )
       .then((response) => response.text())
@@ -708,7 +708,7 @@
           };
 
           fetch(
-            `${config.SERVER_IP}:${config.SERVER_PORT}/bookings/approve/${booking.Booking_id}`,
+            `${config.SERVER_IP}${config.SERVER_PORT}/bookings/approve/${booking.Booking_id}`,
             requestOptions
           )
             .then((response) => response.text())
@@ -727,7 +727,7 @@
           };
 
           fetch(
-            `${config.SERVER_IP}:${config.SERVER_PORT}/bookings/disapprove/${booking.Booking_id}`,
+            `${config.SERVER_IP}${config.SERVER_PORT}/bookings/disapprove/${booking.Booking_id}`,
             requestOptions
           )
             .then((response) => response.text())

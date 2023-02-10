@@ -27,7 +27,7 @@
     method: "GET",
   };
 
-  fetch(`${config.SERVER_IP}:${config.SERVER_PORT}/listings`, requestOptions)
+  fetch(`${config.SERVER_IP}${config.SERVER_PORT}/listings`, requestOptions)
     .then((response) => response.text())
     .then((result) => {
       listings = JSON.parse(result);

@@ -30,10 +30,7 @@
       body: raw,
     };
 
-    fetch(
-      `${config.SERVER_IP}:${config.SERVER_PORT}/user/login`,
-      requestOptions
-    )
+    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/user/login`, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         let object = JSON.parse(result);
