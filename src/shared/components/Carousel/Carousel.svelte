@@ -85,14 +85,30 @@
               currentCardIndex === 0
                 ? currentCardIndex
                 : (currentCardIndex = currentCardIndex - 1)}
-          />
+          >
+            <img
+              src="/assets/static/icon/arrow.png"
+              style="object-fit: contain;transform: rotate(0deg);object-position: center;"
+              alt=""
+              height="60%"
+              width="60%"
+            />
+          </button>
           <button
             class="mt-4 roundBtn btn"
             on:click={() =>
               currentCardIndex + 3 === cards.length
                 ? currentCardIndex
                 : (currentCardIndex = currentCardIndex + 1)}
-          />
+          >
+            <img
+              src="/assets/static/icon/arrow.png"
+              style="object-fit: contain;transform: rotate(180deg);object-position: center;"
+              alt=""
+              height="60%"
+              width="60%"
+            />
+          </button>
         </div>
       </div>
       <div class="col-md-5">

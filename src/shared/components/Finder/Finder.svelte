@@ -4,6 +4,8 @@
     DropdownItem,
     DropdownMenu,
     DropdownToggle,
+    FormGroup,
+    Input,
   } from "sveltestrap";
   import { DateInput } from "date-picker-svelte";
   import { navigate } from "svelte-routing";
@@ -40,42 +42,57 @@
   export let isPopupOpen = false;
 </script>
 
-<div class="ps-2 pe-2">
+<div class="">
   <div
     class="container {isPopupOpen ? '' : 'finderBox'} bg-white {levitating
       ? 'shadow'
-      : ''} p-4"
-    style="transform: {levitating ? 'translateY(-50%)' : ''}"
+      : ''} p-3"
+    style="transform: {levitating ? 'translateY(-50%)' : ''};"
   >
     <div class="row">
-      <div class="col-md-4 m-md-0 mb-3">
+      <div class="col-md-4">
         <Dropdown {isOpen} toggle={() => (isOpen = !isOpen)}>
           <DropdownToggle tag="div" class="col-12">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Where"
-              bind:value={searchString}
-            />
+            <FormGroup
+              floating
+              label="Enter location"
+              class={"p-0 m-0"}
+              style={"margin:0pt !important;height:35pt !important;font-size:10pt;"}
+            >
+              <Input
+                placeholder="Where"
+                bind:value={searchString}
+                style={"height:35pt !important;font-size:10pt;"}
+              />
+            </FormGroup>
           </DropdownToggle>
           <DropdownMenu style="width: 100%;">
             {#each getFilteredLocations(locations, searchString) as location}
-              <DropdownItem>{location.label}</DropdownItem>
+              <DropdownItem on:click={() => (searchString = location.label)}
+                >{location.label}</DropdownItem
+              >
             {/each}
           </DropdownMenu>
         </Dropdown>
       </div>
-      <div class="col-md-6 m-md-0 mb-3">
-        <div class="row">
+      <div class="col-md-6 ">
+        <div class="row mt-2 mt-md-0 mb-md-0 mb-2">
           <div class="col-6" style="font-size: large;">
             <DateInput
+              min={new Date()}
               bind:value={checkindate}
+              on:select={() => {
+                if (checkindate >= checkoutdate) {
+                  checkoutdate = checkindate;
+                }
+              }}
               closeOnSelection={true}
               format={"dd-MM-yyyy"}
             />
           </div>
           <div class="col-6" style="font-size: large;">
             <DateInput
+              min={checkindate}
               bind:value={checkoutdate}
               closeOnSelection={true}
               format={"dd-MM-yyyy"}
@@ -83,12 +100,12 @@
           </div>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 d-flex align-item-center">
         <button
           on:click={() => {
             navigate("/listing");
           }}
-          class="btn btn col-12 p-1"
+          class="btn btn-lg col-12"
         >
           Search
         </button>
