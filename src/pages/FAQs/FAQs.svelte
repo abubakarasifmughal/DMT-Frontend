@@ -96,7 +96,7 @@
       </div>
       <div class="col-md-6 mt-5">
         <img
-          src="/public/assets/static/images/global/faqs.jpg"
+          src="/assets/static/images/global/faqs.jpg"
           alt=""
           height="100%"
           width="100%"

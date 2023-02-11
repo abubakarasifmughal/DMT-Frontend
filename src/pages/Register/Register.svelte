@@ -39,10 +39,9 @@
 <div class="">
   <Navbar color="text-black" btnTheme={""} />
   <div
-    class="d-flex align-items-center justify-content-center"
-    style="height: 90vh;"
+    class="d-flex align-items-center justify-content-center mt-0 pt-0 pt-sm-5 mt-sm-5"
   >
-    <div class="container shadow p-5" style="background-color: #F9F8FC;">
+    <div class="container shadow p-sm-5" style="background-color: #F9F8FC;">
       <div class="row">
         <div class="col-md-6">
           <div class="text-center">
@@ -94,9 +93,9 @@
             <b>Password Strength</b>
           </div>
           <PasswordStrength password={signupObject.password} />
-          <div class="pt-4 d-flex align-items-center">
+          <div class="pt-4 d-flex align-items-start">
             <input
-              class="me-2"
+              class="me-3 mt-1"
               style="transform: scale(1.2);"
               id="tos_register"
               type="checkbox"
@@ -108,17 +107,22 @@
               ></label
             >
           </div>
-          <div class="mt-4 d-flex align-items-center">
-            {#if tosAgree}
-              <button class="btn ps-5 pe-5" on:click={onSignup}>
-                Sign up
-              </button>
-            {:else}
-              <button disabled class="btn ps-5 pe-5"> Sign up </button>
-            {/if}
-            <span class="ps-3 pe-3">|</span>
-            <Link to="/login" style="text-decoration:none;color:inherit;">
-              <button class="btn ps-5 pe-5"> Login </button>
+          <div class="mt-4 row">
+            <div class="col-md-6 mb-3">
+              {#if tosAgree}
+                <button class="btn ps-5 pe-5 col-12" on:click={onSignup}>
+                  Sign up
+                </button>
+              {:else}
+                <button disabled class="btn ps-5 pe-5 col-12"> Sign up </button>
+              {/if}
+            </div>
+            <Link
+              class="col-md-6 mb-3"
+              to="/login"
+              style="text-decoration:none;color:inherit;"
+            >
+              <button class="btn ps-5 pe-5 col-12"> Login </button>
             </Link>
           </div>
         </div>

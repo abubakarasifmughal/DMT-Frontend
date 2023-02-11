@@ -55,13 +55,16 @@
 </Modal>
 <Navbar color="text-black" btnTheme={""} />
 <div
-  class="d-flex align-items-center justify-content-center"
+  class="d-flex align-items-center justify-content-center pt-5 mt-5 pt-sm-0 mt-sm-0"
   style="height: 90vh;"
 >
-  <div class="container shadow" style="background-color: #F9F8FC;">
-    <div class="row p-5">
+  <div
+    class="container shadow mt-5 mt-sm-0 pt-5 pt-sm-0"
+    style="background-color: #F9F8FC;"
+  >
+    <div class="row ">
       <div
-        class="col-md-6 d-flex justify-content-center flex-column p-5"
+        class="col-md-6 d-flex justify-content-center flex-column p-2 p-sm-5"
         style="height: 50vh;"
       >
         <div class="text-center">
