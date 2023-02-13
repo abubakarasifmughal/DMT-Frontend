@@ -1,5 +1,12 @@
 <script>
-  import { Modal, Offcanvas } from "sveltestrap";
+  import {
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    Modal,
+    Offcanvas,
+  } from "sveltestrap";
   import config from "../../../../environment.json";
   import Amenities from "../../../shared/Forms/Amenities.svelte";
   export let onClickCreate;
@@ -209,7 +216,9 @@
       .catch((error) => console.log("error", error));
   };
 
+  let isLoading = false;
   let loadData = () => {
+    isLoading = true;
     fetch(
       `${config.SERVER_IP}${config.SERVER_PORT}/listings/${userid}`,
       requestOptions
@@ -217,8 +226,12 @@
       .then((response) => response.text())
       .then((result) => {
         listingData = JSON.parse(result);
+        isLoading = false;
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => {
+        console.log("error", error);
+        isLoading = false;
+      });
   };
 
   let openForBookings = false;
@@ -262,62 +275,66 @@
   </div>
   <br />
   <div class="container-fluid">
-    <table class="table table-light">
-      <thead>
-        <tr>
-          <th>Listing</th>
-          <th>Accomodation Type</th>
-          <th>Description</th>
-          <th>Room Categories</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each filteredByString(searchString, listingData) as listing}
+    {#if !isLoading}
+      <table class="table table-light">
+        <thead>
           <tr>
-            <td>
-              <i>{listing.headline}</i>
-            </td>
-            <td>
-              <div>
-                {listing.accomodationType}
-              </div>
-            </td>
-            <td>
-              {listing.description}
-            </td>
-            <td> {listing?.rooms?.length}</td>
-            <td>
-              <button
-                class="btn btn-sm ps-3 pe-3 me-1"
-                on:click={() => toggleForEdit(listing)}
-              >
-                Edit
-              </button>
-              <button
-                class="btn btn-sm pe-3 ps-3 me-1"
-                on:click={() => toggleForAddNewRoom(listing)}
-              >
-                Add new
-              </button>
-              <button
-                class="btn btn-sm pe-3 ps-3 me-1"
-                on:click={() => toggleForRoomsEdit(listing)}
-              >
-                Edit Rooms
-              </button>
-              <button
-                class="btn btn-sm pe-3 ps-3 me-1"
-                on:click={() => toggleForBookings(listing)}
-              >
-                Bookings
-              </button>
-              <button class="btn btn-sm pe-3 ps-3">Delete</button>
-            </td>
+            <th>Listing</th>
+            <th>Accomodation Type</th>
+            <th>Description</th>
+            <th>Room Categories</th>
+            <th>Actions</th>
           </tr>
-        {/each}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {#each filteredByString(searchString, listingData) as listing}
+            <tr>
+              <td>
+                <i>{listing.headline}</i>
+              </td>
+              <td>
+                <div>
+                  {listing.accomodationType}
+                </div>
+              </td>
+              <td>
+                {listing.description}
+              </td>
+              <td> {listing?.rooms?.length}</td>
+              <td>
+                <Dropdown>
+                  <DropdownToggle caret class="btn btn-light border"
+                    >Actions</DropdownToggle
+                  >
+                  <DropdownMenu>
+                    <DropdownItem on:click={() => toggleForEdit(listing)}>
+                      Edit
+                    </DropdownItem>
+                    <DropdownItem on:click={() => toggleForAddNewRoom(listing)}>
+                      Add new
+                    </DropdownItem>
+                    <DropdownItem on:click={() => toggleForRoomsEdit(listing)}>
+                      Edit Rooms
+                    </DropdownItem>
+                    <DropdownItem on:click={() => toggleForBookings(listing)}>
+                      Bookings
+                    </DropdownItem>
+                    <DropdownItem class="text-danger">Delete</DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    {:else}
+      <div
+        class="p-5 d-flex align-items-center justify-content-center flex-column"
+      >
+        <div class="spinner-border text-dark mb-3" />
+        <div class="">Loading Listings</div>
+      </div>
+    {/if}
   </div>
 </div>
 
@@ -673,6 +690,9 @@
 <Modal isOpen={openForBookings} toggle={toggleForBookings}>
   <div class="modal-header">{bookingsData.listing.headline} Bookings</div>
   <div class="modal-body">
+    {#if bookingsData?.bookings?.length === 0}
+      <div>No bookings yet</div>
+    {/if}
     {#each bookingsData?.bookings as booking, index}
       <h5>
         Booking {booking.Booking_id} for {booking.Invoice_amount}
