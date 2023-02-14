@@ -7,12 +7,14 @@
     FormGroup,
     Input,
   } from "sveltestrap";
-  import { DateInput } from "date-picker-svelte";
   import { navigate } from "svelte-routing";
+  import SveltyPicker from "svelty-picker";
+  import { now } from "svelte/internal";
+  import { DateInput } from "date-picker-svelte";
 
   export let levitating: boolean = true;
-
   let checkindate = new Date();
+  // let checkindate = "2021-11-11 14:35";
   let checkoutdate = new Date();
 
   let searchString: string = "";
@@ -53,18 +55,7 @@
       <div class="col-md-4">
         <Dropdown {isOpen} toggle={() => (isOpen = !isOpen)}>
           <DropdownToggle tag="div" class="col-12">
-            <FormGroup
-              floating
-              label="Enter location"
-              class={"p-0 m-0"}
-              style={"margin:0pt !important;height:35pt !important;font-size:10pt;"}
-            >
-              <Input
-                placeholder="Where"
-                bind:value={searchString}
-                style={"height:35pt !important;font-size:10pt;"}
-              />
-            </FormGroup>
+            <Input placeholder="Where" bind:value={searchString} />
           </DropdownToggle>
           <DropdownMenu style="width: 100%;">
             {#each getFilteredLocations(locations, searchString) as location}
@@ -78,6 +69,23 @@
       <div class="col-md-6 ">
         <div class="row mt-2 mt-md-0 mb-md-0 mb-2">
           <div class="col-6" style="font-size: large;">
+            <!-- {checkindate} -->
+            <!-- <SveltyPicker
+              inputClasses="form-control"
+              on:change={(event) => {
+                let today = new Date();
+                console.log("Today", today);
+                let d = new Date();
+                // 2023-02-14
+                console.log("->", event.detail.replaceAll("-", ""));
+                console.log("->", event.detail.replaceAll("-", ""));
+
+                d.setFullYear(event.detail.replaceAll("-", "").substring(0, 4));
+                d.setMonth(event.detail.replaceAll("-", "").substring(4, 7));
+                d.setDate(event.detail.replaceAll("-", "").substring(7, 10));
+                console.log("selected", d);
+              }}
+            /> -->
             <DateInput
               min={new Date()}
               bind:value={checkindate}
@@ -91,6 +99,15 @@
             />
           </div>
           <div class="col-6" style="font-size: large;">
+            <!-- <SveltyPicker
+              inputClasses="form-control"
+              on:change={(event) => {
+                checkoutdate = event.detail;
+                if (checkindate >= checkoutdate) {
+                  checkoutdate = checkindate;
+                }
+              }}
+            /> -->
             <DateInput
               min={checkindate}
               bind:value={checkoutdate}
@@ -105,7 +122,7 @@
           on:click={() => {
             navigate("/listing");
           }}
-          class="btn btn-lg col-12"
+          class="btn col-12"
         >
           Search
         </button>

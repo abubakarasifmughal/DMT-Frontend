@@ -22,6 +22,7 @@
     "date-picker-svelte": "^2.2.5",
     "leaflet": "^1.9.3",
     "svelte-routing": "^1.6.0",
-    "sveltestrap": "^5.10.0"
+    "sveltestrap": "^5.10.0",
+    "svelty-picker": "^3.4.2"
   }
 }
