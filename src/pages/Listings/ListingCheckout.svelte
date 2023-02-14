@@ -7,6 +7,7 @@
   import RoomCard from "../../shared/lib/RoomCard/RoomCard.svelte";
   import config from "../../../environment.json";
   import { Modal } from "sveltestrap";
+  import { DateInput } from "date-picker-svelte";
   let userid = sessionStorage.getItem("di");
   let pathname;
   let unsub;
@@ -58,8 +59,8 @@
     people: 1,
     contact_email: "",
     contact_tel: "",
-    checkin_date: "",
-    checkout_date: "",
+    checkin_date: new Date(),
+    checkout_date: new Date(),
     additional_requests: "",
   };
   let ERROR = false;
@@ -200,23 +201,29 @@
         <div class="row mb-2">
           <div class="col-6">
             <div class="mb-1">Check In</div>
-            <input
-              class="form-control"
-              type="date"
-              placeholder="Check In Date"
+            <DateInput
+              min={new Date()}
               bind:value={information.checkin_date}
+              on:select={() => {
+                if (information.checkin_date >= information.checkout_date) {
+                  information.checkout_date = information.checkin_date;
+                }
+              }}
+              closeOnSelection={true}
+              format={"dd-MM-yyyy"}
             />
           </div>
           <div class="col-6">
             <div class="mb-1">Check Out</div>
-            <input
-              class="form-control"
-              type="date"
-              placeholder="Check out Date"
+            <DateInput
+              min={information.checkin_date}
               bind:value={information.checkout_date}
+              closeOnSelection={true}
+              format={"dd-MM-yyyy"}
             />
           </div>
         </div>
+
         <div class="row mb-2">
           <div class="col-8">
             <div class="mb-1">Telephone</div>

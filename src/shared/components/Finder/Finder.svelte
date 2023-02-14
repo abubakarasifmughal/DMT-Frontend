@@ -69,23 +69,6 @@
       <div class="col-md-6 ">
         <div class="row mt-2 mt-md-0 mb-md-0 mb-2">
           <div class="col-6" style="font-size: large;">
-            <!-- {checkindate} -->
-            <!-- <SveltyPicker
-              inputClasses="form-control"
-              on:change={(event) => {
-                let today = new Date();
-                console.log("Today", today);
-                let d = new Date();
-                // 2023-02-14
-                console.log("->", event.detail.replaceAll("-", ""));
-                console.log("->", event.detail.replaceAll("-", ""));
-
-                d.setFullYear(event.detail.replaceAll("-", "").substring(0, 4));
-                d.setMonth(event.detail.replaceAll("-", "").substring(4, 7));
-                d.setDate(event.detail.replaceAll("-", "").substring(7, 10));
-                console.log("selected", d);
-              }}
-            /> -->
             <DateInput
               min={new Date()}
               bind:value={checkindate}
@@ -99,15 +82,6 @@
             />
           </div>
           <div class="col-6" style="font-size: large;">
-            <!-- <SveltyPicker
-              inputClasses="form-control"
-              on:change={(event) => {
-                checkoutdate = event.detail;
-                if (checkindate >= checkoutdate) {
-                  checkoutdate = checkindate;
-                }
-              }}
-            /> -->
             <DateInput
               min={checkindate}
               bind:value={checkoutdate}
@@ -149,7 +123,7 @@
 
   :root {
     --date-input-width: 100%;
-    --date-picker-foreground: #9427f7;
+    --date-picker-foreground: black;
     /* --date-picker-background */
     --date-picker-highlight-border: #9427f7;
     /* --date-picker-highlight-shadow: #9427f7; */
