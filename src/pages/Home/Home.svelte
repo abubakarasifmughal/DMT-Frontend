@@ -99,7 +99,7 @@
       <div class="col-md-5 mb-5">
         <div
           class="card text-white p-5"
-          style="background-image: url('/assets/static/images/index/cave_explore.png');height: 400pt"
+          style="background-image: url('/assets/static/images/index/cave_explore.jpg');height: 400pt"
         >
           <h1 class="fw-bolder">Things to do from home</h1>
           <div class="mt-3">
@@ -153,7 +153,7 @@
     background-size: cover;
   }
   .low_backgrounded {
-    background-image: url("/assets/static/images/global/ocean_footer.png");
+    background-image: url("/assets/static/images/global/ocean_footer.jpg");
     background-position-x: center;
     background-position-y: center;
     background-repeat: no-repeat;
