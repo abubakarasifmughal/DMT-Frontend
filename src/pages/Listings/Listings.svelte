@@ -8,19 +8,19 @@
 
   let loading = true;
   let listings = [
-    {
-      isPropery: true,
-      address: "Gold Ave, 55679",
-      address_lat: null,
-      address_lon: null,
-      headline: "Hotel Grand",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis rem cum natus et facere deserunt voluptatem ipsum nostrum, aperiam itaque tenetur iusto suscipit ducimus in sed beatae nobis laboriosam accusamus!",
-      accomodationType: "",
-      currency: "",
-      rooms: [],
-      listingImages: [],
-    },
+    // {
+    //   isPropery: true,
+    //   address: "Gold Ave, 55679",
+    //   address_lat: null,
+    //   address_lon: null,
+    //   headline: "Hotel Grand",
+    //   description:
+    //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis rem cum natus et facere deserunt voluptatem ipsum nostrum, aperiam itaque tenetur iusto suscipit ducimus in sed beatae nobis laboriosam accusamus!",
+    //   accomodationType: "",
+    //   currency: "",
+    //   rooms: [],
+    //   listingImages: [],
+    // },
   ];
 
   var requestOptions = {
