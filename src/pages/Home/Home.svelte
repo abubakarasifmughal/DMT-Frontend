@@ -31,7 +31,7 @@
       <Navbar btnTheme={"btn-outline-light"} />
     </div>
 
-    <Carousel {items} bind:activeIndex ride interval={2000} style="background-color: red; height: 600pt; width: 100%;">
+    <Carousel {items} bind:activeIndex ride interval={2000} style="background-color: gainsboro; height: 600pt; width: 100%;">
       <CarouselIndicators bind:activeIndex {items} />
     
       <div class="carousel-inner">
