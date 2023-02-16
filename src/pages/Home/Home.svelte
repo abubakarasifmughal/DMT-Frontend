@@ -87,7 +87,7 @@
     <GetApp/> 
   </div>
   <br />
-  <div class="mt-5 pt-5">
+  <!-- <div class="mt-5 pt-5">
     <div class="container ">
       <div class="row d-flex justify-content-center">
         <div class="col-lg-3 mt-5 text-center text-lg-start">
@@ -125,7 +125,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <br />
   <div class="container mt-5 p-5">
     <div class="row mb-5">
@@ -159,16 +159,16 @@
     d-flex justify-content-center align-items-center flex-column"
   >
     <h1 class="fw-bolder mb-5 text-dark">Offers and Discount Notification</h1>
-    <div class="row col-md-4">
-      <div class="col-md-9 mb-4">
+    <div class="row col-md-5">
+      <div class="col-lg-8 mb-4">
         <input
           type="text"
-          class="form-control col-12 p-3"
+          class="form-control col-12 px-2 py-3"
           placeholder="Email"
         />
       </div>
-      <div class="col-md-3">
-        <button class="btn col-12 p-3 fw-bold">Submit</button>
+      <div class="col-lg-4">
+        <button class="btn col-12 px-2 py-3 fw-bold">Submit</button>
       </div>
     </div>
   </div>
