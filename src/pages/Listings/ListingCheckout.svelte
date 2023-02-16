@@ -6,7 +6,7 @@
   import { globalHistory } from "svelte-routing/src/history";
   import RoomCard from "../../shared/lib/RoomCard/RoomCard.svelte";
   import config from "../../../environment.json";
-  import { Modal } from "sveltestrap";
+  import { Icon, Modal } from "sveltestrap";
   import { DateInput } from "date-picker-svelte";
   let userid = sessionStorage.getItem("di");
   let pathname;
@@ -57,6 +57,9 @@
     firstname: "",
     lastname: "",
     people: 1,
+    adults: 1,
+    children: 0,
+    pets: false,
     contact_email: "",
     contact_tel: "",
     checkin_date: new Date(),
@@ -236,15 +239,131 @@
           </div>
           <div class="col-4">
             <div class="mb-1">No. Persons</div>
+            <div class="form-control">
+              {information.adults + information.children}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="mb-1">Adults</div>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-8">
             <input
               class="form-control"
               type="number"
               min="1"
-              placeholder="Number of People"
-              bind:value={information.people}
+              placeholder="Adults"
+              bind:value={information.adults}
             />
           </div>
+          <div class="col-4">
+            <div class="d-flex align-items-center justify-content-around">
+              <button
+                class="border-0 bg-transparent"
+                on:click={() => {
+                  if (information.adults > 1) {
+                    information.adults = information.adults - 1;
+                    information.people = information.people - 1;
+                  }
+                }}
+              >
+                <i class="bi bi-dash-circle fs-3" />
+              </button>
+              <button
+                class="border-0 bg-transparent"
+                on:click={() => {
+                  if (information.adults < 10) {
+                    information.adults = information.adults + 1;
+                    information.people = information.people + 1;
+                  }
+                }}
+              >
+                <i class="bi bi-plus-circle fs-3" />
+              </button>
+            </div>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="mb-1">Childrens</div>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-8">
+            <input
+              class="form-control"
+              type="number"
+              min="0"
+              placeholder="Childrens"
+              bind:value={information.children}
+            />
+          </div>
+          <div class="col-4">
+            <div class="d-flex align-items-center justify-content-around">
+              <button
+                class="border-0 bg-transparent"
+                on:click={() => {
+                  if (information.children > 0) {
+                    information.children = information.children - 1;
+                    information.people = information.people - 1;
+                  }
+                }}
+              >
+                <i class="bi bi-dash-circle fs-3" />
+              </button>
+              <button
+                class="border-0 bg-transparent"
+                on:click={() => {
+                  if (information.children < 10) {
+                    information.children = information.children + 1;
+                    information.people = information.people + 1;
+                  }
+                }}
+              >
+                <i class="bi bi-plus-circle fs-3" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-8">
+            <div class="d-flex align-items-center h-100">
+              <span class="text-center">Pets</span>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="d-flex align-items-center justify-content-around">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault1"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Yes
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault2"
+                  checked
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  No
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="row mb-2">
           <div class="col-12">
             <textarea
