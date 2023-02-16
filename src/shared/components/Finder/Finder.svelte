@@ -55,7 +55,7 @@
       <div class="col-md-4">
         <Dropdown {isOpen} toggle={() => (isOpen = !isOpen)}>
           <DropdownToggle tag="div" class="col-12">
-            <Input placeholder="Where" bind:value={searchString} />
+            <Input placeholder="Where" bind:value={searchString} style="border-radius: 3px;"/>
           </DropdownToggle>
           <DropdownMenu style="width: 100%;">
             {#each getFilteredLocations(locations, searchString) as location}
@@ -97,6 +97,7 @@
             navigate("/listing");
           }}
           class="btn col-12"
+          style="border-radius: 3px;"
         >
           Search
         </button>
