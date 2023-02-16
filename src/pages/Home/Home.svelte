@@ -20,7 +20,7 @@
         </span>
       </div>
       <br />
-      <span style="font-size: 20pt;text-shadow: 0px 0px 10px gray;">
+      <span style="font-size: 16pt;text-shadow: 0px 0px 10px gray;">
         Find and book great expierences in Nepal
       </span>
     </div>
@@ -157,13 +157,13 @@
   }
 
   .home_top_section {
-    min-height: 700pt;
+    min-height: 600pt;
     /* background-image: url("/assets/static/images/dev/front_page-dw.jpg"); */
     background-image: url("/assets/static/images/index/nepal_sunset.jpg");
     background-size: cover;
     /* background-attachment: fixed; */
     background-position-x: center;
-    background-position-y: bottom;
+    background-position-y: center;
     position: relative;
     display: flex;
     align-items: center;
