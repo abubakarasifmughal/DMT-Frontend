@@ -239,14 +239,9 @@
           </div>
           <div class="col-4">
             <div class="mb-1">No. Persons</div>
-            <input
-              class="form-control"
-              type="number"
-              min="1"
-              placeholder="Number of People"
-              disabled
-              bind:value={information.people}
-            />
+            <div class="form-control">
+              {information.adults + information.children}
+            </div>
           </div>
         </div>
         <div class="row">
@@ -261,27 +256,32 @@
               type="number"
               min="1"
               placeholder="Adults"
-
               bind:value={information.adults}
             />
           </div>
           <div class="col-4">
-            <div class="d-flex align-items-center justify-content-around">  
-              <button class="border-0 bg-transparent" on:click={() => {
-                if ( information.adults > 1 ) {
-                  information.adults= information.adults - 1
-                  information.people = information.people - 1
-                }
-              }}>
-                <i class="bi bi-dash-circle fs-3"></i>
+            <div class="d-flex align-items-center justify-content-around">
+              <button
+                class="border-0 bg-transparent"
+                on:click={() => {
+                  if (information.adults > 1) {
+                    information.adults = information.adults - 1;
+                    information.people = information.people - 1;
+                  }
+                }}
+              >
+                <i class="bi bi-dash-circle fs-3" />
               </button>
-              <button class="border-0 bg-transparent" on:click={() => {
-                if (information.adults < 10 ) {
-                  information.adults = information.adults + 1
-                  information.people = information.people + 1
-                }
-              }}>
-                <i class="bi bi-plus-circle fs-3"></i>
+              <button
+                class="border-0 bg-transparent"
+                on:click={() => {
+                  if (information.adults < 10) {
+                    information.adults = information.adults + 1;
+                    information.people = information.people + 1;
+                  }
+                }}
+              >
+                <i class="bi bi-plus-circle fs-3" />
               </button>
             </div>
           </div>
@@ -298,27 +298,32 @@
               type="number"
               min="0"
               placeholder="Childrens"
-
               bind:value={information.children}
             />
           </div>
           <div class="col-4">
-            <div class="d-flex align-items-center justify-content-around">  
-              <button class="border-0 bg-transparent" on:click={() => {
-                if ( information.children > 0 ) {
-                  information.children = information.children - 1
-                  information.people = information.people - 1
-                }
-              }}>
-                <i class="bi bi-dash-circle fs-3"></i>
+            <div class="d-flex align-items-center justify-content-around">
+              <button
+                class="border-0 bg-transparent"
+                on:click={() => {
+                  if (information.children > 0) {
+                    information.children = information.children - 1;
+                    information.people = information.people - 1;
+                  }
+                }}
+              >
+                <i class="bi bi-dash-circle fs-3" />
               </button>
-              <button class="border-0 bg-transparent" on:click={() => {
-                if ( information.children < 10 ) {
-                  information.children = information.children + 1
-                  information.people = information.people + 1
-                }
-              }}>
-                <i class="bi bi-plus-circle fs-3"></i>
+              <button
+                class="border-0 bg-transparent"
+                on:click={() => {
+                  if (information.children < 10) {
+                    information.children = information.children + 1;
+                    information.people = information.people + 1;
+                  }
+                }}
+              >
+                <i class="bi bi-plus-circle fs-3" />
               </button>
             </div>
           </div>
@@ -331,15 +336,26 @@
             </div>
           </div>
           <div class="col-4">
-            <div class="d-flex align-items-center justify-content-around">  
+            <div class="d-flex align-items-center justify-content-around">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault1"
+                />
                 <label class="form-check-label" for="flexRadioDefault1">
                   Yes
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault2"
+                  checked
+                />
                 <label class="form-check-label" for="flexRadioDefault2">
                   No
                 </label>
