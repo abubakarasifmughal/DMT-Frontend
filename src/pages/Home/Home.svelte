@@ -2,6 +2,7 @@
   import Carousel from "../../shared/components/Carousel/Carousel.svelte";
   import Finder from "../../shared/components/Finder/Finder.svelte";
   import Footer from "../../shared/components/Footer/Footer.svelte";
+  import GetApp from "../../shared/components/GetApp/GetApp.svelte";
   import Navbar from "../../shared/components/Navbar/Navbar.svelte";
 </script>
 
@@ -27,25 +28,29 @@
   </div>
   <div style="position: relative;">
     <Finder />
-    <div style="height:100pt" />
+    
   </div>
   <div class="container-fluid">
-    <div class="row mt-5">
-      <div class="col-lg-3" />
+    <div class="row ">
+      
       <div
-        class="col-lg-3 d-flex flex-column align-items-center align-items-sm-end justify-content-center"
+        class="col-lg-5 d-flex flex-column align-items-center align-items-sm-end justify-content-center"
       >
         <div
-          class="fw-bolder text-md-end text-center p-5"
+          class="fw-bolder p-5"
           style="font-size: 30pt;line-height: 35pt;"
         >
           <b> Unforgettable activities to do in Naples </b>
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-7">
         <Carousel />
       </div>
     </div>
+  </div>
+
+  <div>
+    <GetApp/> 
   </div>
   <br />
   <div class="mt-5 pt-5">
