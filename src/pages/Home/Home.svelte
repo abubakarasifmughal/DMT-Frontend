@@ -51,11 +51,6 @@
   <div class="mt-5 pt-5">
     <div class="container ">
       <div class="row d-flex justify-content-center">
-        <div class="col-md-12 text-center">
-          <h2>
-            <b>Why book with DMT?</b>
-          </h2>
-        </div>
         <div class="col-lg-3 mt-5 text-center text-lg-start">
           <img
             src="/assets/static/icon/coffe_icon.svg"
