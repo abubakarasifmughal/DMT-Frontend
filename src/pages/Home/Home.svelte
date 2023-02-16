@@ -1,17 +1,51 @@
 <script lang="ts">
-  import Carousel from "../../shared/components/Carousel/Carousel.svelte";
+  import CarouselCustom from "../../shared/components/Carousel/Carousel.svelte";
   import Finder from "../../shared/components/Finder/Finder.svelte";
   import Footer from "../../shared/components/Footer/Footer.svelte";
   import GetApp from "../../shared/components/GetApp/GetApp.svelte";
   import Navbar from "../../shared/components/Navbar/Navbar.svelte";
+  import {
+    Carousel,
+    CarouselControl,
+    CarouselIndicators,
+    CarouselItem,
+    CarouselCaption
+  } from 'sveltestrap';
+
+  
+
+  const items = [
+    {
+      url: '/assets/static/images/index/nepal_sunset.jpg',
+    },
+    {
+      url: '/assets/static/images/index/napel_clouds_mountian.jpg',
+    },
+  ];
+  let activeIndex = 0;
 </script>
 
 <div>
   <div class="home_top_section">
-    <div style="position: absolute;top: 0pt;width: 100%;">
+    <div style="position: absolute; top: 0pt; width: 100%; z-index: 100;">
       <Navbar btnTheme={"btn-outline-light"} />
     </div>
-    <div class="text-white container">
+
+    <Carousel {items} bind:activeIndex ride interval={2000} style="background-color: red; height: 600pt; width: 100%;">
+      <CarouselIndicators bind:activeIndex {items} />
+    
+      <div class="carousel-inner">
+        {#each items as item, index}
+          <CarouselItem bind:activeIndex itemIndex={index} style="height: 600pt;">
+            <img src={item.url} class="w-100 h-100" alt="" style="object-fit: cover;"/>
+          </CarouselItem>
+        {/each}
+      </div>
+    
+      <CarouselControl direction="prev" bind:activeIndex {items} />
+      <CarouselControl direction="next" bind:activeIndex {items} />
+    </Carousel>
+    <!-- <div class="text-white container">
       <div
         style="font-size: 55pt;line-height: 60pt;text-shadow: 0px 0px 20px gray;"
       >
@@ -21,10 +55,10 @@
         </span>
       </div>
       <br />
-      <span style="font-size: 20pt;text-shadow: 0px 0px 10px gray;">
+      <span style="font-size: 16pt;text-shadow: 0px 0px 10px gray;">
         Find and book great expierences in Nepal
       </span>
-    </div>
+    </div> -->
   </div>
   <div style="position: relative;">
     <Finder />
@@ -43,8 +77,8 @@
           <b> Unforgettable activities to do in Naples </b>
         </div>
       </div>
-      <div class="col-lg-7">
-        <Carousel />
+      <div class="col-lg-6">
+        <CarouselCustom />
       </div>
     </div>
   </div>
@@ -162,13 +196,13 @@
   }
 
   .home_top_section {
-    min-height: 700pt;
+    min-height: 600pt;
     /* background-image: url("/assets/static/images/dev/front_page-dw.jpg"); */
-    background-image: url("/assets/static/images/index/nepal_sunset.jpg");
-    background-size: cover;
+    /* background-image: url("/assets/static/images/index/nepal_sunset.jpg");
+    background-size: cover; */
     /* background-attachment: fixed; */
-    background-position-x: center;
-    background-position-y: bottom;
+    /* background-position-x: center;
+    background-position-y: center; */
     position: relative;
     display: flex;
     align-items: center;
