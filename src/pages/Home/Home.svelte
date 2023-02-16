@@ -119,7 +119,7 @@
     class="mt-2 p-5 text-center 
     d-flex justify-content-center align-items-center flex-column"
   >
-    <h1 class="fw-bolder mb-5 text-dark">Keep in touch</h1>
+    <h1 class="fw-bolder mb-5 text-dark">Offers and Discount Notification</h1>
     <div class="row col-md-4">
       <div class="col-md-9 mb-4">
         <input
