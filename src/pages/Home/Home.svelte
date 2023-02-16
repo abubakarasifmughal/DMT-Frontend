@@ -1,8 +1,15 @@
 <script lang="ts">
-  import Carousel from "../../shared/components/Carousel/Carousel.svelte";
+  import CarouselCustom from "../../shared/components/Carousel/Carousel.svelte";
   import Finder from "../../shared/components/Finder/Finder.svelte";
   import Footer from "../../shared/components/Footer/Footer.svelte";
   import Navbar from "../../shared/components/Navbar/Navbar.svelte";
+  import {
+    Carousel,
+    CarouselControl,
+    CarouselIndicators,
+    CarouselItem,
+    CarouselCaption
+  } from 'sveltestrap';
 </script>
 
 <div>
@@ -10,7 +17,7 @@
     <div style="position: absolute;top: 0pt;width: 100%;">
       <Navbar btnTheme={"btn-outline-light"} />
     </div>
-    <div class="text-white container">
+    <!-- <div class="text-white container">
       <div
         style="font-size: 55pt;line-height: 60pt;text-shadow: 0px 0px 20px gray;"
       >
@@ -23,7 +30,7 @@
       <span style="font-size: 16pt;text-shadow: 0px 0px 10px gray;">
         Find and book great expierences in Nepal
       </span>
-    </div>
+    </div> -->
   </div>
   <div style="position: relative;">
     <Finder />
@@ -43,7 +50,7 @@
         </div>
       </div>
       <div class="col-lg-6">
-        <Carousel />
+        <CarouselCustom />
       </div>
     </div>
   </div>
@@ -159,11 +166,11 @@
   .home_top_section {
     min-height: 600pt;
     /* background-image: url("/assets/static/images/dev/front_page-dw.jpg"); */
-    background-image: url("/assets/static/images/index/nepal_sunset.jpg");
-    background-size: cover;
+    /* background-image: url("/assets/static/images/index/nepal_sunset.jpg");
+    background-size: cover; */
     /* background-attachment: fixed; */
-    background-position-x: center;
-    background-position-y: center;
+    /* background-position-x: center;
+    background-position-y: center; */
     position: relative;
     display: flex;
     align-items: center;
