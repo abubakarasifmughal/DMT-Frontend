@@ -3,10 +3,9 @@
 </script>
 
 <div class="pb-5">
-  <div style="height: 300pt;" />
   <div class="container pb-5 text-center">
-    <div class="row mt-5 d-flex justify-content-center text-white">
-      <div class="col-md-4 p-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-4">
         <h2>DMT</h2>
         <div>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempor luctus
@@ -15,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="row p-5 text-start text-white">
+    <div class="row p-5 text-start">
       <div class="col-md-4">
         <div class="row">
           <div class="col-md-6">
@@ -41,29 +40,44 @@
         <div>Support: 407 924 6902</div>
         <div>
           Email: <a
-            style="text-decoration: none;color:white"
+            style="text-decoration: none;"
             href="mailto:adam@webrevived.com">adam@webrevived.com</a
           >
         </div>
         <div class="mt-3">
-          <img
-            class="m-2"
-            src="/assets/static/icon/facebook.svg"
-            alt=""
-            height="30pt"
-          />
-          <img
-            class="m-2"
-            src="/assets/static/icon/instagram.png"
-            alt=""
-            height="30pt"
-          />
-          <img
-            class="m-2"
-            src="/assets/static/icon/twitter.svg"
-            alt=""
-            height="30pt"
-          />
+          <div
+            class="bg-primary rounded-circle bg-opacity-50 me-2 ms-2"
+            style="display: inline-block;padding:8pt"
+          >
+            <img
+              class="m-0"
+              src="/assets/static/icon/facebook.svg"
+              alt=""
+              height="30pt"
+            />
+          </div>
+          <div
+            class="bg-primary rounded-circle bg-opacity-50 me-2 ms-2"
+            style="display: inline-block;padding:8pt"
+          >
+            <img
+              class="m-0"
+              src="/assets/static/icon/instagram.png"
+              alt=""
+              height="30pt"
+            />
+          </div>
+          <div
+            class="bg-primary rounded-circle bg-opacity-50 me-2 ms-2"
+            style="display: inline-block;padding:8pt"
+          >
+            <img
+              class="m-0"
+              src="/assets/static/icon/twitter.svg"
+              alt=""
+              height="30pt"
+            />
+          </div>
         </div>
       </div>
     </div>

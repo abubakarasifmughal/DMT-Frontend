@@ -6,7 +6,7 @@
   let loginToken: string = "";
 </script>
 
-<div>
+<div style="width: 100%;overflow:hidden">
   <RounterOutlet {loginToken} />
 </div>
 

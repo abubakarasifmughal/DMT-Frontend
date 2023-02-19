@@ -9,71 +9,62 @@
     CarouselControl,
     CarouselIndicators,
     CarouselItem,
-    CarouselCaption
-  } from 'sveltestrap';
-
-  
+    CarouselCaption,
+  } from "sveltestrap";
 
   const items = [
     {
-      url: '/assets/static/images/index/nepal_sunset.jpg',
+      url: "/assets/static/images/index/nepal_sunset.jpg",
     },
     {
-      url: '/assets/static/images/index/napel_clouds_mountian.jpg',
+      url: "/assets/static/images/index/napel_clouds_mountian.jpg",
     },
   ];
   let activeIndex = 0;
 </script>
 
 <div>
-  <div class="home_top_section">
-    <div style="position: absolute; top: 0pt; width: 100%; z-index: 100;">
+  <div class="home_top_section bg-danger">
+    <div
+      style="position: absolute; top: 0pt; width: 100%; z-index: 100;"
+      class="bg-light"
+    >
       <Navbar btnTheme={"btn-outline-light"} />
     </div>
 
-    <Carousel {items} bind:activeIndex ride interval={2000} style="background-color: gainsboro; height: 600pt; width: 100%;">
+    <Carousel
+      {items}
+      bind:activeIndex
+      ride
+      interval={2000}
+      style="background-color: gainsboro;height: 70vh; width: 100%;"
+    >
       <CarouselIndicators bind:activeIndex {items} />
-    
-      <div class="carousel-inner">
+      <div class="carousel-inner" style="height: 100%;">
         {#each items as item, index}
-          <CarouselItem bind:activeIndex itemIndex={index} style="height: 600pt;">
-            <img src={item.url} class="w-100 h-100" alt="" style="object-fit: cover;"/>
+          <CarouselItem bind:activeIndex itemIndex={index}>
+            <img
+              src={item.url}
+              alt=""
+              style="object-position: center;object-fit: cover;height: 70vh;width: 100%;"
+            />
           </CarouselItem>
         {/each}
       </div>
-    
+
       <CarouselControl direction="prev" bind:activeIndex {items} />
       <CarouselControl direction="next" bind:activeIndex {items} />
     </Carousel>
-    <!-- <div class="text-white container">
-      <div
-        style="font-size: 55pt;line-height: 60pt;text-shadow: 0px 0px 20px gray;"
-      >
-        It's time to <br />
-        <span style="font-weight: bolder;">
-          <b>Discover</b>
-        </span>
-      </div>
-      <br />
-      <span style="font-size: 16pt;text-shadow: 0px 0px 10px gray;">
-        Find and book great expierences in Nepal
-      </span>
-    </div> -->
   </div>
   <div style="position: relative;">
     <Finder />
-    
   </div>
   <div class="container-fluid">
     <div class="row ">
-      
       <div
         class="col-lg-5 d-flex flex-column align-items-center align-items-sm-end justify-content-center"
       >
-        <div
-          class="fw-bolder p-5"
-          style="font-size: 30pt;line-height: 35pt;"
-        >
+        <div class="fw-bolder p-5" style="font-size: 30pt;line-height: 35pt;">
           <b> Unforgettable activities to do in Naples </b>
         </div>
       </div>
@@ -83,10 +74,6 @@
     </div>
   </div>
 
-  <div>
-    <GetApp/> 
-  </div>
-  <br />
   <!-- <div class="mt-5 pt-5">
     <div class="container ">
       <div class="row d-flex justify-content-center">
@@ -127,7 +114,7 @@
     </div>
   </div> -->
   <br />
-  <div class="container mt-5 p-5">
+  <div class="container mt-5 p-3 p-sm-5">
     <div class="row mb-5">
       <div class="col-md-1" />
       <div class="col-md-5 mb-5">
@@ -137,7 +124,7 @@
         >
           <h1 class="fw-bolder">Things to do from home</h1>
           <div class="mt-3">
-            <button class="btn btn-light ps-4 pe-4 fw-bold">Experiences</button>
+            <button class="btn btn-light px-5 fw-bold">Experiences</button>
           </div>
         </div>
       </div>
@@ -148,17 +135,22 @@
         >
           <h1 class="fw-bolder">Places to Stay In Nepal</h1>
           <div class="mt-3">
-            <button class="btn btn-light ps-4 pe-4 fw-bold">Stays</button>
+            <button class="btn btn-light px-5 fw-bold">Stays</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div>
+    <GetApp />
+  </div>
+  <br />
   <div
     class="mt-2 p-5 text-center 
     d-flex justify-content-center align-items-center flex-column"
   >
-    <h1 class="fw-bolder mb-5 text-dark">Offers and Discount Notification</h1>
+    <h1 class="fw-bolder mb-5 text-dark">Offers and Discount</h1>
     <div class="row col-md-5">
       <div class="col-lg-8 mb-4">
         <input
@@ -173,9 +165,6 @@
     </div>
   </div>
   <div class="low_backgrounded">
-    <div
-      style="height: 200pt;background: linear-gradient(white,transparent);width:100%"
-    />
     <Footer />
   </div>
 </div>
@@ -187,16 +176,17 @@
     background-size: cover;
   }
   .low_backgrounded {
-    background-image: url("/assets/static/images/global/ocean_footer.jpg");
-    background-position-x: center;
+    background-color: whitesmoke;
+    padding-top: 20pt;
+    /* background-image: url("/assets/static/images/global/ocean_footer.jpg"); */
+    /* background-position-x: center;
     background-position-y: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
+    position: relative; */
   }
 
   .home_top_section {
-    min-height: 600pt;
     /* background-image: url("/assets/static/images/dev/front_page-dw.jpg"); */
     /* background-image: url("/assets/static/images/index/nepal_sunset.jpg");
     background-size: cover; */
@@ -205,7 +195,7 @@
     background-position-y: center; */
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .btn {

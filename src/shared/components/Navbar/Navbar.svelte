@@ -19,7 +19,7 @@
   export let color: string = "text-white";
   export let btnTheme: string = "btn-outline-light";
 
-  let isOpen: boolean = false;
+  let isOpen: boolean = true;
 
   function handleUpdate(event: any) {
     isOpen = event.detail.isOpen;
@@ -44,20 +44,51 @@
         <img src="/assets/logo.png" alt="Logo" />
       </Link>
     </NavbarBrand>
-    <NavbarToggler
+    <!-- <NavbarToggler
       on:click={() => {
         isOpen = !isOpen;
       }}
-    />
-    <Collapse
+    > -->
+    <!-- <DropdownToggle
+        class="btn bg-transparent border border-secondary"
+        style="border-radius:30pt;display: flex;justify-content: space-between;align-items: center;padding: 4pt;"
+      >
+        <span class="me-2 ms-2 text-dark">Menu</span>
+        <img
+          src="/assets/static/images/global/no_avatar.png"
+          alt=""
+          style="border-radius: 15pt;"
+          class="border border-secondary"
+          height="30pt"
+          width="30pt"
+        />
+      </DropdownToggle> -->
+    <!-- </NavbarToggler> -->
+
+    <!-- <DropdownToggle
+      class="btn bg-transparent border border-secondary"
+      style="border-radius:30pt;display: flex;justify-content: space-between;align-items: center;padding: 4pt;"
+    >
+      <span class="me-2 ms-2 text-dark">Menu</span>
+      <img
+        src="/assets/static/images/global/no_avatar.png"
+        alt=""
+        style="border-radius: 15pt;"
+        class="border border-secondary"
+        height="30pt"
+        width="30pt"
+      />
+    </DropdownToggle> -->
+
+    <!-- <Collapse
       style="transition: 0s;"
       {isOpen}
       navbar
       expand="lg"
       on:update={handleUpdate}
-    >
-      <Nav class="ms-auto" navbar>
-        <NavItem>
+    > -->
+    <Nav class="ms-auto" navbar>
+      <!-- <NavItem>
           <NavLink>
             <Button class="bg-transparent {color} border-0 fw-bold">
               <Link style="text-decoration: none;color: inherit;" to="/faqs">
@@ -119,14 +150,61 @@
               </DropdownMenu>
             </Dropdown>
           </NavItem>
-        {/if}
+        {/if} -->
+      <NavLink>
         <NavItem>
-          <NavLink>
-            <button class="btn {btnTheme}">Get Started </button>
-          </NavLink>
+          <Dropdown>
+            <DropdownToggle
+              class="btn bg-transparent border border-secondary"
+              style="border-radius:30pt;display: flex;justify-content: space-between;align-items: center;padding: 4pt;"
+            >
+              <span class="me-2 ms-2 text-dark">Menu</span>
+              <img
+                src="/assets/static/images/global/no_avatar.png"
+                alt=""
+                style="border-radius: 15pt;"
+                class="border border-secondary"
+                height="30pt"
+                width="30pt"
+              />
+            </DropdownToggle>
+            <DropdownMenu class="shadow mt-2" style="border-radius:10pt">
+              {#if !loggedIn}
+                <Link
+                  style="text-decoration: none;color: inherit;"
+                  to="/register"
+                >
+                  <DropdownItem>Sign up</DropdownItem>
+                </Link>
+                <Link style="text-decoration: none;color: inherit;" to="/login">
+                  <DropdownItem>Login</DropdownItem>
+                </Link>
+                <div class="border-top mt-1 mb-1" />
+                <Link style="text-decoration: none;color: inherit;" to="/login">
+                  <DropdownItem>List on DMT</DropdownItem>
+                </Link>
+              {:else}
+                <Link
+                  to="/dashboard/listings"
+                  style="text-decoration:none;color:inherit"
+                >
+                  <DropdownItem>List on DMT</DropdownItem>
+                </Link>
+              {/if}
+              <Link style="text-decoration: none;color: inherit;" to="/faqs">
+                <DropdownItem>FAQs</DropdownItem>
+              </Link>
+              {#if loggedIn}
+                <DropdownItem on:click={onLogout}>
+                  <span class="text-danger">Log out</span>
+                </DropdownItem>
+              {/if}
+            </DropdownMenu>
+          </Dropdown>
         </NavItem>
-      </Nav>
-    </Collapse>
+      </NavLink>
+    </Nav>
+    <!-- </Collapse> -->
   </Navbar>
 </Container>
 
