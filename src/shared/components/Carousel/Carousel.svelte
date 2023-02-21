@@ -49,7 +49,7 @@
     <div class="row pt-5 pb-5" style="flex-wrap: nowrap;overflow: hidden;">
       <div class="col-md-5">
         <div
-          class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5"
+          class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5 rounded"
           style="background-image: url({cards[currentCardIndex].image});"
         >
           {#if cards[currentCardIndex].image === ""}
@@ -81,6 +81,7 @@
         <div>
           <button
             class="mt-4 me-3 roundBtn btn"
+            style="background-color:transparent"
             on:click={() =>
               currentCardIndex === 0
                 ? currentCardIndex
@@ -96,6 +97,7 @@
           </button>
           <button
             class="mt-4 roundBtn btn"
+            style="background-color:transparent"
             on:click={() =>
               currentCardIndex + 3 === cards.length
                 ? currentCardIndex
@@ -162,6 +164,13 @@
     width: 30pt;
     border-radius: 15pt;
     transition: 0.5s;
+  }
+  .roundBtn:hover {
+    height: 30pt;
+    width: 30pt;
+    border-radius: 15pt;
+    transition: 0.5s;
+    border-color: #6801c8;
   }
 
   .btn {

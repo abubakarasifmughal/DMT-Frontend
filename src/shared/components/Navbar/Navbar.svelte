@@ -177,7 +177,7 @@
                   <DropdownItem>Sign up</DropdownItem>
                 </Link>
                 <Link style="text-decoration: none;color: inherit;" to="/login">
-                  <DropdownItem>Login</DropdownItem>
+                  <DropdownItem>Log In</DropdownItem>
                 </Link>
                 <div class="border-top mt-1 mb-1" />
                 <Link style="text-decoration: none;color: inherit;" to="/login">

@@ -47,36 +47,21 @@
         <div class="mt-3">
           <div
             class="bg-primary rounded-circle bg-opacity-50 me-2 ms-2"
-            style="display: inline-block;padding:8pt"
+            style="display: inline-block;padding:6pt"
           >
-            <img
-              class="m-0"
-              src="/assets/static/icon/facebook.svg"
-              alt=""
-              height="30pt"
-            />
+            <img src="/assets/static/icon/facebook.svg" alt="" height="25pt" />
           </div>
           <div
             class="bg-primary rounded-circle bg-opacity-50 me-2 ms-2"
-            style="display: inline-block;padding:8pt"
+            style="display: inline-block;padding:6pt"
           >
-            <img
-              class="m-0"
-              src="/assets/static/icon/instagram.png"
-              alt=""
-              height="30pt"
-            />
+            <img src="/assets/static/icon/instagram.png" alt="" height="25pt" />
           </div>
           <div
             class="bg-primary rounded-circle bg-opacity-50 me-2 ms-2"
-            style="display: inline-block;padding:8pt"
+            style="display: inline-block;padding:6pt"
           >
-            <img
-              class="m-0"
-              src="/assets/static/icon/twitter.svg"
-              alt=""
-              height="30pt"
-            />
+            <img src="/assets/static/icon/twitter.svg" alt="" height="25pt" />
           </div>
         </div>
       </div>

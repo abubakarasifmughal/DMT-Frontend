@@ -116,8 +116,8 @@
   <br />
   <div class="container mt-5 p-3 p-sm-5">
     <div class="row mb-5">
-      <div class="col-md-1" />
-      <div class="col-md-5 mb-5">
+      <div class="col-lg-1" />
+      <div class="col-lg-5 mb-5">
         <div
           class="card text-white p-5"
           style="background-image: url('/assets/static/images/index/cave_explore.jpg');height: 400pt"
@@ -128,7 +128,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-5 mb-5">
+      <div class="col-lg-5 mb-5">
         <div
           class="card text-white p-5"
           style="background-image: url('/assets/static/images/index/online_expierence.png');height: 400pt;"
