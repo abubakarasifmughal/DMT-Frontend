@@ -2,7 +2,7 @@
   export let slides = [
     {
       image: "/assets/static/images/global/galleria_umberto.png",
-      text:"Accommodation",
+      text: "Accommodation",
       rating: 4.9,
       review: 10,
       label: "A beautiful light filled shopping arcade",
@@ -10,7 +10,7 @@
     },
     {
       image: "/assets/static/images/global/cappella.png",
-      text:"Online Experience ",
+      text: "Online Experience ",
       rating: 2.7,
       review: 120,
       label: "Get connected and experience the customs",
@@ -18,7 +18,7 @@
     },
     {
       image: "/assets/static/images/global/castel_ovo.png",
-      text:"Onsite Experience ",
+      text: "Onsite Experience ",
       rating: 1.7,
       review: 98,
       label: "Seaside view",
@@ -31,7 +31,7 @@
     // ------------------
     {
       image: "",
-      text:"",
+      text: "",
       rating: null,
       review: null,
       label: "",
@@ -39,7 +39,7 @@
     },
     {
       image: null,
-      text:"",
+      text: "",
       rating: null,
       review: null,
       label: "",
@@ -60,21 +60,21 @@
           <div class="bg-white w-100 rounded p-3 text-start">
             <div>
               <div>
-                <span class="text-secondary1"
-                  ><div><b>{cards[currentCardIndex].text}</b></div><div class="rat"><div><b>{cards[currentCardIndex].rating}</b></div><div> <b>({cards[
-                    currentCardIndex
-                  ].review})</b></div></div></span
+                <span class="text-secondary1 justify-content-between"
+                  ><div><b>{cards[currentCardIndex].text}</b></div>
+                  <div class="rat">
+                    <div><b>{cards[currentCardIndex].rating}</b></div>
+                    <div><b>({cards[currentCardIndex].review})</b></div>
+                  </div></span
                 >
               </div>
-              <div>
-               
-                
-              </div>
+              <div />
               <div class="label">
-              <div class="text-black">{cards[currentCardIndex].label}</div>
-            </div>
+                <div class="text-black">{cards[currentCardIndex].label}</div>
+              </div>
               <div class="text-secondary">
-                <i class="bi bi-geo-alt-fill"></i> {cards[currentCardIndex].address}
+                <i class="bi bi-geo-alt-fill" />
+                {cards[currentCardIndex].address}
               </div>
             </div>
           </div>
@@ -162,24 +162,22 @@
 </div>
 
 <style>
-  .text-secondary1{
-    color:rgb(144, 141, 141);
+  .text-secondary1 {
+    color: rgb(144, 141, 141);
     display: flex;
     font-size: 15px;
   }
-  .text-secondary{
+  .text-secondary {
     font-size: 10px;
   }
-  .rat{
-    font-size: 15px;
+
+
+  .label {
+    margin: 10px 0px;
   }
-  .label{
-    margin:10px 0px;
-  }
-  .rat{
-    color:rgb(144, 141, 141);
-    display:flex;
-    padding-left: 5px;
+  .rat {
+    color: rgb(144, 141, 141);
+    display: flex;
   }
   .card-slide {
     transition: 0.5s;
