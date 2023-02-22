@@ -8,8 +8,7 @@
     Input,
   } from "sveltestrap";
   import { navigate } from "svelte-routing";
-  import SveltyPicker from "svelty-picker";
-  import { now } from "svelte/internal";
+
   import { DateInput } from "date-picker-svelte";
 
   export let levitating: boolean = true;
@@ -47,89 +46,91 @@
   export let isPopupOpen = false;
 </script>
 
-<div class="">
-  <div
-    class="container {isPopupOpen ? '' : 'finderBox'} bg-white {levitating
-      ? 'shadow'
-      : ''} p-3"
-    style="transform: {levitating ? 'translateY(-50%)' : ''};"
-  >
-    <div class="row">
-      <div class="col-md-3">
-        <Dropdown {isOpen} toggle={() => (isOpen = !isOpen)}>
-          <DropdownToggle tag="div" class="col-12">
-            <Input
-              placeholder="Where"
-              bind:value={searchString}
-              style="border-radius: 3px;"
-            />
-          </DropdownToggle>
-          <DropdownMenu style="width: 100%;">
-            {#each getFilteredLocations(locations, searchString) as location}
-              <DropdownItem on:click={() => (searchString = location.label)}
-                >{location.label}</DropdownItem
-              >
-            {/each}
-          </DropdownMenu>
-        </Dropdown>
-      </div>
-      <div class="col-md-3 ">
-        <Dropdown
-          isOpen={isOpen2}
-          toggle={() => (isOpen2 = !isOpen2)}
-          class={"mt-2 mt-md-0 mb-md-0 mb-1"}
-        >
-          <DropdownToggle tag="div" class="col-12">
-            <Input
-              placeholder="Service Type"
-              bind:value={serviceSelected}
-              style="border-radius: 3px;"
-            />
-          </DropdownToggle>
-          <DropdownMenu style="width: 100%;">
-            {#each allServices as service}
-              <DropdownItem on:click={() => (serviceSelected = service)}
-                >{service}</DropdownItem
-              >
-            {/each}
-          </DropdownMenu>
-        </Dropdown>
-      </div>
-      <div class="col-md-4 ">
-        <div class="row mt-2 mt-md-0 mb-md-0 mb-2">
-          <div class="col-6" style="font-size: large;">
-            <DateInput
-              min={new Date()}
-              bind:value={checkindate}
-              on:select={() => {
-                if (checkindate >= checkoutdate) {
-                  checkoutdate = checkindate;
-                }
-              }}
-              closeOnSelection={true}
-              format={"dd-MM-yyyy"}
-            />
-          </div>
-          <div class="col-6" style="font-size: large;">
-            <DateInput
-              min={checkindate}
-              bind:value={checkoutdate}
-              closeOnSelection={true}
-              format={"dd-MM-yyyy"}
-            />
+<div class="container">
+  <div class="container">
+    <div
+      class="container {isPopupOpen ? '' : 'finderBox'} bg-white {levitating
+        ? 'shadow'
+        : ''} p-3"
+      style="transform: {levitating ? 'translateY(-50%)' : ''};"
+    >
+      <div class="row">
+        <div class="col-md-3">
+          <Dropdown {isOpen} toggle={() => (isOpen = !isOpen)}>
+            <DropdownToggle tag="div" class="col-12">
+              <Input
+                placeholder="Where"
+                bind:value={searchString}
+                style="border-radius: 3px;"
+              />
+            </DropdownToggle>
+            <DropdownMenu style="width: 100%;">
+              {#each getFilteredLocations(locations, searchString) as location}
+                <DropdownItem on:click={() => (searchString = location.label)}
+                  >{location.label}</DropdownItem
+                >
+              {/each}
+            </DropdownMenu>
+          </Dropdown>
+        </div>
+        <div class="col-md-3 ">
+          <Dropdown
+            isOpen={isOpen2}
+            toggle={() => (isOpen2 = !isOpen2)}
+            class={"mt-2 mt-md-0 mb-md-0 mb-1"}
+          >
+            <DropdownToggle tag="div" class="col-12">
+              <Input
+                placeholder="Service Type"
+                bind:value={serviceSelected}
+                style="border-radius: 3px;"
+              />
+            </DropdownToggle>
+            <DropdownMenu style="width: 100%;">
+              {#each allServices as service}
+                <DropdownItem on:click={() => (serviceSelected = service)}
+                  >{service}</DropdownItem
+                >
+              {/each}
+            </DropdownMenu>
+          </Dropdown>
+        </div>
+        <div class="col-md-4 ">
+          <div class="row mt-2 mt-md-0 mb-md-0 mb-2">
+            <div class="col-6" style="font-size: large;">
+              <DateInput
+                min={new Date()}
+                bind:value={checkindate}
+                on:select={() => {
+                  if (checkindate >= checkoutdate) {
+                    checkoutdate = checkindate;
+                  }
+                }}
+                closeOnSelection={true}
+                format={"dd-MM-yyyy"}
+              />
+            </div>
+            <div class="col-6" style="font-size: large;">
+              <DateInput
+                min={checkindate}
+                bind:value={checkoutdate}
+                closeOnSelection={true}
+                format={"dd-MM-yyyy"}
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-2 d-flex align-item-center">
-        <button
-          on:click={() => {
-            navigate("/listing");
-          }}
-          class="btn col-12"
-          style="border-radius: 3px;"
-        >
-          Search
-        </button>
+        <div class="col-md-2 d-flex align-item-center">
+          <button
+            on:click={() => {
+              navigate("/listing");
+            }}
+            class="btn col-12"
+            style="border-radius: 3px;"
+          >
+            Search
+          </button>
+        </div>
       </div>
     </div>
   </div>

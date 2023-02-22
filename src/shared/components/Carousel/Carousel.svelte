@@ -47,11 +47,26 @@
 <div>
   <div class="carousel ">
     <div class="row pt-5 pb-5" style="flex-wrap: nowrap;overflow: hidden;">
-      <div class="col-md-5">
+      <div class="col-md-5 pe-5 pe-md-0">
         <div
-          class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5 rounded"
+          class="card-slide me-3 me-md-0 d-flex text-center p-4 align-items-center justify-content-end flex-column rounded"
           style="background-image: url({cards[currentCardIndex].image});"
         >
+          <div class="bg-white w-100 rounded p-3 text-start">
+            <div>
+              <div>
+                <span class="text-secondary"
+                  ><b>{cards[currentCardIndex].rating}</b> ({cards[
+                    currentCardIndex
+                  ].review})</span
+                >
+              </div>
+              <div class="text-black">{cards[currentCardIndex].label}</div>
+              <div class="text-secondary">
+                {cards[currentCardIndex].category}
+              </div>
+            </div>
+          </div>
           {#if cards[currentCardIndex].image === ""}
             <h4>Search for Location</h4>
             <span>
@@ -63,21 +78,7 @@
             <button class="btn ps-4 pe-4 mt-4"> Exlore </button>
           {/if}
         </div>
-        <div>
-          <div class="p-2">
-            <div>
-              <span class="text-secondary"
-                ><b>{cards[currentCardIndex].rating}</b> ({cards[
-                  currentCardIndex
-                ].review})</span
-              >
-            </div>
-            <div class="text-black">{cards[currentCardIndex].label}</div>
-            <div class="text-secondary">
-              {cards[currentCardIndex].category}
-            </div>
-          </div>
-        </div>
+
         <div>
           <button
             class="mt-4 me-3 roundBtn btn"

@@ -59,16 +59,17 @@
   <div style="position: relative;">
     <Finder />
   </div>
-  <div class="container-fluid">
-    <div class="row ">
+  <div class="">
+    <div class="row">
       <div
-        class="col-lg-5 d-flex flex-column align-items-center align-items-sm-end justify-content-center"
+        class="col-xl-5 d-flex flex-column align-items-center align-items-sm-end justify-content-center"
       >
         <div class="fw-bolder p-5" style="font-size: 30pt;line-height: 35pt;">
           <b> Interesting Offers </b>
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-xl-1" />
+      <div class="col-xl-6 ms-4 ms-xl-0">
         <CarouselCustom />
       </div>
     </div>
@@ -114,10 +115,10 @@
     </div>
   </div> -->
   <br />
-  <div class="container mt-5 p-3 p-sm-5">
-    <div class="row mb-5">
-      <div class="col-lg-1" />
-      <div class="col-lg-5 mb-5">
+  <div class="container mt-5 p-2 p-sm-5">
+    <div class="row mb-5 p-3 ">
+      <div class="col-xl-1" />
+      <div class="col-xl-5 mb-5 me-0 me-sm-2">
         <div
           class="card text-white p-5"
           style="background-image: url('/assets/static/images/index/cave_explore.jpg');height: 400pt"
@@ -128,7 +129,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-5 mb-5">
+      <div class="col-xl-5 mb-5 me-0 me-sm-2">
         <div
           class="card text-white p-5"
           style="background-image: url('/assets/static/images/index/online_expierence.png');height: 400pt;"

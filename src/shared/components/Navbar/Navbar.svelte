@@ -37,18 +37,18 @@
   };
 </script>
 
-<Container>
-  <Navbar light expand="lg">
+<div class="container">
+  <Navbar light>
     <NavbarBrand>
       <Link to="/">
-        <img src="/assets/logo.png" alt="Logo" />
+        <img src="/assets/logo.png" alt="Logo" class="tr_l" />
       </Link>
     </NavbarBrand>
 
     <Nav class="ms-auto" navbar>
       <NavLink>
         <NavItem>
-          <Dropdown>
+          <Dropdown class="tr_r">
             <DropdownToggle
               class="btn bg-transparent border border-secondary"
               style="border-radius:30pt;display: flex;justify-content: space-between;align-items: center;padding: 4pt;"
@@ -103,7 +103,7 @@
       </NavLink>
     </Nav>
   </Navbar>
-</Container>
+</div>
 
 {#if btnTheme === ""}
   <style>
