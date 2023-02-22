@@ -75,7 +75,7 @@
                   <DropdownItem>Sign up</DropdownItem>
                 </Link>
                 <Link style="text-decoration: none;color: inherit;" to="/login">
-                  <DropdownItem>Log In</DropdownItem>
+                  <DropdownItem>Log in</DropdownItem>
                 </Link>
                 <div class="border-top mt-1 mb-1" />
                 <Link style="text-decoration: none;color: inherit;" to="/login">
