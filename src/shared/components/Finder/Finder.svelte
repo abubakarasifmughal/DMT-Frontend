@@ -36,7 +36,7 @@
     },
   ];
 
-  let allServices = ["Property", "Service"];
+  let allServices = ["Accomodation", "Experience"];
   let serviceSelected = "";
   function getFilteredLocations(array: any[], searchString: string) {
     return array.filter((a: any) =>
