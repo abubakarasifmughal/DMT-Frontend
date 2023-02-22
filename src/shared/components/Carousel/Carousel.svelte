@@ -113,7 +113,7 @@
       </div>
       <div class="col-md-5">
         <div
-          class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5"
+          class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5 rounded"
           style="background-image: url({cards[currentCardIndex + 1].image});"
         >
           {#if cards[currentCardIndex + 1].image === ""}
@@ -130,7 +130,7 @@
       </div>
       <div class="col-md-5">
         <div
-          class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5"
+          class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5 rounded"
           style="background-image: url({cards[currentCardIndex + 2].image});"
         >
           {#if cards[currentCardIndex + 2].image === ""}

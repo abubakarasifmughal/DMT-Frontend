@@ -65,7 +65,7 @@
         class="col-lg-5 d-flex flex-column align-items-center align-items-sm-end justify-content-center"
       >
         <div class="fw-bolder p-5" style="font-size: 30pt;line-height: 35pt;">
-          <b> Unforgettable activities to do in Naples </b>
+          <b> Interesting Offers </b>
         </div>
       </div>
       <div class="col-lg-6">
