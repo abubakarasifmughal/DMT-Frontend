@@ -60,7 +60,7 @@
       <Finder levitating={false} />
     </div>
     <div class="row" style="border-top: 1px solid gainsboro;">
-      <div class="col-md-4 p-4" style="overflow: scroll;height: 80vh;">
+      <div class="col-lg-4 p-4" style="overflow: scroll;height: 80vh;">
         {#if listings.length === 0}
           <div>
             <h3>No Results</h3>
@@ -76,7 +76,7 @@
           {/each}
         {/if}
       </div>
-      <div class="col-md-8 sticky" style="position: relative;">
+      <div class="col-lg-8 sticky" style="position: relative;">
         <Mapbox />
         <!-- <Map /> -->
       </div>

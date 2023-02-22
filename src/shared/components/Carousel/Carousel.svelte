@@ -81,7 +81,6 @@
         <div>
           <button
             class="mt-4 me-3 roundBtn btn"
-            style="background-color:transparent"
             on:click={() =>
               currentCardIndex === 0
                 ? currentCardIndex
@@ -97,7 +96,6 @@
           </button>
           <button
             class="mt-4 roundBtn btn"
-            style="background-color:transparent"
             on:click={() =>
               currentCardIndex + 3 === cards.length
                 ? currentCardIndex

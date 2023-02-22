@@ -19,6 +19,7 @@
 
   let searchString: string = "";
   let isOpen: boolean = false;
+  let isOpen2: boolean = false;
 
   $: locations = [
     {
@@ -35,6 +36,8 @@
     },
   ];
 
+  let allServices = ["Property", "Service"];
+  let serviceSelected = "";
   function getFilteredLocations(array: any[], searchString: string) {
     return array.filter((a: any) =>
       a.label.toLowerCase().includes(searchString.toLowerCase())
@@ -52,10 +55,14 @@
     style="transform: {levitating ? 'translateY(-50%)' : ''};"
   >
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <Dropdown {isOpen} toggle={() => (isOpen = !isOpen)}>
           <DropdownToggle tag="div" class="col-12">
-            <Input placeholder="Where" bind:value={searchString} style="border-radius: 3px;"/>
+            <Input
+              placeholder="Where"
+              bind:value={searchString}
+              style="border-radius: 3px;"
+            />
           </DropdownToggle>
           <DropdownMenu style="width: 100%;">
             {#each getFilteredLocations(locations, searchString) as location}
@@ -66,7 +73,29 @@
           </DropdownMenu>
         </Dropdown>
       </div>
-      <div class="col-md-6 ">
+      <div class="col-md-3 ">
+        <Dropdown
+          isOpen={isOpen2}
+          toggle={() => (isOpen2 = !isOpen2)}
+          class={"mt-2 mt-md-0 mb-md-0 mb-1"}
+        >
+          <DropdownToggle tag="div" class="col-12">
+            <Input
+              placeholder="Service Type"
+              bind:value={serviceSelected}
+              style="border-radius: 3px;"
+            />
+          </DropdownToggle>
+          <DropdownMenu style="width: 100%;">
+            {#each allServices as service}
+              <DropdownItem on:click={() => (serviceSelected = service)}
+                >{service}</DropdownItem
+              >
+            {/each}
+          </DropdownMenu>
+        </Dropdown>
+      </div>
+      <div class="col-md-4 ">
         <div class="row mt-2 mt-md-0 mb-md-0 mb-2">
           <div class="col-6" style="font-size: large;">
             <DateInput

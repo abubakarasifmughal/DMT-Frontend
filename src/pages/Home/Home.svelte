@@ -26,8 +26,8 @@
 <div>
   <div class="home_top_section bg-danger">
     <div
-      style="position: absolute; top: 0pt; width: 100%; z-index: 100;"
-      class="bg-light"
+      style="position: fixed; top: 0pt; width: 100%; z-index: 2700;"
+      class="bg-light "
     >
       <Navbar btnTheme={"btn-outline-light"} />
     </div>
