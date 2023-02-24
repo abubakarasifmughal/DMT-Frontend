@@ -36,7 +36,7 @@
       style="position: relative;height: 90vh;display: flex;flex-direction: column;align-items: flex-start;justify-content: center;width: 100%;"
     >
       <div
-        style="position: absolute;z-index: 1000;width: 100%;color: white;text-shadow: 0px 0px 10px gray;margin: 12%;"
+        style="position: absolute;z-index: 1000;width: 75%;color: white;text-shadow: 0px 0px 10px gray;margin: 12%;"
       >
         <div style="font-size: 6vh;line-height: 6vh;">
           Marketplace for <br /> <span style="font-weight: bolder;">Tourism</span>

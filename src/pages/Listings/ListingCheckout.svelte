@@ -412,7 +412,9 @@
             <div
               class="imageSpanned shadow"
               style="background-image: url({listing.listingImages?.length > 0
-                ? config.SERVER_IP+config.SERVER_PORT+listing.listingImages[0]?.address
+                ? config.SERVER_IP +
+                  config.SERVER_PORT +
+                  listing.listingImages[0]?.address
                 : ''});background-color:whitesmoke;"
             />
           </div>
@@ -423,7 +425,9 @@
                   class="imageSpanned shadow"
                   style="background-image: url({listing.listingImages?.length >
                   1
-                    ? config.SERVER_IP+config.SERVER_PORT+listing.listingImages[1]?.address
+                    ? config.SERVER_IP +
+                      config.SERVER_PORT +
+                      listing.listingImages[1]?.address
                     : ''});background-color:whitesmoke;"
                 />
               </div>
@@ -432,7 +436,9 @@
                   class="imageSpanned shadow"
                   style="background-image: url({listing.listingImages?.length >
                   2
-                    ? config.SERVER_IP+config.SERVER_PORT+listing.listingImages[2]?.address
+                    ? config.SERVER_IP +
+                      config.SERVER_PORT +
+                      listing.listingImages[2]?.address
                     : ''});background-color:whitesmoke;"
                 />
               </div>
@@ -443,7 +449,9 @@
                   class="imageSpanned shadow"
                   style="background-image: url({listing.listingImages?.length >
                   3
-                    ? config.SERVER_IP+config.SERVER_PORT+listing.listingImages[3]?.address
+                    ? config.SERVER_IP +
+                      config.SERVER_PORT +
+                      listing.listingImages[3]?.address
                     : ''});background-color:whitesmoke;"
                 />
               </div>
@@ -452,7 +460,9 @@
                   class="imageSpanned shadow"
                   style="background-image: url({listing.listingImages?.length >
                   4
-                    ? config.SERVER_IP+config.SERVER_PORT+listing.listingImages[4]?.address
+                    ? config.SERVER_IP +
+                      config.SERVER_PORT +
+                      listing.listingImages[4]?.address
                     : ''});background-color:whitesmoke;"
                 />
               </div>
