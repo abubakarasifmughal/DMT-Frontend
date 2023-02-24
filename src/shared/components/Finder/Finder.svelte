@@ -56,7 +56,11 @@
     >
       <div class="row">
         <div class="col-md-3">
-          <Dropdown {isOpen} toggle={() => (isOpen = !isOpen)}>
+          <Dropdown
+            {isOpen}
+            toggle={() => (isOpen = !isOpen)}
+            class={"mb-1 mb-md-0 mb-md-0"}
+          >
             <DropdownToggle tag="div" class="col-12">
               <Input
                 placeholder="Where"
@@ -73,11 +77,11 @@
             </DropdownMenu>
           </Dropdown>
         </div>
-        <div class="col-md-3 ">
+        <div class="col-md-3">
           <Dropdown
             isOpen={isOpen2}
             toggle={() => (isOpen2 = !isOpen2)}
-            class={"mt-2 mt-md-0 mb-md-0 mb-1"}
+            class={"mt-1 mt-md-0 mb-md-0"}
           >
             <DropdownToggle tag="div" class="col-12">
               <Input
@@ -96,8 +100,8 @@
           </Dropdown>
         </div>
         <div class="col-md-4 ">
-          <div class="row mt-2 mt-md-0 mb-md-0 mb-2">
-            <div class="col-6" style="font-size: large;">
+          <div class="row">
+            <div class="col-md-6 mt-2 mt-md-0" style="font-size: large;">
               <DateInput
                 min={new Date()}
                 bind:value={checkindate}
@@ -110,7 +114,7 @@
                 format={"dd-MM-yyyy"}
               />
             </div>
-            <div class="col-6" style="font-size: large;">
+            <div class="col-md-6 mt-2 mt-md-0" style="font-size: large;">
               <DateInput
                 min={checkindate}
                 bind:value={checkoutdate}
@@ -120,7 +124,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-2 d-flex align-item-center">
+        <div class="col-md-2 d-flex align-item-center mt-2 mt-md-0">
           <button
             on:click={() => {
               navigate("/listing");

@@ -24,7 +24,7 @@
 </script>
 
 <div>
-  <div class="home_top_section bg-danger">
+  <div class="home_top_section ">
     <div
       style="position: fixed; top: 0pt; width: 100%; z-index: 2700;"
       class="bg-light "
@@ -32,29 +32,44 @@
       <Navbar btnTheme={"btn-outline-light"} />
     </div>
 
-    <Carousel
-      {items}
-      bind:activeIndex
-      ride
-      interval={2000}
-      style="background-color: gainsboro;height: 70vh; width: 100%;"
+    <div
+      style="position: relative;height: 90vh;display: flex;flex-direction: column;align-items: flex-start;justify-content: center;width: 100%;"
     >
-      <CarouselIndicators bind:activeIndex {items} />
-      <div class="carousel-inner" style="height: 100%;">
-        {#each items as item, index}
-          <CarouselItem bind:activeIndex itemIndex={index}>
-            <img
-              src={item.url}
-              alt=""
-              style="object-position: center;object-fit: cover;height: 70vh;width: 100%;"
-            />
-          </CarouselItem>
-        {/each}
+      <div
+        style="position: absolute;z-index: 1000;width: 100%;color: white;text-shadow: 0px 0px 10px gray;margin: 8%;"
+      >
+        <div style="font-size: 6vh;line-height: 6vh;">
+          It's time to <br /> <span style="font-weight: bolder;">Discover</span>
+        </div>
+        <br />
+        <div style="font-size: 2vh;line-height: 3vh;">
+          Book Hotels and Experience around Africa and Asia
+        </div>
       </div>
-
-      <CarouselControl direction="prev" bind:activeIndex {items} />
-      <CarouselControl direction="next" bind:activeIndex {items} />
-    </Carousel>
+      <div />
+      <Carousel
+        {items}
+        bind:activeIndex
+        ride
+        interval={2000}
+        style="background-color: gainsboro;height: 90vh; width: 100wv;"
+      >
+        <CarouselIndicators bind:activeIndex {items} />
+        <div class="carousel-inner" style="height: 100%;">
+          {#each items as item, index}
+            <CarouselItem bind:activeIndex itemIndex={index}>
+              <img
+                src={item.url}
+                alt=""
+                style="object-position: center;object-fit: cover;height: 90vh;width: 100%;"
+              />
+            </CarouselItem>
+          {/each}
+        </div>
+        <CarouselControl direction="prev" bind:activeIndex {items} />
+        <CarouselControl direction="next" bind:activeIndex {items} />
+      </Carousel>
+    </div>
   </div>
   <div style="position: relative;">
     <Finder />
@@ -62,14 +77,13 @@
   <div class="">
     <div class="row">
       <div
-        class="col-xl-5 d-flex flex-column align-items-center align-items-sm-end justify-content-center"
+        class="col-xl-4 d-flex flex-column align-items-center align-items-sm-end justify-content-center"
       >
         <div class="fw-bolder p-5" style="font-size: 30pt;line-height: 35pt;">
-          <b> Interesting Offers </b>
+          <b> Marketplace for Tourism </b>
         </div>
       </div>
-      <div class="col-xl-1" />
-      <div class="col-xl-6 ms-4 ms-xl-0">
+      <div class="col-xl-8">
         <CarouselCustom />
       </div>
     </div>
@@ -116,11 +130,11 @@
   </div> -->
   <br />
   <div class="container mt-5 p-2 p-sm-5">
-    <div class="row mb-5 p-3 ">
+    <div class="row mb-5 p-2 ">
       <div class="col-xl-1" />
       <div class="col-xl-5 mb-5 me-0 me-sm-2">
         <div
-          class="card text-white p-5"
+          class="card text-white p-md-5 p-3"
           style="background-image: url('/assets/static/images/index/cave_explore.jpg');height: 400pt"
         >
           <h1 class="fw-bolder">Things to do from home</h1>
@@ -131,7 +145,7 @@
       </div>
       <div class="col-xl-5 mb-5 me-0 me-sm-2">
         <div
-          class="card text-white p-5"
+          class="card text-white p-md-5 p-3"
           style="background-image: url('/assets/static/images/index/online_expierence.png');height: 400pt;"
         >
           <h1 class="fw-bolder">Places to Stay In Nepal</h1>
@@ -148,15 +162,15 @@
   </div>
   <br />
   <div
-    class="mt-2 p-5 text-center 
+    class="mt-2 p-3 text-center 
     d-flex justify-content-center align-items-center flex-column"
   >
     <h1 class="fw-bolder mb-5 text-dark">Offers and Discount</h1>
-    <div class="row col-md-5">
+    <div class="row col-md-7">
       <div class="col-lg-8 mb-4">
         <input
           type="text"
-          class="form-control col-12 px-2 py-3"
+          class="form-control col-12 px-3 py-3"
           placeholder="Email"
         />
       </div>
@@ -165,7 +179,7 @@
       </div>
     </div>
   </div>
-  <div class="low_backgrounded">
+  <div class="low_backgrounded border-top">
     <Footer />
   </div>
 </div>
