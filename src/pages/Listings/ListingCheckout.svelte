@@ -412,7 +412,7 @@
             <div
               class="imageSpanned shadow"
               style="background-image: url({listing.listingImages?.length > 0
-                ? listing.listingImages[0]?.address
+                ? config.SERVER_IP+config.SERVER_PORT+listing.listingImages[0]?.address
                 : ''});background-color:whitesmoke;"
             />
           </div>
@@ -423,7 +423,7 @@
                   class="imageSpanned shadow"
                   style="background-image: url({listing.listingImages?.length >
                   1
-                    ? listing.listingImages[1]?.address
+                    ? config.SERVER_IP+config.SERVER_PORT+listing.listingImages[1]?.address
                     : ''});background-color:whitesmoke;"
                 />
               </div>
@@ -432,7 +432,7 @@
                   class="imageSpanned shadow"
                   style="background-image: url({listing.listingImages?.length >
                   2
-                    ? listing.listingImages[2]?.address
+                    ? config.SERVER_IP+config.SERVER_PORT+listing.listingImages[2]?.address
                     : ''});background-color:whitesmoke;"
                 />
               </div>
@@ -443,7 +443,7 @@
                   class="imageSpanned shadow"
                   style="background-image: url({listing.listingImages?.length >
                   3
-                    ? listing.listingImages[3]?.address
+                    ? config.SERVER_IP+config.SERVER_PORT+listing.listingImages[3]?.address
                     : ''});background-color:whitesmoke;"
                 />
               </div>
@@ -452,7 +452,7 @@
                   class="imageSpanned shadow"
                   style="background-image: url({listing.listingImages?.length >
                   4
-                    ? listing.listingImages[4]?.address
+                    ? config.SERVER_IP+config.SERVER_PORT+listing.listingImages[4]?.address
                     : ''});background-color:whitesmoke;"
                 />
               </div>
@@ -477,7 +477,7 @@
 
             <div class="row mt-5">
               {#each listing?.rooms ?? [] as room}
-                <div class="col-md-6 mb-3">
+                <div class="col-lg-6 mb-3">
                   <RoomCard
                     {room}
                     currency={listing.currency}

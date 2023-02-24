@@ -1,5 +1,6 @@
 <script>
   import { Link } from "svelte-routing";
+  import config from "../../../../environment.json";
 
   export let listing;
 </script>
@@ -10,7 +11,7 @@
       {#if listing?.listingImages?.length > 0}
         {#if listing.listingImages[0]?.address !== undefined && listing.listingImages[0]?.address !== ""}
           <img
-            src={listing.listingImages[0]?.address}
+          src={`${config.SERVER_IP}${config.SERVER_PORT}${listing.listingImages[0]?.address}`}
             alt=""
             style="object-fit: cover;object-position: center;"
             height="350px"

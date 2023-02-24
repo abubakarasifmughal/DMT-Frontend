@@ -1,4 +1,5 @@
 <script>
+  import config from "../../../../environment.json";
   export let room;
   export let onClickAddtoCart;
   export let currency;
@@ -6,7 +7,7 @@
 
 <div class="card shadow-sm p-3">
   <img
-    src={room?.Images.length > 0 ? room?.Images[0]?.address : ""}
+    src={room?.Images.length > 0 ? config.SERVER_IP+config.SERVER_PORT+room?.Images[0]?.address : ""}
     height="250px"
     style="object-fit: cover;object-position: top;"
     alt=""
