@@ -36,10 +36,10 @@
       style="position: relative;height: 90vh;display: flex;flex-direction: column;align-items: flex-start;justify-content: center;width: 100%;"
     >
       <div
-        style="position: absolute;z-index: 1000;width: 100%;color: white;text-shadow: 0px 0px 10px gray;margin: 8%;"
+        style="position: absolute;z-index: 1000;width: 100%;color: white;text-shadow: 0px 0px 10px gray;margin: 12%;"
       >
         <div style="font-size: 6vh;line-height: 6vh;">
-          It's time to <br /> <span style="font-weight: bolder;">Discover</span>
+          Marketplace for <br /> <span style="font-weight: bolder;">Tourism</span>
         </div>
         <br />
         <div style="font-size: 2vh;line-height: 3vh;">
@@ -52,7 +52,7 @@
         bind:activeIndex
         ride
         interval={2000}
-        style="background-color: gainsboro;height: 90vh; width: 100wv;"
+        style="background-color: gainsboro;height: 90vh; width: 100%;"
       >
         <CarouselIndicators bind:activeIndex {items} />
         <div class="carousel-inner" style="height: 100%;">
