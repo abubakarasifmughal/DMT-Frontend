@@ -202,7 +202,7 @@
           </div>
         </div>
         <div class="row mb-2">
-          <div class="col-6">
+          <div class="col-md-6">
             <div class="mb-1">Check In</div>
             <DateInput
               min={new Date()}
@@ -216,7 +216,7 @@
               format={"dd-MM-yyyy"}
             />
           </div>
-          <div class="col-6">
+          <div class="col-md-6">
             <div class="mb-1">Check Out</div>
             <DateInput
               min={information.checkin_date}
@@ -228,7 +228,7 @@
         </div>
 
         <div class="row mb-2">
-          <div class="col-8">
+          <div class="col-md-8">
             <div class="mb-1">Telephone</div>
             <input
               class="form-control"
@@ -237,7 +237,7 @@
               bind:value={information.contact_tel}
             />
           </div>
-          <div class="col-4">
+          <div class="col-md-4">
             <div class="mb-1">No. Persons</div>
             <div class="form-control">
               {information.adults + information.children}
@@ -330,12 +330,12 @@
         </div>
 
         <div class="row mb-2">
-          <div class="col-8">
+          <div class="col-7">
             <div class="d-flex align-items-center h-100">
               <span class="text-center">Pets</span>
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-5">
             <div class="d-flex align-items-center justify-content-around">
               <div class="form-check">
                 <input
@@ -348,7 +348,7 @@
                   Yes
                 </label>
               </div>
-              <div class="form-check">
+              <div class="form-check ms-2">
                 <input
                   class="form-check-input"
                   type="radio"
@@ -396,7 +396,9 @@
 <div style="height: 100vh;width: 100%;overflow-x: hidden;">
   {#if !loading}
     <div class="bg-white">
-      <Navbar color={"text-dark"} btnTheme={""} />
+      <div class="container">
+        <Navbar color={"text-dark"} btnTheme={""} />
+      </div>
       <Finder levitating={false} isPopupOpen={isCheckoutPopup} />
       <div class="container">
         <h2 class="fw-bolder" style="text-transform: capitalize;">
@@ -410,7 +412,7 @@
         <div class="row">
           <div class="col-md-6" style="height: 460pt;">
             <div
-              class="imageSpanned shadow"
+              class="imageSpanned"
               style="background-image: url({listing.listingImages?.length > 0
                 ? config.SERVER_IP +
                   config.SERVER_PORT +
@@ -422,7 +424,7 @@
             <div class="row">
               <div class="col-sm-6" style="height: 220pt;margin-bottom: 10pt;">
                 <div
-                  class="imageSpanned shadow"
+                  class="imageSpanned"
                   style="background-image: url({listing.listingImages?.length >
                   1
                     ? config.SERVER_IP +
@@ -433,7 +435,7 @@
               </div>
               <div class="col-sm-6" style="height: 220pt;margin-bottom: 20pt;">
                 <div
-                  class="imageSpanned shadow"
+                  class="imageSpanned"
                   style="background-image: url({listing.listingImages?.length >
                   2
                     ? config.SERVER_IP +
@@ -446,7 +448,7 @@
             <div class="row">
               <div class="col-sm-6" style="height: 220pt;margin-bottom: 10pt;">
                 <div
-                  class="imageSpanned shadow"
+                  class="imageSpanned "
                   style="background-image: url({listing.listingImages?.length >
                   3
                     ? config.SERVER_IP +
@@ -457,7 +459,7 @@
               </div>
               <div class="col-sm-6" style="height: 220pt;margin-bottom: 10pt;">
                 <div
-                  class="imageSpanned shadow"
+                  class="imageSpanned "
                   style="background-image: url({listing.listingImages?.length >
                   4
                     ? config.SERVER_IP +
@@ -525,7 +527,10 @@
                             <b>{room.room.RoomCategory}</b>
                           </div>
                           <span style="font-size: small;margin: 0pt;">
-                            {room.room.RoomDescription}
+                            {room.room.RoomDescription.length > 50
+                              ? room.room.RoomDescription.substring(0, 50) +
+                                "..."
+                              : room.room.RoomDescription}
                           </span>
                           <div
                             style="font-size: small;margin: 0pt;margin-top: 5pt;"

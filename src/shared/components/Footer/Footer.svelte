@@ -4,7 +4,7 @@
 
 <div class="pb-5">
   <div class="container pb-5 text-center">
-    <div class="row d-flex justify-content-center">
+    <!-- <div class="row d-flex justify-content-center">
       <div class="col-md-4">
         <h2>DMT</h2>
         <div>
@@ -13,7 +13,7 @@
           Pharetra ipsum arcu est nunc cras faucibus.
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="row p-5 text-start">
       <div class="col-md-4">
         <div class="row">

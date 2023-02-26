@@ -55,52 +55,58 @@
       style="transform: {levitating ? 'translateY(-50%)' : ''};"
     >
       <div class="row">
-        <div class="col-md-3">
-          <Dropdown
-            {isOpen}
-            toggle={() => (isOpen = !isOpen)}
-            class={"mb-1 mb-md-0 mb-md-0"}
-          >
-            <DropdownToggle tag="div" class="col-12">
-              <Input
-                placeholder="Where"
-                bind:value={searchString}
-                style="border-radius: 3px;"
-              />
-            </DropdownToggle>
-            <DropdownMenu style="width: 100%;">
-              {#each getFilteredLocations(locations, searchString) as location}
-                <DropdownItem on:click={() => (searchString = location.label)}
-                ><i class="bi bi-geo-alt-fill main-color" />
-                {location.label}</DropdownItem
-                >
-              {/each}
-            </DropdownMenu>
-          </Dropdown>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-8">
+              <Dropdown
+                {isOpen}
+                toggle={() => (isOpen = !isOpen)}
+                class={"mb-1 mb-md-0 mb-md-0 col-12 "}
+              >
+                <DropdownToggle tag="div" class="col-12">
+                  <Input
+                    placeholder="Where"
+                    bind:value={searchString}
+                    style="border-radius: 3px;"
+                  />
+                </DropdownToggle>
+                <DropdownMenu style="width: 100%;">
+                  {#each getFilteredLocations(locations, searchString) as location}
+                    <DropdownItem
+                      on:click={() => (searchString = location.label)}
+                      ><i class="bi bi-geo-alt-fill main-color" />
+                      {location.label}</DropdownItem
+                    >
+                  {/each}
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+            <div class="col-4">
+              <Dropdown
+                isOpen={isOpen2}
+                toggle={() => (isOpen2 = !isOpen2)}
+                class={"mt-md-0 mb-md-0 col-12"}
+              >
+                <DropdownToggle tag="div" class="col-12">
+                  <Input
+                    placeholder="Service Type"
+                    bind:value={serviceSelected}
+                    style="border-radius: 3px;"
+                    class="col-12"
+                  />
+                </DropdownToggle>
+                <DropdownMenu style="width: 100%;">
+                  {#each allServices as service}
+                    <DropdownItem on:click={() => (serviceSelected = service)}
+                      >{service}</DropdownItem
+                    >
+                  {/each}
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+          </div>
         </div>
-        <div class="col-md-3">
-          <Dropdown
-            isOpen={isOpen2}
-            toggle={() => (isOpen2 = !isOpen2)}
-            class={"mt-1 mt-md-0 mb-md-0"}
-          >
-            <DropdownToggle tag="div" class="col-12">
-              <Input
-                placeholder="Service Type"
-                bind:value={serviceSelected}
-                style="border-radius: 3px;"
-              />
-            </DropdownToggle>
-            <DropdownMenu style="width: 100%;">
-              {#each allServices as service}
-                <DropdownItem on:click={() => (serviceSelected = service)}
-                  >{service}</DropdownItem
-                >
-              {/each}
-            </DropdownMenu>
-          </Dropdown>
-        </div>
-        <div class="col-md-4 ">
+        <div class="col-md-4">
           <div class="row">
             <div class="col-md-6 mt-2 mt-md-0" style="font-size: large;">
               <DateInput
