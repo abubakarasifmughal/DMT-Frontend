@@ -71,7 +71,8 @@
             <DropdownMenu style="width: 100%;">
               {#each getFilteredLocations(locations, searchString) as location}
                 <DropdownItem on:click={() => (searchString = location.label)}
-                  >{location.label}</DropdownItem
+                ><i class="bi bi-geo-alt-fill main-color" />
+                {location.label}</DropdownItem
                 >
               {/each}
             </DropdownMenu>
@@ -154,6 +155,10 @@
   .btn:nth-child(n):hover {
     background-color: #6801c8;
     color: white;
+  }
+
+  .main-color {
+    color: #6801c8;
   }
 
   :root {
