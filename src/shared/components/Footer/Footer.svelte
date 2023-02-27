@@ -37,13 +37,6 @@
       </div>
       <div class="col-md-4" />
       <div class="col-md-4">
-        <div>Support: 407 924 6902</div>
-        <div>
-          Email: <a
-            style="text-decoration: none;"
-            href="mailto:adam@webrevived.com">adam@webrevived.com</a
-          >
-        </div>
         <div class="mt-3">
           <div
             class="bg-primary rounded-circle bg-opacity-50 me-2 ms-2"

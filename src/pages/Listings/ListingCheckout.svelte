@@ -400,73 +400,104 @@
         <Navbar color={"text-dark"} btnTheme={""} />
       </div>
       <Finder levitating={false} isPopupOpen={isCheckoutPopup} />
-      <div class="container">
-        <h2 class="fw-bolder" style="text-transform: capitalize;">
-          {listing.headline}
-        </h2>
-
-        <span style="text-transform: capitalize;">{listing.address}</span>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-7" style="color: #434859;">
+            <h3 class="fw-bolder" style="text-transform: capitalize;">
+              {listing.headline}
+            </h3>
+            <span>
+              <i class="bi bi-geo-alt-fill main-color" />
+              <span style="text-transform: capitalize;">{listing.address}</span>
+            </span>
+          </div>
+          <div class="col-md-5 text-sm-end text-center mt-4">
+            <button class="bg-transparent main-color btn btn-sm px-4 me-3"
+              >Share</button
+            >
+            <button class="bg-transparent main-color btn btn-sm px-4"
+              >Save</button
+            >
+          </div>
+        </div>
       </div>
       <br />
-      <div style="width: 100%;overflow-y:hidden" class="container-fluid">
-        <div class="row">
-          <div class="col-md-6" style="height: 460pt;">
-            <div
-              class="imageSpanned"
-              style="background-image: url({listing.listingImages?.length > 0
-                ? config.SERVER_IP +
-                  config.SERVER_PORT +
-                  listing.listingImages[0]?.address
-                : ''});background-color:whitesmoke;"
-            />
-          </div>
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-sm-6" style="height: 220pt;margin-bottom: 10pt;">
-                <div
-                  class="imageSpanned"
-                  style="background-image: url({listing.listingImages?.length >
-                  1
-                    ? config.SERVER_IP +
-                      config.SERVER_PORT +
-                      listing.listingImages[1]?.address
-                    : ''});background-color:whitesmoke;"
-                />
-              </div>
-              <div class="col-sm-6" style="height: 220pt;margin-bottom: 20pt;">
-                <div
-                  class="imageSpanned"
-                  style="background-image: url({listing.listingImages?.length >
-                  2
-                    ? config.SERVER_IP +
-                      config.SERVER_PORT +
-                      listing.listingImages[2]?.address
-                    : ''});background-color:whitesmoke;"
-                />
-              </div>
+      <div class="ps-lg-5 pe-lg-5">
+        <div
+          style="width: 100%;overflow-y:hidden"
+          class="container-fluid ps-lg-5 pe-lg-5"
+        >
+          <div class="row">
+            <div class="col-xl-6 mb-sm-4 mb-4" style="height: 460pt;">
+              <div
+                class="imageSpanned"
+                style="background-image: url({listing.listingImages?.length > 0
+                  ? config.SERVER_IP +
+                    config.SERVER_PORT +
+                    listing.listingImages[0]?.address
+                  : ''});background-color:whitesmoke;"
+              />
             </div>
-            <div class="row">
-              <div class="col-sm-6" style="height: 220pt;margin-bottom: 10pt;">
+            <div class="col-xl-6">
+              <div class="row">
                 <div
-                  class="imageSpanned "
-                  style="background-image: url({listing.listingImages?.length >
-                  3
-                    ? config.SERVER_IP +
-                      config.SERVER_PORT +
-                      listing.listingImages[3]?.address
-                    : ''});background-color:whitesmoke;"
-                />
+                  class="col-sm-6"
+                  style="height: 220pt;margin-bottom: 10pt;"
+                >
+                  <div
+                    class="imageSpanned"
+                    style="background-image: url({listing.listingImages
+                      ?.length > 1
+                      ? config.SERVER_IP +
+                        config.SERVER_PORT +
+                        listing.listingImages[1]?.address
+                      : ''});background-color:whitesmoke;"
+                  />
+                </div>
+                <div
+                  class="col-sm-6"
+                  style="height: 220pt;margin-bottom: 20pt;"
+                >
+                  <div
+                    class="imageSpanned"
+                    style="background-image: url({listing.listingImages
+                      ?.length > 2
+                      ? config.SERVER_IP +
+                        config.SERVER_PORT +
+                        listing.listingImages[2]?.address
+                      : ''});background-color:whitesmoke;"
+                  />
+                </div>
               </div>
-              <div class="col-sm-6" style="height: 220pt;margin-bottom: 10pt;">
+              <div class="row">
                 <div
-                  class="imageSpanned "
-                  style="background-image: url({listing.listingImages?.length >
-                  4
-                    ? config.SERVER_IP +
-                      config.SERVER_PORT +
-                      listing.listingImages[4]?.address
-                    : ''});background-color:whitesmoke;"
-                />
+                  class="col-sm-6"
+                  style="height: 220pt;margin-bottom: 10pt;"
+                >
+                  <div
+                    class="imageSpanned "
+                    style="background-image: url({listing.listingImages
+                      ?.length > 3
+                      ? config.SERVER_IP +
+                        config.SERVER_PORT +
+                        listing.listingImages[3]?.address
+                      : ''});background-color:whitesmoke;"
+                  />
+                </div>
+                <div
+                  class="col-sm-6"
+                  style="height: 220pt;margin-bottom: 10pt;"
+                >
+                  <div
+                    class="imageSpanned "
+                    style="background-image: url({listing.listingImages
+                      ?.length > 4
+                      ? config.SERVER_IP +
+                        config.SERVER_PORT +
+                        listing.listingImages[4]?.address
+                      : ''});background-color:whitesmoke;"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -588,5 +619,17 @@
     background-size: cover;
     height: 100%;
     width: 100%;
+  }
+
+  .main-color {
+    color: #6801c8;
+  }
+  .main-color:first-child {
+    color: #6801c8;
+    border-color: #6801c8;
+  }
+  .main-color:nth-child(n):hover {
+    color: #6801c8;
+    border-color: #6801c8;
   }
 </style>
