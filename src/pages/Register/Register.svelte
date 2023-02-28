@@ -34,6 +34,8 @@
       })
       .catch((error) => console.log("error", error));
   }
+
+  let showPassword = false;
 </script>
 
 <div class="">
@@ -80,15 +82,40 @@
           {#if signupObject.password !== verify_password}
             <div class="mb-1 ps-2 text-danger">Password Must Match</div>
           {/if}
-          <input
-            type="password"
-            class="form-control mb-3"
-            placeholder="Verify Password"
-            bind:value={verify_password}
-            style="border-color: {signupObject.password !== verify_password
-              ? 'red'
-              : ''};"
-          />
+          {#if showPassword}
+            <input
+              type="text"
+              class="form-control mb-3"
+              placeholder="Verify Password"
+              bind:value={verify_password}
+              style="border-color: {signupObject.password !== verify_password
+                ? 'red'
+                : ''};"
+            />
+          {:else}
+            <input
+              type="password"
+              class="form-control mb-3"
+              placeholder="Verify Password"
+              bind:value={verify_password}
+              style="border-color: {signupObject.password !== verify_password
+                ? 'red'
+                : ''};"
+            />
+          {/if}
+          <div class="d-flex align-items-center">
+            <input
+              id="showPass"
+              style="transform: scale(1.3);"
+              type="checkbox"
+              bind:checked={showPassword}
+              class="me-2"
+            />
+            <label for="showPass">
+              {showPassword ? "Hide Password" : "Show Password"}
+            </label>
+          </div>
+          <br />
           <div class="mb-3">
             <b>Password Strength</b>
           </div>

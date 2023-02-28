@@ -11,3 +11,9 @@
 </div>
 
 <Styles />
+
+<style>
+  * {
+    cursor: default;
+  }
+</style>

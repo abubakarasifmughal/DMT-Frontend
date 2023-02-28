@@ -237,7 +237,7 @@
   }
   .card-slide {
     transition: 0.5s;
-    height: 350pt;
+    height: 450pt;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

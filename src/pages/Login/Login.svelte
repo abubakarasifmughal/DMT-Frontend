@@ -14,6 +14,8 @@
     role: 0, //non admin
   };
 
+  let showPassword = false;
+
   function onLogin() {
     sessionStorage.setItem("loggedIn", "123abc");
 
@@ -76,12 +78,34 @@
           placeholder="Email"
           bind:value={signupObject.email}
         />
-        <input
-          type="password"
-          class="form-control mb-3"
-          placeholder="Password"
-          bind:value={signupObject.password}
-        />
+        {#if showPassword}
+          <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Password"
+            bind:value={signupObject.password}
+          />
+        {:else}
+          <input
+            type="password"
+            class="form-control mb-3"
+            placeholder="Password"
+            bind:value={signupObject.password}
+          />
+        {/if}
+        <div class="d-flex align-items-center">
+          <input
+            id="showPass"
+            style="transform: scale(1.3);"
+            type="checkbox"
+            bind:checked={showPassword}
+            class="me-2"
+          />
+          <label for="showPass">
+            {showPassword ? "Hide Password" : "Show Password"}
+          </label>
+        </div>
+        <br />
         <div class="mt-1">
           <div class="row">
             <div class="col-md-6 mb-2">

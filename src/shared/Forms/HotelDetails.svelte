@@ -52,7 +52,7 @@
   };
 </script>
 
-<div class="bg-white shadow p-5 col-md-10">
+<div class="bg-white shadow p-5 col-md-10" style="overflow-x: hidden;">
   <h3>Add details about the hotel</h3>
   <br />
   <span>Let guests know more about the service.</span>

@@ -4,7 +4,7 @@
 
 <div class="pb-5">
   <div class="container pb-5 text-center">
-    <div class="row d-flex justify-content-center">
+    <!-- <div class="row d-flex justify-content-center">
       <div class="col-md-4">
         <h2>DMT</h2>
         <div>
@@ -13,7 +13,7 @@
           Pharetra ipsum arcu est nunc cras faucibus.
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="row p-5 text-start">
       <div class="col-md-4">
         <div class="row">
@@ -37,13 +37,6 @@
       </div>
       <div class="col-md-4" />
       <div class="col-md-4">
-        <!-- <div>Support: 407 924 6902</div>
-        <div>
-          Email: <a
-            style="text-decoration: none;"
-            href="mailto:adam@webrevived.com">adam@webrevived.com</a
-          >
-        </div> -->
         <div class="mt-3">
           <div
             class="bg-primary rounded-circle bg-opacity-50 me-2 ms-2"

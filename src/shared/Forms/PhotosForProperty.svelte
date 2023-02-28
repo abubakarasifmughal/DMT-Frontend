@@ -7,7 +7,7 @@
   export let images = [];
 </script>
 
-<div class="bg-white shadow p-5 col-md-8">
+<div class="bg-white shadow p-5 col-md-11">
   <h3>Add photos of your property</h3>
   <span>
     Show guests why they should pick your property with well-lit,

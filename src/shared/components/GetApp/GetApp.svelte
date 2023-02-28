@@ -12,33 +12,29 @@
         Save 10% on tours and activities is as easy as booking with the DMT App.
       </p>
 
-      
-        <div class="flex">
-          <div >
-            <button>
-              <img
-                src="/assets/static/images/index/store-googleplay.png"
-                alt="qr"
-                class="btns"
-              />
-            </button>
-            <button>
-              <img
-                src="/assets/static/images/index/store-app.png"
-                alt="qr"
-                class="btns"
-              />
-            </button>
-          </div>
-          
+      <div class="flex align-items-start">
+        <div class="me-4">
+          <div class="mt-1">
             <img
-              src="/assets/static/images/index/qr-code.png"
+              src="/assets/static/images/index/store-googleplay.png"
               alt="qr"
-              class="qr"
+              class="btns"
             />
-          
-        
+          </div>
+          <div>
+            <img
+              src="/assets/static/images/index/store-app.png"
+              alt="qr"
+              class="btns"
+            />
+          </div>
+        </div>
 
+        <img
+          src="/assets/static/images/index/qr-code.png"
+          alt="qr"
+          class="qr"
+        />
       </div>
     </div>
     <div class="col-md-6 col-sm-12 airbnb">
@@ -69,8 +65,7 @@
     font-size: 14px;
     margin-top: 20px;
   }
-  .flex{
-
+  .flex {
     display: flex;
     margin-top: 25px;
   }
@@ -78,7 +73,6 @@
     border: none;
     display: block;
     margin-right: 20px;
-    
   }
 
   .airbnb {
@@ -89,7 +83,7 @@
 
   .qr {
     width: 130px;
-    height:60%;
+    height: 60%;
   }
 
   .screen {

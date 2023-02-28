@@ -10,7 +10,7 @@
   let disp = createEventDispatcher();
 </script>
 
-<div class="bg-white col-md-8 p-5 shadow">
+<div class="bg-white col-xl-11 p-5 shadow">
   <h3>Enter location address</h3>
   <hr />
   <br />

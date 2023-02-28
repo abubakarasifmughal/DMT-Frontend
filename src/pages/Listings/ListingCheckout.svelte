@@ -202,7 +202,7 @@
           </div>
         </div>
         <div class="row mb-2">
-          <div class="col-6">
+          <div class="col-md-6">
             <div class="mb-1">Check In</div>
             <DateInput
               min={new Date()}
@@ -216,7 +216,7 @@
               format={"dd-MM-yyyy"}
             />
           </div>
-          <div class="col-6">
+          <div class="col-md-6">
             <div class="mb-1">Check Out</div>
             <DateInput
               min={information.checkin_date}
@@ -228,7 +228,7 @@
         </div>
 
         <div class="row mb-2">
-          <div class="col-8">
+          <div class="col-md-8">
             <div class="mb-1">Telephone</div>
             <input
               class="form-control"
@@ -237,7 +237,7 @@
               bind:value={information.contact_tel}
             />
           </div>
-          <div class="col-4">
+          <div class="col-md-4">
             <div class="mb-1">No. Persons</div>
             <div class="form-control">
               {information.adults + information.children}
@@ -330,12 +330,12 @@
         </div>
 
         <div class="row mb-2">
-          <div class="col-8">
+          <div class="col-7">
             <div class="d-flex align-items-center h-100">
               <span class="text-center">Pets</span>
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-5">
             <div class="d-flex align-items-center justify-content-around">
               <div class="form-check">
                 <input
@@ -348,7 +348,7 @@
                   Yes
                 </label>
               </div>
-              <div class="form-check">
+              <div class="form-check ms-2">
                 <input
                   class="form-check-input"
                   type="radio"
@@ -396,75 +396,108 @@
 <div style="height: 100vh;width: 100%;overflow-x: hidden;">
   {#if !loading}
     <div class="bg-white">
-      <Navbar color={"text-dark"} btnTheme={""} />
-      <Finder levitating={false} isPopupOpen={isCheckoutPopup} />
       <div class="container">
-        <h2 class="fw-bolder" style="text-transform: capitalize;">
-          {listing.headline}
-        </h2>
-
-        <span style="text-transform: capitalize;">{listing.address}</span>
+        <Navbar color={"text-dark"} btnTheme={""} />
+      </div>
+      <Finder levitating={false} isPopupOpen={isCheckoutPopup} />
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-7" style="color: #434859;">
+            <h3 class="fw-bolder" style="text-transform: capitalize;">
+              {listing.headline}
+            </h3>
+            <span>
+              <i class="bi bi-geo-alt-fill main-color" />
+              <span style="text-transform: capitalize;">{listing.address}</span>
+            </span>
+          </div>
+          <div class="col-md-5 text-sm-end text-center mt-4">
+            <button class="bg-transparent main-color btn btn-sm px-4 me-3"
+              >Share</button
+            >
+            <button class="bg-transparent main-color btn btn-sm px-4"
+              >Save</button
+            >
+          </div>
+        </div>
       </div>
       <br />
-      <div style="width: 100%;overflow-y:hidden" class="container-fluid">
-        <div class="row">
-          <div class="col-md-6" style="height: 460pt;">
-            <div
-              class="imageSpanned shadow"
-              style="background-image: url({listing.listingImages?.length > 0
-                ? config.SERVER_IP +
-                  config.SERVER_PORT +
-                  listing.listingImages[0]?.address
-                : ''});background-color:whitesmoke;"
-            />
-          </div>
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-sm-6" style="height: 220pt;margin-bottom: 10pt;">
-                <div
-                  class="imageSpanned shadow"
-                  style="background-image: url({listing.listingImages?.length >
-                  1
-                    ? config.SERVER_IP +
-                      config.SERVER_PORT +
-                      listing.listingImages[1]?.address
-                    : ''});background-color:whitesmoke;"
-                />
-              </div>
-              <div class="col-sm-6" style="height: 220pt;margin-bottom: 20pt;">
-                <div
-                  class="imageSpanned shadow"
-                  style="background-image: url({listing.listingImages?.length >
-                  2
-                    ? config.SERVER_IP +
-                      config.SERVER_PORT +
-                      listing.listingImages[2]?.address
-                    : ''});background-color:whitesmoke;"
-                />
-              </div>
+      <div class="ps-lg-5 pe-lg-5">
+        <div
+          style="width: 100%;overflow-y:hidden"
+          class="container-fluid ps-lg-5 pe-lg-5"
+        >
+          <div class="row">
+            <div class="col-xl-6 mb-sm-4 mb-4" style="height: 460pt;">
+              <div
+                class="imageSpanned"
+                style="background-image: url({listing.listingImages?.length > 0
+                  ? config.SERVER_IP +
+                    config.SERVER_PORT +
+                    listing.listingImages[0]?.address
+                  : ''});background-color:whitesmoke;"
+              />
             </div>
-            <div class="row">
-              <div class="col-sm-6" style="height: 220pt;margin-bottom: 10pt;">
+            <div class="col-xl-6">
+              <div class="row">
                 <div
-                  class="imageSpanned shadow"
-                  style="background-image: url({listing.listingImages?.length >
-                  3
-                    ? config.SERVER_IP +
-                      config.SERVER_PORT +
-                      listing.listingImages[3]?.address
-                    : ''});background-color:whitesmoke;"
-                />
+                  class="col-sm-6"
+                  style="height: 220pt;margin-bottom: 10pt;"
+                >
+                  <div
+                    class="imageSpanned"
+                    style="background-image: url({listing.listingImages
+                      ?.length > 1
+                      ? config.SERVER_IP +
+                        config.SERVER_PORT +
+                        listing.listingImages[1]?.address
+                      : ''});background-color:whitesmoke;"
+                  />
+                </div>
+                <div
+                  class="col-sm-6"
+                  style="height: 220pt;margin-bottom: 20pt;"
+                >
+                  <div
+                    class="imageSpanned"
+                    style="background-image: url({listing.listingImages
+                      ?.length > 2
+                      ? config.SERVER_IP +
+                        config.SERVER_PORT +
+                        listing.listingImages[2]?.address
+                      : ''});background-color:whitesmoke;"
+                  />
+                </div>
               </div>
-              <div class="col-sm-6" style="height: 220pt;margin-bottom: 10pt;">
+              <div class="row">
                 <div
-                  class="imageSpanned shadow"
-                  style="background-image: url({listing.listingImages?.length >
-                  4
-                    ? config.SERVER_IP +
-                      config.SERVER_PORT +
-                      listing.listingImages[4]?.address
-                    : ''});background-color:whitesmoke;"
-                />
+                  class="col-sm-6"
+                  style="height: 220pt;margin-bottom: 10pt;"
+                >
+                  <div
+                    class="imageSpanned "
+                    style="background-image: url({listing.listingImages
+                      ?.length > 3
+                      ? config.SERVER_IP +
+                        config.SERVER_PORT +
+                        listing.listingImages[3]?.address
+                      : ''});background-color:whitesmoke;"
+                  />
+                </div>
+                <div
+                  class="col-sm-6"
+                  style="height: 220pt;margin-bottom: 10pt;"
+                >
+                  <div
+                    class="imageSpanned "
+                    style="background-image: url({listing.listingImages
+                      ?.length > 4
+                      ? config.SERVER_IP +
+                        config.SERVER_PORT +
+                        listing.listingImages[4]?.address
+                      : ''});background-color:whitesmoke;"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -525,7 +558,10 @@
                             <b>{room.room.RoomCategory}</b>
                           </div>
                           <span style="font-size: small;margin: 0pt;">
-                            {room.room.RoomDescription}
+                            {room.room.RoomDescription.length > 50
+                              ? room.room.RoomDescription.substring(0, 50) +
+                                "..."
+                              : room.room.RoomDescription}
                           </span>
                           <div
                             style="font-size: small;margin: 0pt;margin-top: 5pt;"
@@ -583,5 +619,17 @@
     background-size: cover;
     height: 100%;
     width: 100%;
+  }
+
+  .main-color {
+    color: #6801c8;
+  }
+  .main-color:first-child {
+    color: #6801c8;
+    border-color: #6801c8;
+  }
+  .main-color:nth-child(n):hover {
+    color: #6801c8;
+    border-color: #6801c8;
   }
 </style>

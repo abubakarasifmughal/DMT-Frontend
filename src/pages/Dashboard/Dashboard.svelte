@@ -16,12 +16,12 @@
   });
 </script>
 
-<div style="width: 100%;overflow: hidden;">
+<div style="overflow-x: hidden;width: 100vw;">
   <Navbar2 color={"text-dark"} />
   <div class="row border-top">
-    <div class="col-md-2" style="font-size: large;">
+    <div class="col-md-2 " style="font-size: large;">
       <Link to="/dashboard/home" style="text-decoration:none">
-        <div class="col-12 text-dark sideBarTabs p-3 border-bottom text-start">
+        <div class="col-12  text-dark sideBarTabs p-3 border-bottom text-start">
           Home
         </div>
       </Link>
@@ -43,7 +43,7 @@
     </div>
     <div
       class="col-md-10 bg-light border-start border-bottom"
-      style="height: 90vh;overflow-y: scroll;"
+      style="min-height: 90vh;"
     >
       {#if pathname === "home"}
         <div class="text-center p-5">

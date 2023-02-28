@@ -14,10 +14,16 @@
 
   const items = [
     {
-      url: "/assets/static/images/index/nepal_sunset.jpg",
+      url: "/assets/static/images/index/1.JPG",
     },
     {
-      url: "/assets/static/images/index/napel_clouds_mountian.jpg",
+      url: "/assets/static/images/index/2.JPG",
+    },
+    {
+      url: "/assets/static/images/index/3.JPG",
+    },
+    {
+      url: "/assets/static/images/index/4.JPG",
     },
   ];
   let activeIndex = 0;
@@ -39,7 +45,8 @@
         style="position: absolute;z-index: 1000;width: 75%;color: white;text-shadow: 0px 0px 10px gray;margin: 12%;"
       >
         <div style="font-size: 6vh;line-height: 6vh;">
-          Marketplace for <br /> <span style="font-weight: bolder;">Tourism</span>
+          Marketplace for <br />
+          <span style="font-weight: bolder;">Tourism</span>
         </div>
         <br />
         <div style="font-size: 2vh;line-height: 3vh;">
