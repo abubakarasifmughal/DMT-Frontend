@@ -9,7 +9,7 @@
   export let description = "";
 </script>
 
-<div class="bg-white shadow p-5 col-md-8">
+<div class="bg-white shadow p-5 col-md-11">
   <h3>Enter Listings Name</h3>
   <span
     >This shows up in searches and at the top of your listing. Try to write a

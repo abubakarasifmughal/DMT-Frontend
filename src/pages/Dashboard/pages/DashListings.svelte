@@ -72,7 +72,7 @@
   <div>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-lg-2 ">
           <Stepper
             title={"Listings"}
             steps={[
@@ -88,7 +88,7 @@
             substepIndex={0}
           />
         </div>
-        <div class="col-md-10">
+        <div class="col-lg-10">
           {#if currentPage === 1}
             <Welcome
               property={newListing.isProperty}
