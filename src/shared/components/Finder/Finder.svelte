@@ -6,6 +6,7 @@
     DropdownToggle,
     FormGroup,
     Input,
+    InputGroup,
   } from "sveltestrap";
   import { navigate } from "svelte-routing";
 
@@ -57,7 +58,7 @@
       <div class="row">
         <div class="col-md-6">
           <div class="row">
-            <div class="col-8">
+            <div class="col-md-6">
               <Dropdown
                 {isOpen}
                 toggle={() => (isOpen = !isOpen)}
@@ -81,7 +82,7 @@
                 </DropdownMenu>
               </Dropdown>
             </div>
-            <div class="col-4">
+            <div class="col-md-6">
               <Dropdown
                 isOpen={isOpen2}
                 toggle={() => (isOpen2 = !isOpen2)}
@@ -107,7 +108,7 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-md-6 mt-2 mt-md-0" style="font-size: large;">
               <DateInput
                 min={new Date()}
@@ -129,7 +130,7 @@
                 format={"dd-MM-yyyy"}
               />
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="col-md-2 d-flex align-item-center mt-2 mt-md-0">
           <button
