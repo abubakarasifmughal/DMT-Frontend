@@ -25,6 +25,9 @@
     {
       url: "/assets/static/images/index/4.JPG",
     },
+    {
+      url: "/assets/static/images/index/5.jpg",
+    },
   ];
   let activeIndex = 0;
 </script>
@@ -142,9 +145,9 @@
       <div class="col-xl-5 mb-5 me-0 me-sm-2">
         <div
           class="card text-white p-md-5 p-3"
-          style="background-image: url('/assets/static/images/index/cave_explore.jpg');height: 400pt"
+          style="background-image: url('/assets/static/images/index/Things_to_do_from_home_Online_Experience.JPG');height: 400pt"
         >
-          <h1 class="fw-bolder">Things to do from home</h1>
+          <h1 class="fw-bolder" style="text-shadow: 0px 0px 10px gray;">Things to do from home</h1>
           <div class="mt-3">
             <button class="btn btn-light px-5 fw-bold">Experiences</button>
           </div>
@@ -153,9 +156,9 @@
       <div class="col-xl-5 mb-5 me-0 me-sm-2">
         <div
           class="card text-white p-md-5 p-3"
-          style="background-image: url('/assets/static/images/index/online_expierence.png');height: 400pt;"
+          style="background-image: url('/assets/static/images/index/Things_to_do_on_your_Trip_Onsite_Experience.JPG');height: 400pt;"
         >
-          <h1 class="fw-bolder">Places to Stay In Nepal</h1>
+          <h1 class="fw-bolder" style="text-shadow: 0px 0px 10px gray;">Places to Stay In Nepal</h1>
           <div class="mt-3">
             <button class="btn btn-light px-5 fw-bold">Stays</button>
           </div>
