@@ -99,8 +99,10 @@
                 <DropdownMenu style="width: 100%;">
                   {#each allServices as service}
                     <DropdownItem on:click={() => (serviceSelected = service)}
-                      >{service}</DropdownItem
-                    >
+                      >
+                      <i class="bi bi-bookmarks-fill
+                      main-color"/>
+                      {service}</DropdownItem>
                   {/each}
                 </DropdownMenu>
               </Dropdown>

@@ -11,10 +11,10 @@
 </script>
 
 <div class="bg-white col-xl-11 p-5 shadow">
-  <h3>Enter location address</h3>
+  <h3>Enter the location address</h3>
   <hr />
   <br />
-  <h5>You've entered</h5>
+  <h5>You've entered:</h5>
   <div class="pb-3 pt-3">
     {locationAddress}
   </div>
