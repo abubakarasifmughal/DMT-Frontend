@@ -110,7 +110,7 @@
           </div>
         </div>
         <div class="col-md-4 ">
-          <div class="input-group ">
+          <div class="input-group height-fix">
             <input
               class="form-control"
               type="date"
@@ -196,6 +196,10 @@
 
   .main-color {
     color: #6801c8;
+  }
+
+  .height-fix {
+    height: 41.328px;
   }
 
   :root {
