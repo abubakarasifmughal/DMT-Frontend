@@ -3,6 +3,35 @@
   import Navbar from "../../shared/components/Navbar/Navbar.svelte";
   import PasswordStrength from "../../shared/lib/PasswordStrength/PasswordStrength.svelte";
   import config from "../../../environment.json";
+  import {
+    Button,
+    Modal,
+    ModalBody,
+    ModalFooter,
+    ModalHeader,
+    Input,
+    Label,
+  } from "sveltestrap";
+  let open = false;
+  function toggle() {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify({"email":signupObject.email});
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+    };
+    console.log
+    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/user/generate-token`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        open = !open;
+      })
+      .catch((error) => console.log("error", error));
+
+    
+  }
 
   let signupObject = {
     first_name: "",
@@ -13,12 +42,25 @@
     address: "",
     is_seller: 1, //seller not buyer
     role: 0, //non admin
+    is_individual: false,
+    tax_number: null,
+    user_number: null,
+    otp: null,
   };
 
   let verify_password = "";
   let tosAgree = false;
 
+  let placeholder = "User Identification Number";
+  function changePlaceHolder() {
+    if (!signupObject.is_individual) {
+      placeholder = "Company Identification Number";
+    } else placeholder = "User Identification Number";
+  }
+
   function onSignup() {
+
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify(signupObject);
@@ -34,6 +76,8 @@
       })
       .catch((error) => console.log("error", error));
   }
+
+  let showPassword = false;
 </script>
 
 <div class="">
@@ -71,6 +115,50 @@
             placeholder="Email"
             bind:value={signupObject.email}
           />
+          <div>
+            <Modal isOpen={open} {toggle}>
+              <ModalHeader {toggle}>Email Verification</ModalHeader>
+
+              <ModalBody>
+                <Label
+                  >Enter The One Time Password (OTP) sent to you via email</Label
+                >
+                <input
+                  type="text"
+                  class="form-control mb-3"
+                  placeholder="OTP"
+                  bind:value={signupObject.otp}
+                />
+              </ModalBody>
+
+              <ModalFooter>
+                <Button color="primary" on:click={toggle}>Verify</Button>
+              </ModalFooter>
+            </Modal>
+          </div>
+
+          <Input
+            
+            type="switch"
+            class = "mb-3"
+            label="Is Individual?"
+            bind:checked={signupObject.is_individual}
+            on:change={changePlaceHolder}
+          />
+
+          <input
+            type="text"
+            class="form-control mb-3"
+            {placeholder}
+            bind:value={signupObject.user_number}
+          />
+          <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Tax Number"
+            bind:value={signupObject.tax_number}
+          />
+
           <input
             type="password"
             class="form-control mb-3"
@@ -80,15 +168,40 @@
           {#if signupObject.password !== verify_password}
             <div class="mb-1 ps-2 text-danger">Password Must Match</div>
           {/if}
-          <input
-            type="password"
-            class="form-control mb-3"
-            placeholder="Verify Password"
-            bind:value={verify_password}
-            style="border-color: {signupObject.password !== verify_password
-              ? 'red'
-              : ''};"
-          />
+          {#if showPassword}
+            <input
+              type="text"
+              class="form-control mb-3"
+              placeholder="Verify Password"
+              bind:value={verify_password}
+              style="border-color: {signupObject.password !== verify_password
+                ? 'red'
+                : ''};"
+            />
+          {:else}
+            <input
+              type="password"
+              class="form-control mb-3"
+              placeholder="Verify Password"
+              bind:value={verify_password}
+              style="border-color: {signupObject.password !== verify_password
+                ? 'red'
+                : ''};"
+            />
+          {/if}
+          <div class="d-flex align-items-center">
+            <input
+              id="showPass"
+              style="transform: scale(1.3);"
+              type="checkbox"
+              bind:checked={showPassword}
+              class="me-2"
+            />
+            <label for="showPass">
+              {showPassword ? "Hide Password" : "Show Password"}
+            </label>
+          </div>
+          <br />
           <div class="mb-3">
             <b>Password Strength</b>
           </div>
@@ -110,7 +223,7 @@
           <div class="mt-4 row">
             <div class="col-md-6 mb-3">
               {#if tosAgree}
-                <button class="btn ps-5 pe-5 col-12" on:click={onSignup}>
+                <button class="btn ps-5 pe-5 col-12" on:click={toggle}>
                   Sign up
                 </button>
               {:else}
@@ -147,6 +260,9 @@
 </div>
 
 <style>
+  .switch-input{
+    margin-bottom: 20px;
+  }
   .btn {
     border: 1px solid #9427f7;
     background-color: transparent;
