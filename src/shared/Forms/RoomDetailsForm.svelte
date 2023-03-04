@@ -10,6 +10,7 @@
   export let onClickRemove;
 
   let isOpen = false;
+  $: amenetiesLength = room.ameneties.length;
 
   const toggle = () => {
     isOpen = !isOpen;
@@ -119,6 +120,117 @@
         },
       ],
     },
+    {
+      label: "Room Ameneties",
+      description: `Add room packages and information about each room.`,
+      options: [
+        {
+          label: "Air Conditioning",
+          checked: false,
+          id: 18,
+        },
+        {
+          label: "Alarm Clock",
+          checked: false,
+          id: 19,
+        },
+        {
+          label: "Bathrobe",
+          checked: false,
+          id: 20,
+        },
+        {
+          label: "Bathroom Amenities",
+          checked: false,
+          id: 21,
+        },
+        {
+          label: "Bathtub",
+          checked: false,
+          id: 22,
+        },
+        {
+          label: "Hair Dryer",
+          checked: false,
+          id: 23,
+        },
+        {
+          label: "Hotel Key Cards",
+          checked: false,
+          id: 24,
+        },
+        {
+          label: "In-Room Safe",
+          checked: false,
+          id: 25,
+        },
+        {
+          label: "Minibar",
+          checked: false,
+          id: 26,
+        },
+        {
+          label: "Slippers",
+          checked: false,
+          id: 27,
+        },
+        {
+          label: "Smart TV",
+          checked: false,
+          id: 28,
+        },
+        {
+          label: "Smoke Detector",
+          checked: false,
+          id: 29,
+        },
+        {
+          label: "Sofa Couch",
+          checked: false,
+          id: 30,
+        },
+        {
+          label: "Stationary Kit",
+          checked: false,
+          id: 31,
+        },
+        {
+          label: "Study Table",
+          checked: false,
+          id: 32,
+        },
+        {
+          label: "Telephone",
+          checked: false,
+          id: 33,
+        },
+        {
+          label: "Tea/Coffee Maker",
+          checked: false,
+          id: 34,
+        },
+        {
+          label: "Tea/Coffee Sachet",
+          checked: false,
+          id: 35,
+        },
+        {
+          label: "Towel",
+          checked: false,
+          id: 36,
+        },
+        {
+          label: "Wardrobe",
+          checked: false,
+          id: 37,
+        },
+        {
+          label: "WIFI",
+          checked: false,
+          id: 38,
+        },
+      ],
+    },
   ];
 </script>
 
@@ -137,12 +249,12 @@
       <input
         type="text"
         class="form-control mt-2"
-        placeholder="Room Category"
+        placeholder="Category Name"
         bind:value={room.RoomCategory}
       />
       <textarea
         class="form-control mt-2"
-        placeholder="Description"
+        placeholder="Category Highlights"
         rows="5"
         bind:value={room.RoomDescription}
       />
@@ -219,12 +331,12 @@
         </div>
       </div>
       <button class="btn mt-3 btn-light border" on:click={toggle}>
-        Add Amenities
+        {amenetiesLength <= 0 ? "Add Ameneties" : "Ameneties Added"}
       </button>
     </div>
     <div class="col-md-6">
       <div class="col-12 p-5 dragInRegion text-center">
-        <div>Drag and drop you photos here</div>
+        <div>Select photos for your room</div>
         <input
           style="visibility: hidden;position: absolute;"
           type="file"
@@ -277,7 +389,13 @@
   </div>
 </div>
 
-<Offcanvas {isOpen} {toggle}>
+<Offcanvas
+  {isOpen}
+  {toggle}
+  on:close={() => {
+    amenetiesLength = room.ameneties.length;
+  }}
+>
   <Amenities
     selectedAmeneties={room.ameneties}
     amenitiesList={AllAmeneties}

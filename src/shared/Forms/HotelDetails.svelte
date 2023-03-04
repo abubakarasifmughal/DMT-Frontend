@@ -53,7 +53,7 @@
 </script>
 
 <div class="bg-white shadow p-5 col-md-10" style="overflow-x: hidden;">
-  <h3>Add details about the hotel</h3>
+  <h3>Please add details about Room Categories</h3>
   <br />
   <span>Let guests know more about the service.</span>
   <br />
@@ -140,7 +140,9 @@
     />
   {/each}
   <div class="pt-3 pb-3 fw-bold">Total Sellable Rooms {getTotalRooms()}</div>
-  <button class="btn pe-5 ps-5 mt-5" on:click={addNewRoom}>Add New Room</button>
+  <button class="btn pe-5 ps-5 mt-5" on:click={addNewRoom}
+    >Add Room Category</button
+  >
   <hr />
   <div class="mt-3 d-flex justify-content-between">
     <button

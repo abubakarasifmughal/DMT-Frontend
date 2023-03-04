@@ -163,7 +163,7 @@
     </div>
     <div class="col-md-6 mb-3">
       <button class="btn btn-light border" on:click={toggle}>
-        Add Amenities
+        {selectedAmeneties.length <= 0 ? "Add Facilities" : "Facilities Added"}
       </button>
     </div>
   </div>
@@ -190,7 +190,13 @@
     <button on:click={onClickNext} class="btn pe-5 ps-5">Next</button>
   </div>
 
-  <Offcanvas {isOpen} {toggle}>
+  <Offcanvas
+    {isOpen}
+    {toggle}
+    on:close={() => {
+      selectedAmeneties = selectedAmeneties;
+    }}
+  >
     <Amenities
       {selectedAmeneties}
       amenitiesList={AllAmeneties}

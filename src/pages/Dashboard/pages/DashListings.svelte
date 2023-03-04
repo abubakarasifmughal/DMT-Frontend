@@ -8,6 +8,7 @@
   import Welcome from "../../../shared/Forms/Welcome.svelte";
   import Progressbar from "../../../shared/lib/Progressbar/Progressbar.svelte";
   import config from "../../../../environment.json";
+  import BusinessNature from "../../../shared/Forms/BusinessNature.svelte";
 
   let currentPage = 1;
   let user_id = sessionStorage.getItem("di");
@@ -24,6 +25,12 @@
     listingImages: [],
     weeklyDiscount: 10,
     nightlyDiscount: 0,
+    // New props, not in db or nest yet
+    isIndividual: true,
+    IndividualIdentificationNumber: "",
+    IndividualTaxFileNumber: "",
+    CompanyIdentificationNumber: "",
+    CompanyTaxFileNumber: "",
   };
 
   function apiCall() {
@@ -57,6 +64,11 @@
           listingImages: [],
           weeklyDiscount: 10,
           nightlyDiscount: 0,
+          isIndividual: false,
+          IndividualIdentificationNumber: "",
+          IndividualTaxFileNumber: "",
+          CompanyIdentificationNumber: "",
+          CompanyTaxFileNumber: "",
         };
         // -----
         currentPage = 1;
@@ -78,6 +90,7 @@
             steps={[
               { label: "Welcome", substeps: [] },
               { label: "Location", substeps: [] },
+              { label: "Business", substeps: [] },
               { label: "Details", substeps: [] },
               { label: "Photos", substeps: [] },
               { label: "Amenities", substeps: [] },
@@ -90,13 +103,7 @@
         </div>
         <div class="col-lg-10">
           {#if currentPage === 1}
-            <Welcome
-              property={newListing.isProperty}
-              on:isPropery={(data) => {
-                newListing.isProperty = data.detail.isProperty;
-              }}
-              onClickContinue={() => (currentPage = currentPage + 1)}
-            />
+            <Welcome onClickContinue={() => (currentPage = currentPage + 1)} />
           {:else if currentPage === 2}
             <LocationForListing
               coordX={27.717245}
@@ -109,6 +116,20 @@
               onClickNext={() => (currentPage = currentPage + 1)}
             />
           {:else if currentPage === 3}
+            <BusinessNature
+              IndividualTaxFileNumber={newListing.IndividualTaxFileNumber}
+              IndividualIdentificationNumber={newListing.IndividualIdentificationNumber}
+              CompanyIdentificationNumber={newListing.CompanyIdentificationNumber}
+              CompanyTaxFileNumber={newListing.CompanyTaxFileNumber}
+              isIndividual={newListing.isIndividual}
+              property={newListing.isProperty}
+              on:isPropery={(data) => {
+                newListing.isProperty = data.detail.isProperty;
+              }}
+              onClickBack={() => (currentPage = currentPage - 1)}
+              onClickNext={() => (currentPage = currentPage + 1)}
+            />
+          {:else if currentPage === 4}
             <DetailsForListing
               headline={newListing.headline}
               description={newListing.description}
@@ -121,7 +142,7 @@
               onClickBack={() => (currentPage = currentPage - 1)}
               onClickNext={() => (currentPage = currentPage + 1)}
             />
-          {:else if currentPage === 4}
+          {:else if currentPage === 5}
             <HotelDetails
               currency={newListing.currency}
               on:currency={(data) => {
@@ -138,7 +159,7 @@
               onClickBack={() => (currentPage = currentPage - 1)}
               onClickNext={() => (currentPage = currentPage + 1)}
             />
-          {:else if currentPage === 5}
+          {:else if currentPage === 6}
             <PhotosForProperty
               on:listingImages={(data) => {
                 newListing.listingImages = data.detail.images;
