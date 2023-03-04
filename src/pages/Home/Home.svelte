@@ -90,7 +90,7 @@
         class="col-xl-4 d-flex flex-column align-items-center align-items-sm-end justify-content-center"
       >
         <div class="fw-bolder p-5" style="font-size: 30pt;line-height: 35pt;">
-          <b> Marketplace for Tourism </b>
+          <b> Interesting Offers around Africa and Asia </b>
         </div>
       </div>
       <div class="col-xl-8">
@@ -147,7 +147,9 @@
           class="card text-white p-md-5 p-3"
           style="background-image: url('/assets/static/images/index/Things_to_do_from_home_Online_Experience.JPG');height: 400pt"
         >
-          <h1 class="fw-bolder" style="text-shadow: 0px 0px 10px gray;">Things to do from home</h1>
+          <h1 class="fw-bolder" style="text-shadow: 0px 0px 10px gray;">
+            Things to do from home
+          </h1>
           <div class="mt-3">
             <button class="btn btn-light px-5 fw-bold">Experiences</button>
           </div>
@@ -158,7 +160,9 @@
           class="card text-white p-md-5 p-3"
           style="background-image: url('/assets/static/images/index/Things_to_do_on_your_Trip_Onsite_Experience.JPG');height: 400pt;"
         >
-          <h1 class="fw-bolder" style="text-shadow: 0px 0px 10px gray;">Places to Stay In Nepal</h1>
+          <h1 class="fw-bolder" style="text-shadow: 0px 0px 10px gray;">
+            Places to Stay In Nepal
+          </h1>
           <div class="mt-3">
             <button class="btn btn-light px-5 fw-bold">Stays</button>
           </div>
