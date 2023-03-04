@@ -13,6 +13,7 @@
     Label,
   } from "sveltestrap";
   let open = false;
+  let emailExists=false
   function toggle() {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -24,13 +25,19 @@
     };
     console.log
     fetch(`${config.SERVER_IP}${config.SERVER_PORT}/user/generate-token`, requestOptions)
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((result) => {
-        open = !open;
-      })
-      .catch((error) => console.log("error", error));
+        if(result.msg=='success'){
+        open = !open
+        emailExists=false
+        }
+        else{
 
-    
+          emailExists=true
+        }
+        console.log(result)
+      })
+      .catch((error) => console.log("error", error));    
   }
 
   let signupObject = {
@@ -43,13 +50,14 @@
     is_seller: 1, //seller not buyer
     role: 0, //non admin
     is_individual: false,
-    tax_number: null,
-    user_number: null,
+    tax_number: 123,
+    user_number: 123,
     otp: null,
   };
 
   let verify_password = "";
   let tosAgree = false;
+
 
   let placeholder = "User Identification Number";
   function changePlaceHolder() {
@@ -57,7 +65,7 @@
       placeholder = "Company Identification Number";
     } else placeholder = "User Identification Number";
   }
-
+let otpMatch=true
   function onSignup() {
 
 
@@ -67,12 +75,21 @@
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
-      body: raw,
+      body: raw
     };
     fetch(`${config.SERVER_IP}${config.SERVER_PORT}/user`, requestOptions)
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((result) => {
-        navigate("/login");
+        console.log(result)
+        if(result.statusCode!=405){
+        //navigate("/login");
+        open=false
+        
+        }
+        else{
+          open=true
+          otpMatch=false
+        }
       })
       .catch((error) => console.log("error", error));
   }
@@ -114,7 +131,15 @@
             class="form-control mb-3"
             placeholder="Email"
             bind:value={signupObject.email}
+            style="border-color: {emailExists
+              ? 'red'
+              : ''};"
           />
+          <div>
+            {#if emailExists}
+            <div class="mb-1 ps-2 text-danger">Email already exists</div>
+            {/if}
+          </div>
           <div>
             <Modal isOpen={open} {toggle}>
               <ModalHeader {toggle}>Email Verification</ModalHeader>
@@ -129,27 +154,30 @@
                   placeholder="OTP"
                   bind:value={signupObject.otp}
                 />
+                {#if !otpMatch}
+                <div class="mb-1 ps-2 text-danger">OTP did'nt match</div>
+                {/if}
               </ModalBody>
 
               <ModalFooter>
-                <Button color="primary" on:click={toggle}>Verify</Button>
+                <Button color="primary" on:click={onSignup}>Verify</Button>
               </ModalFooter>
             </Modal>
           </div>
 
-          <Input
+          <!-- <Input
             
             type="switch"
             class = "mb-3"
             label="Is Individual?"
             bind:checked={signupObject.is_individual}
             on:change={changePlaceHolder}
-          />
+          /> -->
 
-          <input
+          <!-- <input
             type="text"
             class="form-control mb-3"
-            {placeholder}
+            {placeholder}A
             bind:value={signupObject.user_number}
           />
           <input
@@ -157,7 +185,7 @@
             class="form-control mb-3"
             placeholder="Tax Number"
             bind:value={signupObject.tax_number}
-          />
+          /> -->
 
           <input
             type="password"
@@ -205,6 +233,7 @@
           <div class="mb-3">
             <b>Password Strength</b>
           </div>
+
           <PasswordStrength password={signupObject.password} />
           <div class="pt-4 d-flex align-items-start">
             <input
@@ -220,6 +249,7 @@
               ></label
             >
           </div>
+
           <div class="mt-4 row">
             <div class="col-md-6 mb-3">
               {#if tosAgree}
