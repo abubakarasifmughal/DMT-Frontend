@@ -237,9 +237,10 @@
   }
   .card-slide {
     transition: 0.5s;
-    height: 450pt;
+    height: 60vh;
     background-size: cover;
-    background-position: center;
+    background-position-x: center;
+    background-position-y: top;
     background-repeat: no-repeat;
   }
   .roundBtn {

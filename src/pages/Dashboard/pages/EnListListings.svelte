@@ -225,6 +225,7 @@
     )
       .then((response) => response.text())
       .then((result) => {
+        console.log(JSON.parse(result));
         listingData = JSON.parse(result);
         isLoading = false;
       })

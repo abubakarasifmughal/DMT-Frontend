@@ -1,5 +1,12 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { each } from "svelte/internal";
+  import {
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+  } from "sveltestrap";
   import Map from "../lib/MapBox/Map.svelte";
   import Mapbox from "../lib/MapBox/Mapbox.svelte";
   export let onClickBack;
@@ -8,17 +15,43 @@
   export let coordX;
   export let coordY;
   let disp = createEventDispatcher();
+
+  const allRegions = [
+    { name: "Asia", enabled: true },
+    { name: "Africa", enabled: true },
+    { name: "Europe", enabled: false },
+    { name: "America", enabled: false },
+    { name: "Chine", enabled: false },
+  ];
+  let selectedRegion = "";
 </script>
 
 <div class="bg-white col-xl-11 p-5 shadow">
   <h3>Enter the location address</h3>
   <hr />
   <br />
-  <h5>You've entered:</h5>
-  <div class="pb-3 pt-3">
-    {locationAddress}
-  </div>
 
+
+  <Dropdown>
+    <DropdownToggle class="btn btn-light px-4 mb-4 border">
+      {selectedRegion === "" ? "Select Region" : selectedRegion}
+    </DropdownToggle>
+    <DropdownMenu>
+      {#each allRegions as region}
+        <DropdownItem
+          on:click={() => {
+            if (region.enabled) {
+              selectedRegion = region.name;
+            } else {
+              alert("Listing is available only within Africa and Asia");
+            }
+          }}
+        >
+          {region.name}
+        </DropdownItem>
+      {/each}
+    </DropdownMenu>
+  </Dropdown>
   <textarea
     class="form-control"
     rows="5"
