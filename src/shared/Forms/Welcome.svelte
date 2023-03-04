@@ -3,8 +3,7 @@
 
   let event = createEventDispatcher();
 
-  export let property;
-  $: notPropert = !property;
+  export let property = true;
 
   export let onClickContinue;
 </script>
@@ -21,32 +20,36 @@
       </span>
       <div class="mt-2" style="font-size: large;">
         <div class="d-flex align-items-center">
-          <input
-            on:click={() => {
+            <!-- on:click={() => {
               property = true;
               event("isPropery", {
                 isProperty: property,
               });
-            }}
-            bind:checked={property}
-            class="mt-3 mb-3 me-3"
+            }} -->
+          <input
+            group={property}
+            name="property"
+            value={true}
+            class="mt-3 mb-3 me-3 radio"
             id="welcom_property_checkbox"
-            type="checkbox"
+            type="radio"
           />
           <label for="welcom_property_checkbox">Property</label>
         </div>
         <div class="d-flex align-items-center">
-          <input
-            on:click={() => {
+            <!-- on:click={() => {
               property = false;
               event("isPropery", {
                 isProperty: property,
               });
-            }}
-            bind:checked={notPropert}
+            }} -->
+          <input
+            group={property}
+            name="property"
+            value={false}
             class="mt-3 mb-3 me-3"
             id="welcom_service_checkbox"
-            type="checkbox"
+            type="radio"
           />
           <label for="welcom_service_checkbox">Service</label>
         </div>
@@ -59,7 +62,7 @@
 </div>
 
 <style>
-  input[type="checkbox"] {
+  input[type="radio"] {
     transform: scale(1.3);
     accent-color: #9427f7;
   }
