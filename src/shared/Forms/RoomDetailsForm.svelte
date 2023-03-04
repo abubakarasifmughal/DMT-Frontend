@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { createEventDispatcher } from "svelte";
   import { Offcanvas, Tooltip } from "sveltestrap";
   import Amenities from "./Amenities.svelte";
@@ -232,6 +232,8 @@
       ],
     },
   ];
+
+  let discountAvailable = false;
 </script>
 
 <div class="mt-4">
@@ -299,9 +301,74 @@
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-md-8 mt-2">
-          <label class="mb-2" for="">Price per night</label>
+          <label class="mb-2" for="">Max Occupancy (per room)</label>
+          <div class="d-flex flex-wrap">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Discounted Price"
+              bind:value={room.MaxOccupancy}
+            />
+          </div>
+          <div class="col-md-4" />
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <b>Breakfast</b>
+        <div class="col-md-8">
+          <div class="d-flex flex-wrap align-items-center m-2">
+            <input
+              type="radio"
+              name="breakfast"
+              class="m-2"
+              style="transform: scale(1.2);"
+            />
+            <div>Included</div>
+          </div>
+          <div class="d-flex flex-wrap align-items-top m-2">
+            <input
+              type="radio"
+              name="breakfast"
+              class="m-2"
+              style="transform: scale(1.2);"
+            />
+            <div>Extra (Price - {currency} 7)</div>
+          </div>
+          <div class="col-md-4" />
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <b>Transfer of service</b>
+        <div class="col-md-8">
+          <div class="d-flex flex-wrap align-items-center m-2">
+            <input
+              type="radio"
+              name="breakfast"
+              class="m-2"
+              style="transform: scale(1.2);"
+            />
+            <div>Included</div>
+          </div>
+          <div class="d-flex flex-wrap align-items-top m-2">
+            <input
+              type="radio"
+              name="breakfast"
+              class="m-2"
+              style="transform: scale(1.2);"
+            />
+            <div>Extra (Price - {currency} 20)</div>
+          </div>
+          <div class="col-md-4" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 mt-2">
+          <label class="mb-2" for="">Price per night ({currency})</label>
           <div class="d-flex flex-wrap">
             <input
               type="number"
@@ -310,26 +377,54 @@
               bind:value={room.Cost}
             />
           </div>
-          <div class="col-md-4">
-            {currency}
-          </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-8 mt-2">
-          <label class="mb-2" for="">Discounted Price</label>
-          <div class="d-flex flex-wrap">
+      <div class="row mt-2">
+        <b>Discount Available</b>
+        <div class="col-md-8">
+          <div class="d-flex flex-wrap align-items-center m-2">
             <input
-              type="number"
-              class="form-control"
-              placeholder="Discounted Price"
-              bind:value={room.DiscountedPrice}
+              bind:group={discountAvailable}
+              type="radio"
+              name="discount"
+              class="m-2"
+              value={true}
+              style="transform: scale(1.2);"
             />
+            <div>Yes</div>
+          </div>
+          <div class="d-flex flex-wrap align-items-top m-2">
+            <input
+              bind:group={discountAvailable}
+              type="radio"
+              name="discount"
+              class="m-2"
+              value={false}
+              style="transform: scale(1.2);"
+            />
+            <div>No</div>
           </div>
           <div class="col-md-4" />
         </div>
       </div>
+      {#if discountAvailable}
+        <div class="row">
+          <div class="col-md-8 mt-2">
+            <label class="mb-2" for="">Discounted Price</label>
+            <div class="d-flex flex-wrap">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Max Occupancy"
+                bind:value={room.DiscountedPrice}
+              />
+            </div>
+            <div class="col-md-4" />
+          </div>
+        </div>
+      {/if}
+
       <button class="btn mt-3 btn-light border" on:click={toggle}>
         {amenetiesLength <= 0 ? "Add Ameneties" : "Ameneties Added"}
       </button>
