@@ -25,6 +25,7 @@
     })
       .then((response) => response.text())
       .then((result) => {
+        console.log(JSON.parse(result));
         let arr = JSON.parse(result).filter((a) => a.id === parseInt(pathname));
         if (arr.length > 0) {
           listing = arr[0];
