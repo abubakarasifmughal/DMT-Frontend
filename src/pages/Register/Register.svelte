@@ -3,6 +3,42 @@
   import Navbar from "../../shared/components/Navbar/Navbar.svelte";
   import PasswordStrength from "../../shared/lib/PasswordStrength/PasswordStrength.svelte";
   import config from "../../../environment.json";
+  import {
+    Button,
+    Modal,
+    ModalBody,
+    ModalFooter,
+    ModalHeader,
+    Input,
+    Label,
+  } from "sveltestrap";
+  let open = false;
+  let emailExists=false
+  function toggle() {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify({"email":signupObject.email});
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+    };
+    console.log
+    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/user/generate-token`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        if(result.msg=='success'){
+        open = !open
+        emailExists=false
+        }
+        else{
+
+          emailExists=true
+        }
+        console.log(result)
+      })
+      .catch((error) => console.log("error", error));    
+  }
 
   let signupObject = {
     first_name: "",
@@ -13,24 +49,47 @@
     address: "",
     is_seller: 1, //seller not buyer
     role: 0, //non admin
+    is_individual: false,
+    tax_number: 123,
+    user_number: 123,
+    otp: null,
   };
 
   let verify_password = "";
   let tosAgree = false;
 
+
+  let placeholder = "User Identification Number";
+  function changePlaceHolder() {
+    if (!signupObject.is_individual) {
+      placeholder = "Company Identification Number";
+    } else placeholder = "User Identification Number";
+  }
+let otpMatch=true
   function onSignup() {
+
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify(signupObject);
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
-      body: raw,
+      body: raw
     };
     fetch(`${config.SERVER_IP}${config.SERVER_PORT}/user`, requestOptions)
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((result) => {
-        navigate("/login");
+        console.log(result)
+        if(result.statusCode!=405){
+        //navigate("/login");
+        open=false
+        
+        }
+        else{
+          open=true
+          otpMatch=false
+        }
       })
       .catch((error) => console.log("error", error));
   }
@@ -72,7 +131,62 @@
             class="form-control mb-3"
             placeholder="Email"
             bind:value={signupObject.email}
+            style="border-color: {emailExists
+              ? 'red'
+              : ''};"
           />
+          <div>
+            {#if emailExists}
+            <div class="mb-1 ps-2 text-danger">Email already exists</div>
+            {/if}
+          </div>
+          <div>
+            <Modal isOpen={open} {toggle}>
+              <ModalHeader {toggle}>Email Verification</ModalHeader>
+
+              <ModalBody>
+                <Label
+                  >Enter The One Time Password (OTP) sent to you via email</Label
+                >
+                <input
+                  type="text"
+                  class="form-control mb-3"
+                  placeholder="OTP"
+                  bind:value={signupObject.otp}
+                />
+                {#if !otpMatch}
+                <div class="mb-1 ps-2 text-danger">OTP did'nt match</div>
+                {/if}
+              </ModalBody>
+
+              <ModalFooter>
+                <Button color="primary" on:click={onSignup}>Verify</Button>
+              </ModalFooter>
+            </Modal>
+          </div>
+
+          <!-- <Input
+            
+            type="switch"
+            class = "mb-3"
+            label="Is Individual?"
+            bind:checked={signupObject.is_individual}
+            on:change={changePlaceHolder}
+          /> -->
+
+          <!-- <input
+            type="text"
+            class="form-control mb-3"
+            {placeholder}A
+            bind:value={signupObject.user_number}
+          />
+          <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Tax Number"
+            bind:value={signupObject.tax_number}
+          /> -->
+
           <input
             type="password"
             class="form-control mb-3"
@@ -119,6 +233,7 @@
           <div class="mb-3">
             <b>Password Strength</b>
           </div>
+
           <PasswordStrength password={signupObject.password} />
           <div class="pt-4 d-flex align-items-start">
             <input
@@ -134,10 +249,11 @@
               ></label
             >
           </div>
+
           <div class="mt-4 row">
             <div class="col-md-6 mb-3">
               {#if tosAgree}
-                <button class="btn ps-5 pe-5 col-12" on:click={onSignup}>
+                <button class="btn ps-5 pe-5 col-12" on:click={toggle}>
                   Sign up
                 </button>
               {:else}
@@ -174,6 +290,9 @@
 </div>
 
 <style>
+  .switch-input{
+    margin-bottom: 20px;
+  }
   .btn {
     border: 1px solid #9427f7;
     background-color: transparent;
