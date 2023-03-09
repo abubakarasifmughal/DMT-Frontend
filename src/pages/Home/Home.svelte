@@ -13,18 +13,18 @@
   } from "sveltestrap";
 
   const items = [
-    {
-      url: "/assets/static/images/index/1.JPG",
-    },
+    // {
+    //   url: "/assets/static/images/index/1.JPG",
+    // },
     {
       url: "/assets/static/images/index/2.JPG",
     },
-    {
-      url: "/assets/static/images/index/3.JPG",
-    },
-    {
-      url: "/assets/static/images/index/4.JPG",
-    },
+    // {
+    //   url: "/assets/static/images/index/3.JPG",
+    // },
+    // {
+    //   url: "/assets/static/images/index/4.JPG",
+    // },
     {
       url: "/assets/static/images/index/5.jpg",
     },
@@ -95,7 +95,6 @@
       </div>
       <div class="col-xl-8">
         <CarouselCustom />
-
       </div>
     </div>
   </div>
@@ -152,7 +151,9 @@
             Things to do from home
           </h1>
           <div class="mt-3">
-            <button class="btn btn-light px-5 fw-bold">Online Experiences</button>
+            <button class="btn btn-light px-5 fw-bold"
+              >Online Experiences</button
+            >
           </div>
         </div>
       </div>
@@ -165,7 +166,8 @@
             Things to do on your trip
           </h1>
           <div class="mt-3">
-            <button class="btn btn-light px-5 fw-bold">Onsite Experience</button>
+            <button class="btn btn-light px-5 fw-bold">Onsite Experience</button
+            >
           </div>
         </div>
       </div>
