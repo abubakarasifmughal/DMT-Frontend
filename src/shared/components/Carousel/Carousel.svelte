@@ -154,7 +154,9 @@
                   </div>
                   <div class="rat">
                     <div><b>{cards[currentCardIndex].rating}</b></div>
-                    <div><b>({cards[currentCardIndex].review})</b></div>
+                    <div>
+                      <b class="ms-1">({cards[currentCardIndex].review})</b>
+                    </div>
                   </div></span
                 >
               </div>
