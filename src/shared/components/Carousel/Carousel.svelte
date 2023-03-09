@@ -32,6 +32,7 @@
       label: "Guided World Heritage Tour around Bhaktapur",
       address: "Bhaktapur, Nepal, Asia",
     },
+
     // {
     //   image: "/assets/static/images/global/galleria_umberto.png",
     //   text: "Accommodation",
