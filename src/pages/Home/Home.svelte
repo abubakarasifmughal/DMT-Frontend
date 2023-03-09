@@ -95,6 +95,7 @@
       </div>
       <div class="col-xl-8">
         <CarouselCustom />
+
       </div>
     </div>
   </div>
@@ -151,7 +152,7 @@
             Things to do from home
           </h1>
           <div class="mt-3">
-            <button class="btn btn-light px-5 fw-bold">Experiences</button>
+            <button class="btn btn-light px-5 fw-bold">Online Experiences</button>
           </div>
         </div>
       </div>
@@ -161,10 +162,10 @@
           style="background-image: url('/assets/static/images/index/Things_to_do_on_your_Trip_Onsite_Experience.JPG');height: 400pt;"
         >
           <h1 class="fw-bolder" style="text-shadow: 0px 0px 10px gray;">
-            Places to Stay In Nepal
+            Things to do on your trip
           </h1>
           <div class="mt-3">
-            <button class="btn btn-light px-5 fw-bold">Stays</button>
+            <button class="btn btn-light px-5 fw-bold">Onsite Experience</button>
           </div>
         </div>
       </div>
