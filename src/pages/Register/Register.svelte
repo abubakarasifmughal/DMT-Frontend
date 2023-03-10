@@ -274,7 +274,7 @@ let otpMatch=true
         >
           <div
             class="image"
-            style="background-image: url(/assets/static/images/Register.png);"
+            style="background-image: url(//static/images/Register.png);"
           />
           <div class="p-5">
             <h3><b>Adventure Travel Simplifed.</b></h3>
