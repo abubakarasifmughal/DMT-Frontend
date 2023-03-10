@@ -13,20 +13,20 @@
   } from "sveltestrap";
 
   const items = [
-    // {
-    //   url: "/assets/static/images/index/1.JPG",
-    // },
+     {
+       url: "/assets/static/images/index/1.webp",
+     },
     {
-      url: "/assets/static/images/index/2.JPG",
+      url: "/assets/static/images/index/2.webp",
     },
-    // {
-    //   url: "/assets/static/images/index/3.JPG",
-    // },
-    // {
-    //   url: "/assets/static/images/index/4.JPG",
-    // },
+     {
+       url: "/assets/static/images/index/3.webp",
+     },
+     {
+       url: "/assets/static/images/index/4.webp",
+     },
     {
-      url: "/assets/static/images/index/5.jpg",
+      url: "/assets/static/images/index/5.webp",
     },
   ];
   let activeIndex = 0;
@@ -145,7 +145,7 @@
       <div class="col-xl-5 mb-5 me-0 me-sm-2">
         <div
           class="card text-white p-md-5 p-3"
-          style="background-image: url('/assets/static/images/index/Things_to_do_from_home_Online_Experience.JPG');height: 400pt"
+          style="background-image: url('/assets/static/images/index/Things_to_do_from_home_Online_Experience.webp');height: 400pt"
         >
           <h1 class="fw-bolder" style="text-shadow: 0px 0px 10px gray;">
             Things to do from home
@@ -160,7 +160,7 @@
       <div class="col-xl-5 mb-5 me-0 me-sm-2">
         <div
           class="card text-white p-md-5 p-3"
-          style="background-image: url('/assets/static/images/index/Things_to_do_on_your_Trip_Onsite_Experience.JPG');height: 400pt;"
+          style="background-image: url('/assets/static/images/index/Things_to_do_on_your_Trip_Onsite_Experience.webp');height: 400pt;"
         >
           <h1 class="fw-bolder" style="text-shadow: 0px 0px 10px gray;">
             Things to do on your trip

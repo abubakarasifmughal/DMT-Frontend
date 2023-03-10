@@ -16,14 +16,14 @@
         <div class="me-4">
           <div class="mt-1">
             <img
-              src="/assets/static/images/index/store-googleplay.png"
+              src="/assets/static/images/index/store-googleplay.webp"
               alt="qr"
               class="btns"
             />
           </div>
           <div>
             <img
-              src="/assets/static/images/index/store-app.png"
+              src="/assets/static/images/index/store-app.webp"
               alt="qr"
               class="btns"
             />
@@ -31,7 +31,7 @@
         </div>
 
         <img
-          src="/assets/static/images/index/qr-code.png"
+          src="/assets/static/images/index/qr-code.webp"
           alt="qr"
           class="qr"
         />
@@ -39,7 +39,7 @@
     </div>
     <div class="col-md-6 col-sm-12 airbnb">
       <img
-        src="/assets/static/images/index/Screen.png"
+        src="/assets/static/images/index/Screen.webp"
         alt="screen"
         class="screen"
       />

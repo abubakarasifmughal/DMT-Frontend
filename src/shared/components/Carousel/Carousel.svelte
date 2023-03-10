@@ -1,7 +1,7 @@
 <script>
   export let slides = [
     {
-      image: "/assets/static/images/global/Accommodation.jpg",
+      image: "/assets/static/images/global/Accommodation.webp",
       text: "Accommodation",
       rating: 4.9,
       review: 10,
@@ -9,7 +9,7 @@
       address: "Bugambira, Uganda, Africa",
     },
     {
-      image: "/assets/static/images/global/Swayambhunath.jpg",
+      image: "/assets/static/images/global/Swayambhunath.webp",
       text: "Online Experience",
       rating: 4.9,
       review: 10,
@@ -17,7 +17,7 @@
       address: "Live from Nepal, Asia",
     },
     {
-      image: "/assets/static/images/global/Bartender.jpg",
+      image: "/assets/static/images/global/Bartender.webp",
       text: "Online Experience",
       rating: 4.9,
       review: 10,
@@ -25,7 +25,7 @@
       address: "Live from Uganda, Africa",
     },
     {
-      image: "/assets/static/images/global/Bhaktapur.jpg",
+      image: "/assets/static/images/global/Bhaktapur.webp",
       text: "Onsite Experience",
       rating: 4.9,
       review: 10,
