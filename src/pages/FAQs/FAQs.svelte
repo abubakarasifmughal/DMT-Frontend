@@ -17,8 +17,8 @@
       >
     </div>
     <br />
-    <div class="row mt-5">
-      <div class="col-md-6 mt-5">
+    <div class="row my-2">
+      <div class="col-12 col-lg-6 my-3">
         <h4>Booking Mechanism</h4>
         <Accordion>
           <AccordionItem
@@ -94,13 +94,13 @@
           </AccordionItem>
         </Accordion>
       </div>
-      <div class="col-md-6 mt-5">
+      <div class="col-12 col-lg-6 my-3">
         <img
-          src="/assets/static/images/global/faqs.jpg"
+          src="/assets/static/images/FAQ.png"
           alt=""
           height="100%"
           width="100%"
-          style="border-radius: 5pt;object-fit: cover;"
+          style="border-radius: 5pt;object-fit: cover; border: solid 1pt #dee2e6"
         />
       </div>
     </div>
