@@ -66,7 +66,7 @@
   >
     <div class="row ">
       <div
-        class="col-md-6 d-flex justify-content-center flex-column p-2 p-sm-5"
+        class="col-md-6 d-flex justify-content-center flex-column p-2 p-sm-5 align-self-center"
         style="height: 50vh;"
       >
         <div class="text-center">
@@ -132,7 +132,7 @@
         </div>
       </div>
       <div
-        class="col-md-6 text-center d-flex align-items-center justify-content-center flex-column p-5 border"
+        class="col-md-6 text-center d-flex align-items-center justify-content-center flex-column p-5"
       >
         <div
           class="image"
@@ -161,8 +161,8 @@
     color: white;
   }
   .image {
-    height: 50%;
     width: 100%;
+    height: 250px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

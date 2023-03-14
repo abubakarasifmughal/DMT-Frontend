@@ -4,10 +4,10 @@
 </script>
 
 <div
-  style="background: linear-gradient(to bottom right,white,whitesmoke);height: 100vh;"
+  style="background: linear-gradient(to bottom right,white,whitesmoke);height: 100vh; overflow: scroll;"
 >
   <Navbar color="text-black" btnTheme=" btn-dark" />
-  <div class="container mt-5">
+  <div class="container my-5">
     <div class="text-center">
       <h1>Do you have a question?</h1>
       <h4>Here are some of the Frequently asked questions</h4>
@@ -22,7 +22,7 @@
         <h4>Booking Mechanism</h4>
         <Accordion>
           <AccordionItem
-            header="How does booking mechanism works in Digital Marketplace for Tourism aka DMT ?"
+            header="How does booking mechanism works in Digital Marketplace for Tourism aka DMT?"
           >
             You as a buyer, request the booking directly from the service
             provider. Once the seller confirms your booking, you have your
