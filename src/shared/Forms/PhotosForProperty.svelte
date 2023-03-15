@@ -1,10 +1,13 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { Spinner } from 'sveltestrap';
   let dispatch = createEventDispatcher();
   export let onClickBack;
   export let onClickNext;
   let files;
   export let images = [];
+
+  let awaiting = false;
 </script>
 
 <div class="bg-white shadow p-5 col-md-11">
@@ -74,12 +77,20 @@
     {#if onClickNext}
       <button
         on:click={() => {
+          awaiting = true;
           dispatch("listingImages", {
             images: images,
           });
           onClickNext();
+          awaiting = false;
         }}
-        class="btn btn-light border pe-5 ps-5">Go Live</button
+        class="btn btn-light border pe-5 ps-5">
+        {#if awaiting}
+          <Spinner size="sm"/>
+        {:else}
+          Go Live
+        {/if}
+        </button
       >
     {/if}
   </div>
