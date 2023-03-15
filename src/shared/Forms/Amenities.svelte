@@ -3,6 +3,7 @@
 
   let dispatch = createEventDispatcher();
 
+  export let title = 'property';
   export let amenitiesList = [];
   export let selectedAmeneties = [];
 
@@ -10,7 +11,7 @@
 </script>
 
 <div class="col-md-12">
-  <h3>What amenities does your property have?</h3>
+  <h3>What amenities does your {title} have?</h3>
   <span>
     We recommend having at least five of these top amenities. You’ll be able to
     add other amenities after you publish your listing.

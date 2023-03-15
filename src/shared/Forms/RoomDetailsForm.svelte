@@ -234,6 +234,8 @@
   ];
 
   let discountAvailable = false;
+  let breakfastNotIncluded = false;
+  let transferNotIncluded = false;
 </script>
 
 <div class="mt-4">
@@ -309,7 +311,7 @@
             <input
               type="number"
               class="form-control"
-              placeholder="Discounted Price"
+              placeholder="Maximum Guests"
               bind:value={room.MaxOccupancy}
             />
           </div>
@@ -322,22 +324,41 @@
         <div class="col-md-8">
           <div class="d-flex flex-wrap align-items-center m-2">
             <input
+              bind:group={breakfastNotIncluded}
               type="radio"
               name="breakfast"
               class="m-2"
+              value={false}
               style="transform: scale(1.2);"
             />
             <div>Included</div>
           </div>
           <div class="d-flex flex-wrap align-items-top m-2">
             <input
+              bind:group={breakfastNotIncluded}
               type="radio"
               name="breakfast"
               class="m-2"
+              value={true}
               style="transform: scale(1.2);"
             />
-            <div>Extra (Price - {currency} 7)</div>
+            <div>Extra</div>
           </div>
+          {#if breakfastNotIncluded}
+          <div class="row">
+            <div class="col-md-8 my-2">
+              <div class="d-flex flex-wrap">
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Breakfast price"
+                  bind:value={room.BreakfastPrice}
+                />
+              </div>
+              <div class="col-md-4" />
+            </div>
+          </div>
+          {/if}
           <div class="col-md-4" />
         </div>
       </div>
@@ -347,22 +368,41 @@
         <div class="col-md-8">
           <div class="d-flex flex-wrap align-items-center m-2">
             <input
+              bind:group={transferNotIncluded}
               type="radio"
-              name="breakfast"
+              name="transfer"
               class="m-2"
+              value={false}
               style="transform: scale(1.2);"
             />
             <div>Included</div>
           </div>
           <div class="d-flex flex-wrap align-items-top m-2">
             <input
+              bind:group={transferNotIncluded}
               type="radio"
-              name="breakfast"
+              name="transfer"
               class="m-2"
+              value={true}
               style="transform: scale(1.2);"
             />
-            <div>Extra (Price - {currency} 20)</div>
+            <div>Extra</div>
           </div>
+          {#if transferNotIncluded}
+          <div class="row">
+            <div class="col-md-8 my-2">
+              <div class="d-flex flex-wrap">
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Transfer price"
+                  bind:value={room.TransferOfServicePrice}
+                />
+              </div>
+              <div class="col-md-4" />
+            </div>
+          </div>
+          {/if}
           <div class="col-md-4" />
         </div>
       </div>
@@ -410,13 +450,13 @@
       </div>
       {#if discountAvailable}
         <div class="row">
-          <div class="col-md-8 mt-2">
-            <label class="mb-2" for="">Discounted Price</label>
+          <div class="col-md-8 my-2">
+            <label class="mb-2" for="">Price After Discount</label>
             <div class="d-flex flex-wrap">
               <input
                 type="number"
                 class="form-control"
-                placeholder="Max Occupancy"
+                placeholder="Price After Discount"
                 bind:value={room.DiscountedPrice}
               />
             </div>
@@ -492,6 +532,7 @@
   }}
 >
   <Amenities
+    title={'room'}
     selectedAmeneties={room.ameneties}
     amenitiesList={AllAmeneties}
     on:ameneties={(data) => {
