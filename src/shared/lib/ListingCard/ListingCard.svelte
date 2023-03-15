@@ -1,5 +1,6 @@
 <script>
   import { Link } from "svelte-routing";
+  import { Icon } from 'sveltestrap';
   import config from "../../../../environment.json";
 
   export let listing;
@@ -22,19 +23,39 @@
             {/if}
           {/if}
         </div>
-        <div class="col-md-6 p-3">
-          <div class="fw-bold" style="font-size: x-large;color:#9427F7">
-            {listing.headline}
+        <div class="col-md-6 px-4 py-3 d-flex flex-column justify-content-between">
+          <div>
+            <div style="font-size: 17.5px;color:#9427F7">
+              {listing.headline.length > 40
+                ? listing.headline.substring(0, 40) + "..."
+                : listing.headline}
+            </div>
+            <div class="fw-bold" style="font-size: 14px; color: #172b4d">
+              {listing.address}
+            </div>
+            <div class="mt-2">
+              <span class="text-secondary" style="font-size: 15px;line-height:19px">
+                {listing.description.length > 200
+                  ? listing.description.substring(0, 200) + "..."
+                  : listing.description}
+              </span>
+              <span style="color: #9427F7;display: inline;"
+                >{listing.description.length > 200 ? "read more" : ""}</span
+              >
+            </div>
           </div>
-          <div class="text-secondary">{listing.address}</div>
-          <span class="text-secondary" style="font-size: 15px;line-height:19px">
-            {listing.description.length > 300
-              ? listing.description.substring(0, 300) + " ..."
-              : listing.description}
-          </span>
-          <span style="color: #9427F7;display: inline;"
-            >{listing.description.length > 300 ? "read more" : ""}</span
-          >
+
+          <div class="text-secondary1 justify-content-between d-flex pe-2">
+            <span style="font-size: 15px;">
+              <span style="color:#9c59df;"><Icon name="star-fill" /></span>
+              <span>4.9</span>
+              <span class="text-muted">(120)</span>
+            </span>
+            <span class="h4">
+              <span>$181</span>
+              <span class="fw-normal h5">/ night</span>
+            </span>
+          </div>
         </div>
       </div>
     </div>

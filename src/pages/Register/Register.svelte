@@ -186,13 +186,21 @@ let otpMatch=true
             placeholder="Tax Number"
             bind:value={signupObject.tax_number}
           /> -->
-
-          <input
-            type="password"
-            class="form-control mb-3"
-            placeholder="Password"
-            bind:value={signupObject.password}
+          {#if showPassword}
+            <input
+              type="text"
+              class="form-control mb-3"
+              placeholder="Password"
+              bind:value={signupObject.password}
           />
+          {:else}
+            <input
+              type="password"
+              class="form-control mb-3"
+              placeholder="Password"
+              bind:value={signupObject.password}
+            />
+          {/if}
           {#if signupObject.password !== verify_password}
             <div class="mb-1 ps-2 text-danger">Password Must Match</div>
           {/if}

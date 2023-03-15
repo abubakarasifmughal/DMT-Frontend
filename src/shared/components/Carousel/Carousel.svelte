@@ -178,7 +178,7 @@
               impedit! Id explicabo in officia? Nesciunt consequatur
               consequuntur esse ducimus atque a numquam eligendi.
             </span>
-            <button class="btn ps-4 pe-4 mt-4"> Exlore </button>
+            <button class="btn ps-4 pe-4 mt-4"> Explore </button>
           {/if}
         </div>
 
