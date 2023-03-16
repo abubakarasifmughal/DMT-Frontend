@@ -9,12 +9,7 @@
   <Navbar color="text-black" btnTheme=" btn-dark" />
   <div class="container my-5">
     <div class="text-center">
-      <h1>Do you have a question?</h1>
       <h4>Here are some of the Frequently asked questions</h4>
-      <span
-        >No need to queue for our customer service agents! You can manage,
-        change, or cancel your booking online.</span
-      >
     </div>
     <br />
     <div class="row my-2">
