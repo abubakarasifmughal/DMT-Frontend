@@ -1,6 +1,6 @@
 <script>
   import { Link } from "svelte-routing";
-  import { Icon } from 'sveltestrap';
+  import { Icon } from "sveltestrap";
   import config from "../../../../environment.json";
 
   export let listing;
@@ -16,14 +16,15 @@
               <img
                 src={`${config.SERVER_IP}${config.SERVER_PORT}${listing.listingImages[0]?.address}`}
                 alt=""
-                style="object-fit: cover;object-position: center;"
+                style="object-fit: cover;object-position: center;height: 300pt;"
                 width="100%"
-                height="100%"
               />
             {/if}
           {/if}
         </div>
-        <div class="col-md-6 px-4 py-3 d-flex flex-column justify-content-between">
+        <div
+          class="col-md-6 px-4 py-3 d-flex flex-column justify-content-between"
+        >
           <div>
             <div style="font-size: 17.5px;color:#9427F7">
               {listing.headline.length > 40
@@ -34,7 +35,10 @@
               {listing.address}
             </div>
             <div class="mt-2">
-              <span class="text-secondary" style="font-size: 15px;line-height:19px">
+              <span
+                class="text-secondary"
+                style="font-size: 15px;line-height:19px"
+              >
                 {listing.description.length > 200
                   ? listing.description.substring(0, 200) + "..."
                   : listing.description}

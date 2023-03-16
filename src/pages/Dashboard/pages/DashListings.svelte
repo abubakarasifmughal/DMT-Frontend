@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Stepper from "../../../shared/components/Stepper/Stepper.svelte";
   import Amenities from "../../../shared/Forms/Amenities.svelte";
   import DetailsForListing from "../../../shared/Forms/DetailsForListing.svelte";
@@ -9,7 +9,9 @@
   import Progressbar from "../../../shared/lib/Progressbar/Progressbar.svelte";
   import config from "../../../../environment.json";
   import BusinessNature from "../../../shared/Forms/BusinessNature.svelte";
+  import { Alert, Modal, ModalBody, ModalHeader } from "sveltestrap";
 
+  let errors: string[] = [];
   let currentPage = 1;
   let user_id = sessionStorage.getItem("di");
   $: newListing = {
@@ -166,11 +168,87 @@
               }}
               images={newListing.listingImages}
               onClickBack={() => (currentPage = currentPage - 1)}
-              onClickNext={apiCall}
+              onClickNext={() => {
+                console.log(JSON.stringify(newListing));
+                let a = {
+                  isProperty: true,
+                  address: "",
+                  address_lat: "nan",
+                  address_lon: "nan",
+                  headline: "",
+                  description: "",
+                  accomodationType: "",
+                  currency: "",
+                  rooms: [],
+                  listingImages: [],
+                  weeklyDiscount: 10,
+                  nightlyDiscount: 0,
+                  isIndividual: true,
+                  IndividualIdentificationNumber: "",
+                  IndividualTaxFileNumber: "",
+                  CompanyIdentificationNumber: "",
+                  CompanyTaxFileNumber: "",
+                };
+                if (newListing.headline === "") {
+                  errors = [...errors, "Please provide a headline"];
+                }
+                if (newListing.address === "") {
+                  errors = [...errors, "Address cannot be empty"];
+                }
+                if (newListing.description === "") {
+                  errors = [...errors, "You did not enter any description"];
+                }
+                if (newListing.accomodationType === "") {
+                  errors = [
+                    ...errors,
+                    "Accomodation Type must be selected from Experience or Accomodation",
+                  ];
+                }
+                if (newListing.currency === "") {
+                  errors = [...errors, "Select your currency"];
+                }
+                if (newListing.rooms.length <= 0) {
+                  errors = [...errors, "No rooms were added"];
+                }
+                if (newListing.listingImages.length <= 0) {
+                  errors = [
+                    ...errors,
+                    "There images for you listing, please add a few",
+                  ];
+                }
+                if (errors.length <= 0) {
+                  apiCall();
+                }
+              }}
             />
           {/if}
         </div>
       </div>
     </div>
   </div>
+
+  <Modal isOpen={errors.length > 0} backdrop="static">
+    <ModalHeader class="row">
+      <div class="row col-12">
+        <div class="col-11 ">Please fix the following errors</div>
+        <div class="col-1 ">
+          <button
+            class="btn btn-close"
+            on:click={() => {
+              errors = [];
+              currentPage = 2;
+            }}
+          />
+        </div>
+      </div>
+    </ModalHeader>
+    <ModalBody>
+      {#each errors as error}
+        <Alert color="danger" dismissible>{error}</Alert>
+      {/each}
+    </ModalBody>
+  </Modal>
 </div>
+
+<style>
+</style>
