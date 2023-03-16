@@ -13,31 +13,32 @@
     Label,
   } from "sveltestrap";
   let open = false;
-  let emailExists=false
+  let emailExists = false;
   function toggle() {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    var raw = JSON.stringify({"email":signupObject.email});
+    var raw = JSON.stringify({ email: signupObject.email });
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: raw,
     };
-    console.log
-    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/user/generate-token`, requestOptions)
+    console.log;
+    fetch(
+      `${config.SERVER_IP}${config.SERVER_PORT}/user/generate-token`,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => {
-        if(result.msg=='success'){
-        open = !open
-        emailExists=false
+        if (result.msg == "success") {
+          open = !open;
+          emailExists = false;
+        } else {
+          emailExists = true;
         }
-        else{
-
-          emailExists=true
-        }
-        console.log(result)
+        console.log(result);
       })
-      .catch((error) => console.log("error", error));    
+      .catch((error) => console.log("error", error));
   }
 
   let signupObject = {
@@ -58,37 +59,32 @@
   let verify_password = "";
   let tosAgree = false;
 
-
   let placeholder = "User Identification Number";
   function changePlaceHolder() {
     if (!signupObject.is_individual) {
       placeholder = "Company Identification Number";
     } else placeholder = "User Identification Number";
   }
-let otpMatch=true
+  let otpMatch = true;
   function onSignup() {
-
-
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify(signupObject);
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
-      body: raw
+      body: raw,
     };
     fetch(`${config.SERVER_IP}${config.SERVER_PORT}/user`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result)
-        if(result.statusCode!=405){
-        //navigate("/login");
-        open=false
-        
-        }
-        else{
-          open=true
-          otpMatch=false
+        console.log(result);
+        if (result.statusCode != 405) {
+          //navigate("/login");
+          open = false;
+        } else {
+          open = true;
+          otpMatch = false;
         }
       })
       .catch((error) => console.log("error", error));
@@ -100,13 +96,15 @@ let otpMatch=true
 <div class="">
   <Navbar color="text-black" btnTheme={""} />
   <div
-    class="d-flex align-items-center justify-content-center mt-0 pt-0 pt-sm-5 mt-sm-5"
+    class="d-flex align-items-center justify-content-center"
+    style="min-height: 100vh;"
   >
-    <div class="container shadow p-sm-5" style="background-color: #F9F8FC;">
+    <div class="container shadow p-5" style="background-color: #F9F8FC;">
       <div class="row">
         <div class="col-md-6">
           <div class="text-center">
             <h3>Register</h3>
+            <br />
           </div>
           <input
             type="text"
@@ -131,13 +129,11 @@ let otpMatch=true
             class="form-control mb-3"
             placeholder="Email"
             bind:value={signupObject.email}
-            style="border-color: {emailExists
-              ? 'red'
-              : ''};"
+            style="border-color: {emailExists ? 'red' : ''};"
           />
           <div>
             {#if emailExists}
-            <div class="mb-1 ps-2 text-danger">Email already exists</div>
+              <div class="mb-1 ps-2 text-danger">Email already exists</div>
             {/if}
           </div>
           <div>
@@ -155,7 +151,7 @@ let otpMatch=true
                   bind:value={signupObject.otp}
                 />
                 {#if !otpMatch}
-                <div class="mb-1 ps-2 text-danger">OTP did'nt match</div>
+                  <div class="mb-1 ps-2 text-danger">OTP did'nt match</div>
                 {/if}
               </ModalBody>
 
@@ -192,7 +188,7 @@ let otpMatch=true
               class="form-control mb-3"
               placeholder="Password"
               bind:value={signupObject.password}
-          />
+            />
           {:else}
             <input
               type="password"
@@ -298,7 +294,7 @@ let otpMatch=true
 </div>
 
 <style>
-  .switch-input{
+  .switch-input {
     margin-bottom: 20px;
   }
   .btn {

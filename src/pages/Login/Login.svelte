@@ -57,17 +57,15 @@
 </Modal>
 <Navbar color="text-black" btnTheme={""} />
 <div
-  class="d-flex align-items-center justify-content-center pt-5 mt-5 pt-sm-0 mt-sm-0"
-  style="height: 90vh;"
+  class="d-flex align-items-center justify-content-center"
+  style="min-height: 100vh;"
 >
-  <div
-    class="container shadow mt-5 mt-sm-0 pt-5 pt-sm-0"
-    style="background-color: #F9F8FC;"
-  >
-    <div class="row ">
+  <!-- style="height: 90vh;" -->
+  <div class="container shadow " style="background-color: #F9F8FC;">
+    <div class="row">
       <div
-        class="col-md-6 d-flex justify-content-center flex-column p-2 p-sm-5 align-self-center"
-        style="height: 50vh;"
+        class="col-md-6 d-flex justify-content-center flex-column p-2 p-sm-5 align-self-center pt-5"
+        style="min-height: 50vh;"
       >
         <div class="text-center">
           <h3>Login</h3>

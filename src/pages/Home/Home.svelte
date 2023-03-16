@@ -10,7 +10,11 @@
     CarouselIndicators,
     CarouselItem,
     CarouselCaption,
+    Modal,
+    ModalBody,
+    ModalHeader,
   } from "sveltestrap";
+  import Payment from "../../shared/components/Payment/Payment.svelte";
 
   const items = [
     // {
@@ -31,6 +35,13 @@
   ];
   let activeIndex = 0;
 </script>
+
+<Modal isOpen={false} backdrop="static" centered>
+  <ModalHeader>Payment Module</ModalHeader>
+  <ModalBody>
+    <Payment />
+  </ModalBody>
+</Modal>
 
 <div>
   <div class="home_top_section ">

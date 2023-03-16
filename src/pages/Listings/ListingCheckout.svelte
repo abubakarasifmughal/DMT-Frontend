@@ -8,6 +8,8 @@
   import config from "../../../environment.json";
   import { Icon, Modal } from "sveltestrap";
   import { DateInput } from "date-picker-svelte";
+
+  // STRIPE-----------------------^^^^^^
   let userid = sessionStorage.getItem("di");
   let pathname;
   let unsub;
@@ -31,6 +33,7 @@
           listing = arr[0];
         }
         loading = false;
+        loadStripeElements();
       })
       .catch((error) => console.log("error", error));
   }
