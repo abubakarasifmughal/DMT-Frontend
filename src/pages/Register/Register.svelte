@@ -12,34 +12,8 @@
     Input,
     Label,
   } from "sveltestrap";
-  let open = false;
-  let emailExists = false;
-  function toggle() {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    var raw = JSON.stringify({ email: signupObject.email });
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-    };
-    console.log;
-    fetch(
-      `${config.SERVER_IP}${config.SERVER_PORT}/user/generate-token`,
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.msg == "success") {
-          open = !open;
-          emailExists = false;
-        } else {
-          emailExists = true;
-        }
-        console.log(result);
-      })
-      .catch((error) => console.log("error", error));
-  }
+  let error = undefined;
+  let responseMessage = "";
 
   let signupObject = {
     first_name: "",
@@ -65,8 +39,9 @@
       placeholder = "Company Identification Number";
     } else placeholder = "User Identification Number";
   }
-  let otpMatch = true;
+
   function onSignup() {
+    error = undefined;
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify(signupObject);
@@ -75,23 +50,116 @@
       headers: myHeaders,
       body: raw,
     };
-    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/user`, requestOptions)
+    fetch(
+      `${config.SERVER_IP}${config.SERVER_PORT}/user/signupa`,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
-        if (result.statusCode != 405) {
-          //navigate("/login");
-          open = false;
+        // quvume@mailinator.com
+        responseMessage = result.message;
+        if (result.error) {
+          error = true;
         } else {
-          open = true;
-          otpMatch = false;
+          error = false;
         }
       })
       .catch((error) => console.log("error", error));
   }
 
   let showPassword = false;
+
+  let emailVerified = false;
+
+  let enteredVerificationCode = "";
 </script>
+
+<Modal isOpen={error === true}>
+  <ModalHeader>Resolve following</ModalHeader>
+  <ModalBody>
+    {responseMessage}
+  </ModalBody>
+  <ModalFooter>
+    <Button
+      on:click={() => {
+        error = undefined;
+      }}
+    >
+      Dismiss
+    </Button>
+  </ModalFooter>
+</Modal>
+
+<Modal isOpen={error === false}>
+  <ModalHeader class="row">
+    <div class="row col-12">
+      <span class="col-11">Verify Email</span>
+      <button
+        class="col-1 btn-close btn"
+        on:click={() => {
+          error = undefined;
+        }}
+      />
+    </div>
+  </ModalHeader>
+
+  <ModalBody>
+    {responseMessage}
+    <input
+      bind:value={enteredVerificationCode}
+      placeholder="Vefication Code"
+      class="form-control mt-3"
+    />
+  </ModalBody>
+  <ModalFooter>
+    {#if !emailVerified}
+      <Button on:click={onSignup}>Resend</Button>
+      <Button
+        on:click={() => {
+          var myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+
+          var raw = JSON.stringify({
+            email: signupObject.email,
+            code: enteredVerificationCode,
+          });
+
+          var requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+          };
+
+          fetch(
+            `${config.SERVER_IP}${config.SERVER_PORT}/user/verify`,
+            requestOptions
+          )
+            .then((response) => response.json())
+            .then((result) => {
+              responseMessage = result.message;
+              if (result.error) {
+                error = true;
+              } else {
+                error = false;
+                emailVerified = true;
+              }
+            })
+            .catch((error) => console.log("error", error));
+        }}
+      >
+        Verify
+      </Button>
+    {:else}
+      <Link
+        class="col-md-6 mb-3"
+        to="/login"
+        style="text-decoration:none;color:inherit;"
+      >
+        <button class="btn ps-5 pe-5 col-12"> Login Now</button>
+      </Link>
+    {/if}
+  </ModalFooter>
+</Modal>
 
 <div class="">
   <Navbar color="text-black" btnTheme={""} />
@@ -125,63 +193,12 @@
             bind:value={signupObject.telephone}
           />
           <input
-            type="text"
+            type="email"
             class="form-control mb-3"
             placeholder="Email"
             bind:value={signupObject.email}
-            style="border-color: {emailExists ? 'red' : ''};"
           />
-          <div>
-            {#if emailExists}
-              <div class="mb-1 ps-2 text-danger">Email already exists</div>
-            {/if}
-          </div>
-          <div>
-            <Modal isOpen={open} {toggle}>
-              <ModalHeader {toggle}>Email Verification</ModalHeader>
-
-              <ModalBody>
-                <Label
-                  >Enter The One Time Password (OTP) sent to you via email</Label
-                >
-                <input
-                  type="text"
-                  class="form-control mb-3"
-                  placeholder="OTP"
-                  bind:value={signupObject.otp}
-                />
-                {#if !otpMatch}
-                  <div class="mb-1 ps-2 text-danger">OTP did'nt match</div>
-                {/if}
-              </ModalBody>
-
-              <ModalFooter>
-                <Button color="primary" on:click={onSignup}>Verify</Button>
-              </ModalFooter>
-            </Modal>
-          </div>
-
-          <!-- <Input
-            
-            type="switch"
-            class = "mb-3"
-            label="Is Individual?"
-            bind:checked={signupObject.is_individual}
-            on:change={changePlaceHolder}
-          /> -->
-
-          <!-- <input
-            type="text"
-            class="form-control mb-3"
-            {placeholder}A
-            bind:value={signupObject.user_number}
-          />
-          <input
-            type="text"
-            class="form-control mb-3"
-            placeholder="Tax Number"
-            bind:value={signupObject.tax_number}
-          /> -->
+          <div />
           {#if showPassword}
             <input
               type="text"
@@ -257,7 +274,7 @@
           <div class="mt-4 row">
             <div class="col-md-6 mb-3">
               {#if tosAgree}
-                <button class="btn ps-5 pe-5 col-12" on:click={toggle}>
+                <button class="btn ps-5 pe-5 col-12" on:click={onSignup}>
                   Sign up
                 </button>
               {:else}
