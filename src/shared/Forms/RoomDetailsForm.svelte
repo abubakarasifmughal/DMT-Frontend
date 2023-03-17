@@ -10,7 +10,7 @@
   export let onClickRemove;
 
   let isOpen = false;
-  $: amenetiesLength = room.ameneties.length;
+  $: amenetiesLength = room.amenities.length;
 
   const toggle = () => {
     isOpen = !isOpen;
@@ -345,19 +345,19 @@
             <div>Extra</div>
           </div>
           {#if breakfastNotIncluded}
-          <div class="row">
-            <div class="col-md-8 my-2">
-              <div class="d-flex flex-wrap">
-                <input
-                  type="number"
-                  class="form-control"
-                  placeholder="Breakfast price"
-                  bind:value={room.BreakfastPrice}
-                />
+            <div class="row">
+              <div class="col-md-8 my-2">
+                <div class="d-flex flex-wrap">
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="Breakfast price"
+                    bind:value={room.BreakfastPrice}
+                  />
+                </div>
+                <div class="col-md-4" />
               </div>
-              <div class="col-md-4" />
             </div>
-          </div>
           {/if}
           <div class="col-md-4" />
         </div>
@@ -389,19 +389,19 @@
             <div>Extra</div>
           </div>
           {#if transferNotIncluded}
-          <div class="row">
-            <div class="col-md-8 my-2">
-              <div class="d-flex flex-wrap">
-                <input
-                  type="number"
-                  class="form-control"
-                  placeholder="Transfer price"
-                  bind:value={room.TransferOfServicePrice}
-                />
+            <div class="row">
+              <div class="col-md-8 my-2">
+                <div class="d-flex flex-wrap">
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="Transfer price"
+                    bind:value={room.TransferOfServicePrice}
+                  />
+                </div>
+                <div class="col-md-4" />
               </div>
-              <div class="col-md-4" />
             </div>
-          </div>
           {/if}
           <div class="col-md-4" />
         </div>
@@ -528,15 +528,15 @@
   {isOpen}
   {toggle}
   on:close={() => {
-    amenetiesLength = room.ameneties.length;
+    amenetiesLength = room.amenities.length;
   }}
 >
   <Amenities
-    title={'room'}
-    selectedAmeneties={room.ameneties}
+    title={"room"}
+    selectedAmeneties={room.amenities}
     amenitiesList={AllAmeneties}
-    on:ameneties={(data) => {
-      room.ameneties = data.detail.ameneties;
+    on:amenities={(data) => {
+      room.amenities = data.detail.amenities;
     }}
   />
 </Offcanvas>

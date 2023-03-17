@@ -3,7 +3,7 @@
 
   let dispatch = createEventDispatcher();
 
-  export let title = 'property';
+  export let title = "property";
   export let amenitiesList = [];
   export let selectedAmeneties = [];
 
@@ -39,8 +39,8 @@
                   selectedAmeneties.splice(index, 1);
                 }
                 selectedAmeneties = selectedAmeneties;
-                dispatch("amenties", {
-                  amenties: selectedAmeneties,
+                dispatch("amenities", {
+                  amenities: selectedAmeneties,
                 });
               }}
             >

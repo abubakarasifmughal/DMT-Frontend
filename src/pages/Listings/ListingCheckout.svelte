@@ -18,7 +18,6 @@
 
   let loading = true;
   function fetchListingDetails(id) {
-    // console.log("FASAD", id);
     if (id === "listing") {
       return;
     }
@@ -27,7 +26,6 @@
     })
       .then((response) => response.text())
       .then((result) => {
-        console.log(JSON.parse(result));
         let arr = JSON.parse(result).filter((a) => a.id === parseInt(pathname));
         if (arr.length > 0) {
           listing = arr[0];
@@ -35,7 +33,7 @@
         loading = false;
         loadStripeElements();
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => error);
   }
 
   $: totalCartPrice = (
@@ -146,14 +144,13 @@
         )
           .then((response) => response.text())
           .then((result) => {
-            console.log(result);
             selectedRoom = [];
             loading = false;
             isCheckoutPopup = false;
           })
-          .catch((error) => console.log("error", error));
+          .catch((error) => error);
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => error);
   };
 </script>
 

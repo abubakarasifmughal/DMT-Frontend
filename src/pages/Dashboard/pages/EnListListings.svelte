@@ -154,7 +154,7 @@
         openForEdit = false;
         loadData();
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => error);
   };
 
   let openForAddNewRoom = false;
@@ -191,6 +191,25 @@
       .catch((err) => {});
   };
 
+  const deleteListing = (listing) => {
+    let headersList = {
+      Accept: "*/*",
+      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    };
+
+    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/listings/${listing.id}`, {
+      method: "DELETE",
+      headers: headersList,
+    })
+      .then((response) => {
+        loadData();
+      })
+      .catch((err) => {
+        alert("Could not delete");
+        loadData();
+      });
+  };
+
   let openForRoomsEdit = false;
   let toggleForRoomsEdit = (listing) => {
     listingToBeEdited = listing;
@@ -213,7 +232,7 @@
         openForRoomsEdit = false;
         loadData();
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => error);
   };
 
   let isLoading = false;
@@ -225,12 +244,10 @@
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(JSON.parse(result));
         listingData = JSON.parse(result);
         isLoading = false;
       })
       .catch((error) => {
-        console.log("error", error);
         isLoading = false;
       });
   };
@@ -254,7 +271,7 @@
         };
         openForBookings = !openForBookings;
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => error);
   };
 
   loadData();
@@ -320,7 +337,11 @@
                     <DropdownItem on:click={() => toggleForBookings(listing)}>
                       Bookings
                     </DropdownItem>
-                    <DropdownItem class="text-danger">Delete</DropdownItem>
+                    <DropdownItem
+                      class="text-danger"
+                      on:click={() => deleteListing(listing)}
+                      >Delete</DropdownItem
+                    >
                   </DropdownMenu>
                 </Dropdown>
               </td>
@@ -398,11 +419,19 @@
       <div class="col-md-12">
         {#each listingToBeEdited?.listingImages as image, index}
           <label class="udateImageContainer" for="{index}_EditListingPopup">
-            <img
-              src={image.address}
-              class="shadow-sm udpateImageElement"
-              alt=""
-            />
+            {#if image.address.substring(0, 4) === "data"}
+              <img
+                src={`${image.address}`}
+                class="shadow-sm udpateImageElement"
+                alt=""
+              />
+            {:else}
+              <img
+                src={`${config.SERVER_IP}${config.SERVER_PORT}${image.address}`}
+                class="shadow-sm udpateImageElement"
+                alt=""
+              />
+            {/if}
             <input
               id="{index}_EditListingPopup"
               style="display: none;"
@@ -673,7 +702,19 @@
                   reader.readAsDataURL(image.tempBlob[0]);
                 }}
               />
-              <img src={image.address} alt="" class="udpateImageElement" />
+              {#if image.address.substring(0, 4) === "data"}
+                <img
+                  src={`${image.address}`}
+                  alt=""
+                  class="udpateImageElement"
+                />
+              {:else}
+                <img
+                  src={`${config.SERVER_IP}${config.SERVER_PORT}${image.address}`}
+                  alt=""
+                  class="udpateImageElement"
+                />
+              {/if}
             </label>
           {/each}
         </div>
@@ -737,7 +778,7 @@
               openForBookings = false;
               loadData();
             })
-            .catch((error) => console.log("error", error));
+            .catch((error) => error);
         }}>Approve</button
       >
       <button
@@ -756,7 +797,7 @@
               openForBookings = false;
               loadData();
             })
-            .catch((error) => console.log("error", error));
+            .catch((error) => error);
         }}>Disapprove</button
       >
       <hr />

@@ -25,6 +25,7 @@
     currency: "",
     rooms: [],
     listingImages: [],
+    amenities: [],
     weeklyDiscount: 10,
     nightlyDiscount: 0,
     // New props, not in db or nest yet
@@ -58,6 +59,7 @@
           address: "",
           address_lat: "nan",
           address_lon: "nan",
+          amenities: [],
           headline: "",
           description: "",
           accomodationType: "",
@@ -75,7 +77,7 @@
         // -----
         currentPage = 1;
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => error);
   }
 </script>
 
@@ -133,6 +135,7 @@
             />
           {:else if currentPage === 4}
             <DetailsForListing
+              selectedAmeneties={newListing.amenities}
               headline={newListing.headline}
               description={newListing.description}
               on:headline={(data) => {
@@ -169,7 +172,6 @@
               images={newListing.listingImages}
               onClickBack={() => (currentPage = currentPage - 1)}
               onClickNext={() => {
-                console.log(JSON.stringify(newListing));
                 let a = {
                   isProperty: true,
                   address: "",
@@ -213,7 +215,13 @@
                 if (newListing.listingImages.length <= 0) {
                   errors = [
                     ...errors,
-                    "There images for you listing, please add a few",
+                    "The images for you listing, please add a few",
+                  ];
+                }
+                if (newListing.amenities.length <= 0) {
+                  errors = [
+                    ...errors,
+                    "There are not facilities for you listing, please add a few",
                   ];
                 }
                 if (errors.length <= 0) {

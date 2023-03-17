@@ -16,7 +16,7 @@
     isOpen = !isOpen;
   };
 
-  let selectedAmeneties: any = [];
+  export let selectedAmeneties: any[] = [];
 
   let AllAmeneties = [
     {
@@ -200,9 +200,9 @@
     <Amenities
       {selectedAmeneties}
       amenitiesList={AllAmeneties}
-      on:ameneties={(data) => {
+      on:amenities={(data) => {
         // Save the data from the amenities to any variable
-        selectedAmeneties = data.detail.ameneties;
+        selectedAmeneties = data.detail.amenities;
       }}
     />
   </Offcanvas>

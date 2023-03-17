@@ -39,7 +39,7 @@
         DiscountedPrice: 0,
         Images: [],
         meta: [],
-        ameneties: [],
+        amenities: [],
         Visible: true,
       },
     ];

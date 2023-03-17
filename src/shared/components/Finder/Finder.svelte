@@ -98,11 +98,13 @@
                 </DropdownToggle>
                 <DropdownMenu style="width: 100%;">
                   {#each allServices as service}
-                    <DropdownItem on:click={() => (serviceSelected = service)}
-                      >
-                      <i class="bi bi-bookmarks-fill
-                      main-color"/>
-                      {service}</DropdownItem>
+                    <DropdownItem on:click={() => (serviceSelected = service)}>
+                      <i
+                        class="bi bi-bookmarks-fill
+                      main-color"
+                      />
+                      {service}</DropdownItem
+                    >
                   {/each}
                 </DropdownMenu>
               </Dropdown>
@@ -128,12 +130,8 @@
               style="border-radius: 2pt;padding-bottom: 0pt;border-top-left-radius:0pt;border-bottom-left-radius:0pt"
               bind:value={checkoutdate}
               on:change={() => {
-                console.log(checkindate);
-                console.log(checkoutdate);
-
                 if (checkindate >= checkoutdate) {
                   checkindate = checkoutdate;
-                  console.log("exec");
                 }
               }}
             />

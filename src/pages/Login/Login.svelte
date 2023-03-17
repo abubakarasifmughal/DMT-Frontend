@@ -46,7 +46,7 @@
           toggle();
         }
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => error);
   }
   let isOpen = false;
   const toggle = () => (isOpen = !isOpen);

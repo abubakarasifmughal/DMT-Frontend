@@ -36,7 +36,7 @@
       listings = JSON.parse(result);
       loading = false;
     })
-    .catch((error) => console.log("error", error));
+    .catch((error) => error);
 </script>
 
 <!-- const mapbox_token =

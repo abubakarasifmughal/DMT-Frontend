@@ -64,7 +64,7 @@
           error = false;
         }
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => error);
   }
 
   let showPassword = false;
@@ -144,7 +144,7 @@
                 emailVerified = true;
               }
             })
-            .catch((error) => console.log("error", error));
+            .catch((error) => error);
         }}
       >
         Verify
