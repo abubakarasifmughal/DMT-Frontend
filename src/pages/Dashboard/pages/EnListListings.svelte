@@ -241,9 +241,9 @@
       `${config.SERVER_IP}${config.SERVER_PORT}/listings/${userid}`,
       requestOptions
     )
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((result) => {
-        listingData = JSON.parse(result);
+        listingData = result;
         isLoading = false;
       })
       .catch((error) => {
@@ -397,12 +397,17 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <input
-          type="text"
+        <select
           class="form-control mb-2"
-          placeholder="Currency"
           bind:value={listingToBeEdited.currency}
-        />
+        >
+          <option>USD</option>
+          <option>AUD</option>
+          <option>AED</option>
+          <option>PKR</option>
+          <option>INR</option>
+          <option>GBP</option>
+        </select>
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -418,7 +423,7 @@
       <div class="col-md-12">
         {#each listingToBeEdited?.listingImages as image, index}
           <label
-            class="udateImageContainer border"
+            class="udateImageContainer border rounded"
             for="{index}_EditListingPopup"
           >
             {#if image.address.substring(0, 4) === "data"}
@@ -476,6 +481,9 @@
           isOpen={isOpenAmenitiesSheet}
           toggle={toggleAmenetiesSheet}
         >
+          <div class="modal-header">
+            <button class="btn btn-close" on:click={toggleAmenetiesSheet} />
+          </div>
           <div class="p-3">
             <Amenities
               selectedAmeneties={room.ameneties}
@@ -706,7 +714,7 @@
                   reader.readAsDataURL(image.tempBlob[0]);
                 }}
               />
-              <div class="border">
+              <div class="border rounded">
                 {#if image.address.substring(0, 4) === "data"}
                   <img
                     src={`${image.address}`}
@@ -836,7 +844,8 @@
     border-radius: 5pt;
     transition: 0.2s;
     border: 2px solid transparent;
-    object-fit: contain;
+    object-fit: cover;
+    height: 80pt;
   }
 
   .udpateImageElement:hover {
