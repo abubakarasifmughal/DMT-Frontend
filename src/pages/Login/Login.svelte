@@ -357,18 +357,17 @@
 </Modal>
 
 <Modal isOpen={error === false}>
-  <ModalHeader class="row">
-    <div class="row col-12">
-      <span class="col-11">Update Password</span>
-      <button
-        class="col-1 btn-close btn"
-        on:click={() => {
-          error = undefined;
-        }}
-      />
-    </div>
+  <ModalHeader>
+    <span class="col-11">Update Password</span>
   </ModalHeader>
   <ModalBody>Password Updated Successfully</ModalBody>
+  <ModalFooter>
+    <Button
+      on:click={() => {
+        error = undefined;
+      }}>Close</Button
+    >
+  </ModalFooter>
 </Modal>
 
 <Modal isOpen={error === true}>

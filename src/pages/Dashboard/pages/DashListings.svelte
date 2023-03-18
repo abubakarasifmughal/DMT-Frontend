@@ -11,6 +11,7 @@
   import BusinessNature from "../../../shared/Forms/BusinessNature.svelte";
   import { Alert, Modal, ModalBody, ModalHeader } from "sveltestrap";
   export let hideCreationUI;
+
   let errors: string[] = [];
   let currentPage = 1;
   let user_id = sessionStorage.getItem("di");

@@ -6,6 +6,7 @@
   import config from "../../../environment.json";
   let user_id = sessionStorage.getItem("di");
   export let location;
+  location;
   let loading = true;
   let listings = [
     // {

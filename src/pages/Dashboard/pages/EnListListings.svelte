@@ -224,7 +224,6 @@
       headers: myHeaders,
       body: JSON.stringify(listingToBeEdited),
     };
-
     fetch(`${config.SERVER_IP}${config.SERVER_PORT}/listings`, requestOptions)
       .then((response) => response.text())
       .then((result) => {
@@ -415,10 +414,13 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-md-12">
         {#each listingToBeEdited?.listingImages as image, index}
-          <label class="udateImageContainer" for="{index}_EditListingPopup">
+          <label
+            class="udateImageContainer border"
+            for="{index}_EditListingPopup"
+          >
             {#if image.address.substring(0, 4) === "data"}
               <img
                 src={`${image.address}`}
@@ -562,10 +564,13 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            {#each room?.Images as image, index}
-              <label class="udateImageContainer" for="{index}_forRoomAdd">
+            {#each room?.Images as image, index2}
+              <label
+                class="udateImageContainer"
+                for="{index2}_forRoomAdd_${index}"
+              >
                 <input
-                  id="{index}_forRoomAdd"
+                  id="{index2}_forRoomAdd_${index}"
                   style="display: none;"
                   type="file"
                   bind:files={image.tempBlob}
@@ -600,7 +605,6 @@
         on:click={() => {
           listingToBeEdited.rooms = [
             ...listingToBeEdited?.rooms,
-
             {
               RoomCategory: "",
               RoomDescription: "",
@@ -634,7 +638,7 @@
     />
   </div>
   <div class="modal-body">
-    {#each listingToBeEdited?.rooms as room}
+    {#each listingToBeEdited?.rooms as room, ri}
       <div class="row">
         <div class="col-md-12">
           <input
@@ -686,11 +690,11 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          {#each room?.Images as image, index}
-            <label for="{index}_forRoomEdit" class="udateImageContainer">
+          {#each room?.Images as image, i}
+            <label for="{i}_forRoomEdit_${ri}" class="udateImageContainer">
               <input
                 style="display: none;"
-                id="{index}_forRoomEdit"
+                id="{i}_forRoomEdit_${ri}"
                 type="file"
                 bind:files={image.tempBlob}
                 on:change={() => {
@@ -702,19 +706,21 @@
                   reader.readAsDataURL(image.tempBlob[0]);
                 }}
               />
-              {#if image.address.substring(0, 4) === "data"}
-                <img
-                  src={`${image.address}`}
-                  alt=""
-                  class="udpateImageElement"
-                />
-              {:else}
-                <img
-                  src={`${config.SERVER_IP}${config.SERVER_PORT}${image.address}`}
-                  alt=""
-                  class="udpateImageElement"
-                />
-              {/if}
+              <div class="border">
+                {#if image.address.substring(0, 4) === "data"}
+                  <img
+                    src={`${image.address}`}
+                    alt=""
+                    class="udpateImageElement col-12"
+                  />
+                {:else}
+                  <img
+                    src={`${config.SERVER_IP}${config.SERVER_PORT}${image.address}`}
+                    alt=""
+                    class="udpateImageElement col-12"
+                  />
+                {/if}
+              </div>
             </label>
           {/each}
         </div>
@@ -830,8 +836,7 @@
     border-radius: 5pt;
     transition: 0.2s;
     border: 2px solid transparent;
-    object-fit: cover;
-    height: 80pt;
+    object-fit: contain;
   }
 
   .udpateImageElement:hover {

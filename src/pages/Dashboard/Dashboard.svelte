@@ -4,7 +4,10 @@
   import { globalHistory } from "svelte-routing/src/history";
   import Navbar2 from "../../shared/components/Navbar2/Navbar2.svelte";
   import ListingsSubPage from "./pages/ListingsSubPage.svelte";
-
+  export let subpage;
+  subpage;
+  export let location;
+  location;
   let pathname = window.location.pathname;
   let unsub;
 

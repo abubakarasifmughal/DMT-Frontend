@@ -5,6 +5,7 @@
   import GetApp from "../../shared/components/GetApp/GetApp.svelte";
   import Navbar from "../../shared/components/Navbar/Navbar.svelte";
   export let location;
+  location;
   import {
     Carousel,
     CarouselControl,

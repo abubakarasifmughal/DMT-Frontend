@@ -10,6 +10,7 @@
   import { DateInput } from "date-picker-svelte";
   export let location;
   export let id;
+  id;
   // STRIPE-----------------------^^^^^^
   let userid = sessionStorage.getItem("di");
   let pathname;

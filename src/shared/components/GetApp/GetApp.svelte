@@ -69,11 +69,6 @@
     display: flex;
     margin-top: 25px;
   }
-  button {
-    border: none;
-    display: block;
-    margin-right: 20px;
-  }
 
   .airbnb {
     background-repeat: no-repeat;
