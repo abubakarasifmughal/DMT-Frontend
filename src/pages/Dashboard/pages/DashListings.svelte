@@ -14,6 +14,7 @@
 
   let errors: string[] = [];
   let currentPage = 1;
+  let letsLoad = false;
   let user_id = sessionStorage.getItem("di");
   $: newListing = {
     isProperty: true,
@@ -38,6 +39,7 @@
   };
 
   function apiCall() {
+    letsLoad = true;
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -79,187 +81,201 @@
         currentPage = 1;
         // revert back to the listing page
         hideCreationUI();
+        letsLoad = false;
       })
       .catch((error) => error);
   }
 </script>
 
-<div>
-  <Progressbar total={6} current={currentPage} />
-  <br />
-  <hr />
+{#if !letsLoad}
   <div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-2 ">
-          <Stepper
-            title={"Listings"}
-            steps={[
-              { label: "Welcome", substeps: [] },
-              { label: "Location", substeps: [] },
-              { label: "Business", substeps: [] },
-              { label: "Details", substeps: [] },
-              { label: "Photos", substeps: [] },
-              { label: "Amenities", substeps: [] },
-              { label: "Property", substeps: [] },
-              { label: "Go Live", substeps: [] },
-            ]}
-            activeIndex={currentPage - 1}
-            substepIndex={0}
-          />
-        </div>
-        <div class="col-lg-10">
-          {#if currentPage === 1}
-            <Welcome onClickContinue={() => (currentPage = currentPage + 1)} />
-          {:else if currentPage === 2}
-            <LocationForListing
-              coordX={27.717245}
-              coordY={85.323959}
-              locationAddress={newListing.address}
-              on:AddressChanged={(data) => {
-                newListing.address = data.detail.Address;
-              }}
-              onClickBack={() => (currentPage = currentPage - 1)}
-              onClickNext={() => (currentPage = currentPage + 1)}
+    <Progressbar total={6} current={currentPage} />
+    <br />
+    <hr />
+    <div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-2 ">
+            <Stepper
+              title={"Listings"}
+              steps={[
+                { label: "Welcome", substeps: [] },
+                { label: "Location", substeps: [] },
+                { label: "Business", substeps: [] },
+                { label: "Details", substeps: [] },
+                { label: "Photos", substeps: [] },
+                { label: "Amenities", substeps: [] },
+                { label: "Property", substeps: [] },
+                { label: "Go Live", substeps: [] },
+              ]}
+              activeIndex={currentPage - 1}
+              substepIndex={0}
             />
-          {:else if currentPage === 3}
-            <BusinessNature
-              IndividualTaxFileNumber={newListing.IndividualTaxFileNumber}
-              IndividualIdentificationNumber={newListing.IndividualIdentificationNumber}
-              CompanyIdentificationNumber={newListing.CompanyIdentificationNumber}
-              CompanyTaxFileNumber={newListing.CompanyTaxFileNumber}
-              isIndividual={newListing.isIndividual}
-              property={newListing.isProperty}
-              on:isPropery={(data) => {
-                newListing.isProperty = data.detail.isProperty;
-              }}
-              onClickBack={() => (currentPage = currentPage - 1)}
-              onClickNext={() => (currentPage = currentPage + 1)}
-            />
-          {:else if currentPage === 4}
-            <DetailsForListing
-              selectedAmeneties={newListing.amenities}
-              headline={newListing.headline}
-              description={newListing.description}
-              on:headline={(data) => {
-                newListing.headline = data.detail.headline;
-              }}
-              on:description={(data) => {
-                newListing.description = data.detail.description;
-              }}
-              onClickBack={() => (currentPage = currentPage - 1)}
-              onClickNext={() => (currentPage = currentPage + 1)}
-            />
-          {:else if currentPage === 5}
-            <HotelDetails
-              currency={newListing.currency}
-              on:currency={(data) => {
-                newListing.currency = data.detail.currency;
-              }}
-              AccomodationType={newListing.accomodationType}
-              on:AccomodationType={(data) => {
-                newListing.accomodationType = data.detail.AccomodationType;
-              }}
-              rooms={newListing.rooms}
-              on:rooms={(data) => {
-                newListing.rooms = data.detail.rooms;
-              }}
-              onClickBack={() => (currentPage = currentPage - 1)}
-              onClickNext={() => (currentPage = currentPage + 1)}
-            />
-          {:else if currentPage === 6}
-            <PhotosForProperty
-              on:listingImages={(data) => {
-                newListing.listingImages = data.detail.images;
-              }}
-              images={newListing.listingImages}
-              onClickBack={() => (currentPage = currentPage - 1)}
-              onClickNext={() => {
-                let a = {
-                  isProperty: true,
-                  address: "",
-                  address_lat: "nan",
-                  address_lon: "nan",
-                  headline: "",
-                  description: "",
-                  accomodationType: "",
-                  currency: "",
-                  rooms: [],
-                  listingImages: [],
-                  weeklyDiscount: 10,
-                  nightlyDiscount: 0,
-                  isIndividual: true,
-                  IndividualIdentificationNumber: "",
-                  IndividualTaxFileNumber: "",
-                  CompanyIdentificationNumber: "",
-                  CompanyTaxFileNumber: "",
-                };
-                if (newListing.headline === "") {
-                  errors = [...errors, "Please provide a headline"];
-                }
-                if (newListing.address === "") {
-                  errors = [...errors, "Address cannot be empty"];
-                }
-                if (newListing.description === "") {
-                  errors = [...errors, "You did not enter any description"];
-                }
-                if (newListing.accomodationType === "") {
-                  errors = [
-                    ...errors,
-                    "Accomodation Type must be selected from Experience or Accomodation",
-                  ];
-                }
-                if (newListing.currency === "") {
-                  errors = [...errors, "Select your currency"];
-                }
-                if (newListing.rooms.length <= 0) {
-                  errors = [...errors, "No rooms were added"];
-                }
-                if (newListing.listingImages.length <= 0) {
-                  errors = [
-                    ...errors,
-                    "The images for you listing, please add a few",
-                  ];
-                }
-                if (newListing.amenities.length <= 0) {
-                  errors = [
-                    ...errors,
-                    "There are not facilities for you listing, please add a few",
-                  ];
-                }
-                if (errors.length <= 0) {
-                  apiCall();
-                }
-              }}
-            />
-          {/if}
+          </div>
+          <div class="col-lg-10">
+            {#if currentPage === 1}
+              <Welcome
+                onClickContinue={() => (currentPage = currentPage + 1)}
+              />
+            {:else if currentPage === 2}
+              <LocationForListing
+                coordX={27.717245}
+                coordY={85.323959}
+                locationAddress={newListing.address}
+                on:AddressChanged={(data) => {
+                  newListing.address = data.detail.Address;
+                }}
+                onClickBack={() => (currentPage = currentPage - 1)}
+                onClickNext={() => (currentPage = currentPage + 1)}
+              />
+            {:else if currentPage === 3}
+              <BusinessNature
+                IndividualTaxFileNumber={newListing.IndividualTaxFileNumber}
+                IndividualIdentificationNumber={newListing.IndividualIdentificationNumber}
+                CompanyIdentificationNumber={newListing.CompanyIdentificationNumber}
+                CompanyTaxFileNumber={newListing.CompanyTaxFileNumber}
+                isIndividual={newListing.isIndividual}
+                property={newListing.isProperty}
+                on:isPropery={(data) => {
+                  newListing.isProperty = data.detail.isProperty;
+                }}
+                onClickBack={() => (currentPage = currentPage - 1)}
+                onClickNext={() => (currentPage = currentPage + 1)}
+              />
+            {:else if currentPage === 4}
+              <DetailsForListing
+                selectedAmeneties={newListing.amenities}
+                headline={newListing.headline}
+                description={newListing.description}
+                on:headline={(data) => {
+                  newListing.headline = data.detail.headline;
+                }}
+                on:description={(data) => {
+                  newListing.description = data.detail.description;
+                }}
+                onClickBack={() => (currentPage = currentPage - 1)}
+                onClickNext={() => (currentPage = currentPage + 1)}
+              />
+            {:else if currentPage === 5}
+              <HotelDetails
+                currency={newListing.currency}
+                on:currency={(data) => {
+                  newListing.currency = data.detail.currency;
+                }}
+                AccomodationType={newListing.accomodationType}
+                on:AccomodationType={(data) => {
+                  newListing.accomodationType = data.detail.AccomodationType;
+                }}
+                rooms={newListing.rooms}
+                on:rooms={(data) => {
+                  newListing.rooms = data.detail.rooms;
+                }}
+                onClickBack={() => (currentPage = currentPage - 1)}
+                onClickNext={() => (currentPage = currentPage + 1)}
+              />
+            {:else if currentPage === 6}
+              <PhotosForProperty
+                on:listingImages={(data) => {
+                  newListing.listingImages = data.detail.images;
+                }}
+                images={newListing.listingImages}
+                onClickBack={() => (currentPage = currentPage - 1)}
+                onClickNext={() => {
+                  let a = {
+                    isProperty: true,
+                    address: "",
+                    address_lat: "nan",
+                    address_lon: "nan",
+                    headline: "",
+                    description: "",
+                    accomodationType: "",
+                    currency: "",
+                    rooms: [],
+                    listingImages: [],
+                    weeklyDiscount: 10,
+                    nightlyDiscount: 0,
+                    isIndividual: true,
+                    IndividualIdentificationNumber: "",
+                    IndividualTaxFileNumber: "",
+                    CompanyIdentificationNumber: "",
+                    CompanyTaxFileNumber: "",
+                  };
+                  if (newListing.headline === "") {
+                    errors = [...errors, "Please provide a headline"];
+                  }
+                  if (newListing.address === "") {
+                    errors = [...errors, "Address cannot be empty"];
+                  }
+                  if (newListing.description === "") {
+                    errors = [...errors, "You did not enter any description"];
+                  }
+                  if (newListing.accomodationType === "") {
+                    errors = [
+                      ...errors,
+                      "Accomodation Type must be selected from Experience or Accomodation",
+                    ];
+                  }
+                  if (newListing.currency === "") {
+                    errors = [...errors, "Select your currency"];
+                  }
+                  if (newListing.rooms.length <= 0) {
+                    errors = [...errors, "No rooms were added"];
+                  }
+                  if (newListing.listingImages.length <= 0) {
+                    errors = [
+                      ...errors,
+                      "The images for you listing, please add a few",
+                    ];
+                  }
+                  if (newListing.amenities.length <= 0) {
+                    errors = [
+                      ...errors,
+                      "There are not facilities for you listing, please add a few",
+                    ];
+                  }
+                  if (errors.length <= 0) {
+                    apiCall();
+                  }
+                }}
+              />
+            {/if}
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <Modal isOpen={errors.length > 0} backdrop="static">
-    <ModalHeader class="row">
-      <div class="row col-12">
-        <div class="col-11 ">Please fix the following errors</div>
-        <div class="col-1 ">
-          <button
-            class="btn btn-close"
-            on:click={() => {
-              errors = [];
-              currentPage = 2;
-            }}
-          />
+    <Modal isOpen={errors.length > 0} backdrop="static">
+      <ModalHeader class="row">
+        <div class="row col-12">
+          <div class="col-11 ">Please fix the following errors</div>
+          <div class="col-1 ">
+            <button
+              class="btn btn-close"
+              on:click={() => {
+                errors = [];
+                currentPage = 2;
+              }}
+            />
+          </div>
         </div>
-      </div>
-    </ModalHeader>
-    <ModalBody>
-      {#each errors as error}
-        <Alert color="danger" dismissible>{error}</Alert>
-      {/each}
-    </ModalBody>
-  </Modal>
-</div>
+      </ModalHeader>
+      <ModalBody>
+        {#each errors as error}
+          <Alert color="danger" dismissible>{error}</Alert>
+        {/each}
+      </ModalBody>
+    </Modal>
+  </div>
+{:else}
+  <div
+    class="d-flex flex-column justify-content-center align-items-center"
+    style="min-height: 50vh;width: 100%;"
+  >
+    <div class="spinner-border" />
+    <br />
+    <span>Creating Listing</span>
+  </div>
+{/if}
 
 <style>
 </style>
