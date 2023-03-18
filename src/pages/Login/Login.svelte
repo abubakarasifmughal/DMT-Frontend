@@ -409,7 +409,7 @@
     <Button
       on:click={() => {
         error = undefined;
-      }}>Close</Button
+      }}>Login</Button
     >
   </ModalFooter>
 </Modal>
