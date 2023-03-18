@@ -16,7 +16,7 @@
               <img
                 src={`${config.SERVER_IP}${config.SERVER_PORT}${listing.listingImages[0]?.address}`}
                 alt=""
-                style="object-fit: cover;object-position: center;height: 300pt;"
+                style="object-fit: cover;object-position: center;height: 230pt;"
                 width="100%"
               />
             {/if}
