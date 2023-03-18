@@ -8,7 +8,8 @@
   import config from "../../../environment.json";
   import { Icon, Modal } from "sveltestrap";
   import { DateInput } from "date-picker-svelte";
-
+  export let location;
+  export let id;
   // STRIPE-----------------------^^^^^^
   let userid = sessionStorage.getItem("di");
   let pathname;
@@ -21,7 +22,7 @@
     if (id === "listing") {
       return;
     }
-    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/listings/${pathname}`, {
+    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/listings/n/${pathname}`, {
       method: "GET",
     })
       .then((response) => response.text())

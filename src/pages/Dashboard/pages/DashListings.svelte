@@ -10,7 +10,7 @@
   import config from "../../../../environment.json";
   import BusinessNature from "../../../shared/Forms/BusinessNature.svelte";
   import { Alert, Modal, ModalBody, ModalHeader } from "sveltestrap";
-
+  export let hideCreationUI;
   let errors: string[] = [];
   let currentPage = 1;
   let user_id = sessionStorage.getItem("di");
@@ -76,6 +76,8 @@
         };
         // -----
         currentPage = 1;
+        // revert back to the listing page
+        hideCreationUI();
       })
       .catch((error) => error);
   }

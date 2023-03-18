@@ -6,11 +6,15 @@
   const onClickCreate = () => {
     create = true;
   };
+
+  const hideCreationUI = () => {
+    create = false;
+  };
 </script>
 
 <div>
   {#if create}
-    <DashListings />
+    <DashListings {hideCreationUI} />
   {:else}
     <EnListListings {onClickCreate} />
   {/if}

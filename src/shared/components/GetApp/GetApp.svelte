@@ -76,7 +76,6 @@
   }
 
   .airbnb {
-    background-image: url("/assets/static/images/index/airbnb.png");
     background-repeat: no-repeat;
     background-size: cover;
   }
