@@ -41,30 +41,35 @@
   }
 
   function onSignup() {
-    error = undefined;
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    var raw = JSON.stringify(signupObject);
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-    };
-    fetch(
-      `${config.SERVER_IP}${config.SERVER_PORT}/user/signupa`,
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        // quvume@mailinator.com
-        responseMessage = result.message;
-        if (result.error) {
-          error = true;
-        } else {
-          error = false;
-        }
-      })
-      .catch((error) => error);
+    if (!activity) {
+      activity = true;
+      error = undefined;
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      var raw = JSON.stringify(signupObject);
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+      };
+      fetch(
+        `${config.SERVER_IP}${config.SERVER_PORT}/user/signupa`,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          // quvume@mailinator.com
+          responseMessage = result.message;
+          if (result.error) {
+            error = true;
+            activity = false;
+          } else {
+            error = false;
+            activity = false;
+          }
+        })
+        .catch((error) => error);
+    }
   }
 
   let showPassword = false;
@@ -72,6 +77,8 @@
   let emailVerified = false;
 
   let enteredVerificationCode = "";
+
+  let activity = false;
 </script>
 
 <Modal isOpen={error === true}>
@@ -116,38 +123,45 @@
       <Button on:click={onSignup}>Resend</Button>
       <Button
         on:click={() => {
-          var myHeaders = new Headers();
-          myHeaders.append("Content-Type", "application/json");
+          if (!activity) {
+            activity = true;
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
 
-          var raw = JSON.stringify({
-            email: signupObject.email,
-            code: enteredVerificationCode,
-          });
+            var raw = JSON.stringify({
+              email: signupObject.email,
+              code: enteredVerificationCode,
+            });
 
-          var requestOptions = {
-            method: "POST",
-            headers: myHeaders,
-            body: raw,
-          };
+            var requestOptions = {
+              method: "POST",
+              headers: myHeaders,
+              body: raw,
+            };
 
-          fetch(
-            `${config.SERVER_IP}${config.SERVER_PORT}/user/verify`,
-            requestOptions
-          )
-            .then((response) => response.json())
-            .then((result) => {
-              responseMessage = result.message;
-              if (result.error) {
-                error = true;
-              } else {
-                error = false;
-                emailVerified = true;
-              }
-            })
-            .catch((error) => error);
+            fetch(
+              `${config.SERVER_IP}${config.SERVER_PORT}/user/verify`,
+              requestOptions
+            )
+              .then((response) => response.json())
+              .then((result) => {
+                responseMessage = result.message;
+                if (result.error) {
+                  error = true;
+                } else {
+                  error = false;
+                  emailVerified = true;
+                }
+              })
+              .catch((error) => error);
+          }
         }}
       >
-        Verify
+        {#if activity}
+          <span class="spinner-border text-success spinner-border-sm" />
+        {:else}
+          Verify
+        {/if}
       </Button>
     {:else}
       <Link
@@ -275,7 +289,13 @@
             <div class="col-md-6 mb-3">
               {#if tosAgree}
                 <button class="btn ps-5 pe-5 col-12" on:click={onSignup}>
-                  Sign up
+                  {#if activity}
+                    <span
+                      class="spinner-border text-success spinner-border-sm"
+                    />
+                  {:else}
+                    Sign up
+                  {/if}
                 </button>
               {:else}
                 <button disabled class="btn ps-5 pe-5 col-12"> Sign up </button>
