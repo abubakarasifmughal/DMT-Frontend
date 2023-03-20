@@ -54,3 +54,8 @@
   background-color: #9427f7;
   color: white;
 } */
+
+
+.leaflet-control-attribution {
+  display: none !important;
+}

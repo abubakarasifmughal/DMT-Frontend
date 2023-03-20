@@ -13,6 +13,7 @@
   export let hideCreationUI;
 
   let errors: string[] = [];
+  let done: boolean = false;
   let currentPage = 1;
   let letsLoad = false;
   let user_id = sessionStorage.getItem("di");
@@ -79,13 +80,27 @@
         };
         // -----
         currentPage = 1;
+        done = true;
+
         // revert back to the listing page
-        hideCreationUI();
-        letsLoad = false;
       })
       .catch((error) => error);
   }
 </script>
+
+<Modal centered isOpen={done}>
+  <div class="modal-header">Congratulations!</div>
+  <div class="modal-body">Your listing was successfully created!</div>
+  <div class="modal-footer">
+    <button
+      class="btn btn-light border"
+      on:click={() => {
+        done = false;
+        hideCreationUI();
+      }}>Close</button
+    >
+  </div>
+</Modal>
 
 {#if !letsLoad}
   <div>

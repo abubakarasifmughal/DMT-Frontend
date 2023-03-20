@@ -17,11 +17,12 @@
   let disp = createEventDispatcher();
 
   const allRegions = [
-    { name: "Asia", enabled: true },
     { name: "Africa", enabled: true },
+    { name: "Asia", enabled: true },
     { name: "Europe", enabled: false },
-    { name: "America", enabled: false },
-    { name: "Chine", enabled: false },
+    { name: "North America", enabled: false },
+    { name: "Oceania", enabled: false },
+    { name: "South America", enabled: false },
   ];
   let selectedRegion = "";
 </script>
@@ -30,7 +31,6 @@
   <h3>Enter the location address</h3>
   <hr />
   <br />
-
 
   <Dropdown>
     <DropdownToggle class="btn btn-light px-4 mb-4 border">

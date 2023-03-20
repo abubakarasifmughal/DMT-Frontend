@@ -5,15 +5,20 @@
 <div class="mt-3">
   <div class="row">
     <div class="col-md-10">
-      <h2>Greetings! from Digital Marketplace for Tourism branded as DMT</h2>
+      <h2>Greetings from Digital Marketplace for Tourism Branded as DMT</h2>
       <span>
-        We welcome you to list your Hotels and Experience offering based in
-        Africa and Asia to the world
+        We welcome all the individuals and businesses to our tourism marketplace
+        platform. Here, you can list Accommodation property and Experience
+        offering based in Africa and Asia. Focused on tourism niche and regional
+        specific services, the sellers will be able to take great advantage
+        among buyers around the world. We wish everyone who is connected with
+        DMT for the prosperity of this community and help boost business
+        operations around the region.
       </span>
       <div>May we all prosper</div>
       <br />
       <button on:click={onClickContinue} class="mt-3 btn pe-5 ps-5">
-        Lets get Started
+        Let's get Started
       </button>
     </div>
   </div>
