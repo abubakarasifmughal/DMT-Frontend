@@ -40,7 +40,7 @@
               name="isIndividual"
               checked
               value={true}
-              class="mt-3 mb-3 me-3 radio"
+              class="mt-3 mb-2 me-3 radio"
               id="welcom_property_checkbox"
               type="radio"
             />
@@ -90,8 +90,9 @@
       </div>
       <div>
         <div>
-          <h4>Is it a Property or a Service?</h4>
           <br />
+          <br />
+          <h4>Is it a Property or a Service?</h4>
           <div class="mt-2" style="font-size: large;">
             <div class="mt-2" style="font-size: large;">
               <div class="d-flex align-items-center">

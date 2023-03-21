@@ -6,6 +6,7 @@
   <div class="row">
     <div class="col-md-10">
       <h2>Greetings from Digital Marketplace for Tourism Branded as DMT</h2>
+      <br />
       <span>
         We welcome all the individuals and businesses to our tourism marketplace
         platform. Here, you can list Accommodation property and Experience
