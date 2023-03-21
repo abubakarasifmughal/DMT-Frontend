@@ -305,7 +305,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md-8 mt-2">
+        <div class="col-md-12 mt-2">
           <label class="mb-2" for="">Max Occupancy (per room)</label>
           <div class="d-flex flex-wrap">
             <input
@@ -321,7 +321,7 @@
 
       <div class="row mt-2">
         <b>Breakfast</b>
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div class="d-flex flex-wrap align-items-center m-2">
             <input
               bind:group={breakfastNotIncluded}
@@ -365,7 +365,7 @@
 
       <div class="row mt-2">
         <b>Transfer of service</b>
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div class="d-flex flex-wrap align-items-center m-2">
             <input
               bind:group={transferNotIncluded}
@@ -407,7 +407,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-8 mt-2">
+        <div class="col-md-12 mt-2">
           <label class="mb-2" for="">Price per night ({currency})</label>
           <div class="d-flex flex-wrap">
             <input
@@ -422,7 +422,7 @@
 
       <div class="row mt-2">
         <b>Discount Available</b>
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div class="d-flex flex-wrap align-items-center m-2">
             <input
               bind:group={discountAvailable}
@@ -450,7 +450,7 @@
       </div>
       {#if discountAvailable}
         <div class="row">
-          <div class="col-md-8 my-2">
+          <div class="col-md-12 my-2">
             <label class="mb-2" for="">Price After Discount</label>
             <div class="d-flex flex-wrap">
               <input
