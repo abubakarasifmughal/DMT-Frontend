@@ -346,11 +346,11 @@
           </div>
           {#if breakfastNotIncluded}
             <div class="row">
-              <div class="col-md-8 my-2">
+              <div class="col-md-12 my-2">
                 <div class="d-flex flex-wrap">
                   <input
                     type="number"
-                    class="form-control"
+                    class="form-control col-12"
                     placeholder="Breakfast price"
                     bind:value={room.BreakfastPrice}
                   />
@@ -390,11 +390,11 @@
           </div>
           {#if transferNotIncluded}
             <div class="row">
-              <div class="col-md-8 my-2">
+              <div class="col-md-12 my-2">
                 <div class="d-flex flex-wrap">
                   <input
                     type="number"
-                    class="form-control"
+                    class="form-control col-12"
                     placeholder="Transfer price"
                     bind:value={room.TransferOfServicePrice}
                   />
