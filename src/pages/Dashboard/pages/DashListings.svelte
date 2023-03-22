@@ -45,6 +45,7 @@
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({ ...newListing });
+    console.log(newListing);
 
     const requestOptions = {
       method: "POST",
@@ -155,7 +156,25 @@
                   newListing.isProperty = data.detail.isProperty;
                 }}
                 onClickBack={() => (currentPage = currentPage - 1)}
-                onClickNext={() => (currentPage = currentPage + 1)}
+                onClickNext={({
+                  isIndividual,
+                  property,
+                  IndividualIdentificationNumber,
+                  IndividualTaxFileNumber,
+                  CompanyIdentificationNumber,
+                  CompanyTaxFileNumber,
+                }) => {
+                  newListing.isIndividual = isIndividual;
+                  newListing.isProperty = property;
+                  newListing.IndividualIdentificationNumber =
+                    IndividualIdentificationNumber;
+                  newListing.IndividualTaxFileNumber = IndividualTaxFileNumber;
+                  newListing.CompanyIdentificationNumber =
+                    CompanyIdentificationNumber;
+                  newListing.CompanyTaxFileNumber = CompanyTaxFileNumber;
+
+                  currentPage = currentPage + 1;
+                }}
               />
             {:else if currentPage === 4}
               <DetailsForListing

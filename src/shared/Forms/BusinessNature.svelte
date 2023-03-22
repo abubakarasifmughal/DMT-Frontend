@@ -137,7 +137,19 @@
 
       <div class="mt-3 d-flex justify-content-between">
         <button on:click={onClickBack} class="btn pe-5 ps-5">Back</button>
-        <button on:click={onClickNext} class="btn pe-5 ps-5">Next</button>
+        <button
+          on:click={() => {
+            onClickNext({
+              isIndividual: isIndividual,
+              property: property,
+              IndividualIdentificationNumber: IndividualIdentificationNumber,
+              IndividualTaxFileNumber: IndividualTaxFileNumber,
+              CompanyIdentificationNumber: CompanyIdentificationNumber,
+              CompanyTaxFileNumber: CompanyTaxFileNumber,
+            });
+          }}
+          class="btn pe-5 ps-5">Next</button
+        >
       </div>
     </div>
   </div>

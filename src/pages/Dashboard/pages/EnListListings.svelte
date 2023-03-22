@@ -4,6 +4,7 @@
     DropdownItem,
     DropdownMenu,
     DropdownToggle,
+    Input,
     Modal,
     Offcanvas,
   } from "sveltestrap";
@@ -273,6 +274,35 @@
       .catch((error) => error);
   };
 
+  let openForBusinessDetails = false;
+  let businessData = {
+    isIndividual: false,
+    IndividualIdentificationNumber: "",
+    IndividualTaxFileNumber: "",
+    CompanyIdentificationNumber: "",
+    CompanyTaxFileNumber: "",
+  };
+  const updateBusinessListing = () => {
+    var requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(businessData),
+    };
+
+    fetch(
+      `${config.SERVER_IP}${config.SERVER_PORT}/listings/addbiz/${userid}`,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        openForBusinessDetails = false;
+        loadData();
+      })
+      .catch((error) => error);
+  };
+
   loadData();
 </script>
 
@@ -335,6 +365,24 @@
                     </DropdownItem>
                     <DropdownItem on:click={() => toggleForBookings(listing)}>
                       Bookings
+                    </DropdownItem>
+                    <DropdownItem
+                      on:click={() => {
+                        businessData = {
+                          id: listing?.id,
+                          CompanyIdentificationNumber:
+                            listing?.CompanyIdentificationNumber,
+                          CompanyTaxFileNumber: listing?.CompanyTaxFileNumber,
+                          IndividualIdentificationNumber:
+                            listing?.IndividualIdentificationNumber,
+                          IndividualTaxFileNumber:
+                            listing?.IndividualTaxFileNumber,
+                          isIndividual: listing?.isIndividual,
+                        };
+                        openForBusinessDetails = true;
+                      }}
+                    >
+                      Manage Business
                     </DropdownItem>
                     <DropdownItem
                       class="text-danger"
@@ -819,6 +867,81 @@
   </div>
   <div class="modal-footer">
     <button class="btn btn-sm" on:click={toggleForBookings}>Close</button>
+  </div>
+</Modal>
+
+<Modal isOpen={openForBusinessDetails}>
+  <div class="modal-header">
+    Add your business details
+    <button
+      class="btn btn-close"
+      on:click={() => (openForBusinessDetails = !openForBusinessDetails)}
+    />
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="mb-2">
+        <span>Is your Listing Individual owned or Business owned </span>
+        <span class="d-flex mt-3">
+          <Input
+            checked={businessData.isIndividual}
+            type="switch"
+            class="inline-block"
+            on:change={(e) => {
+              businessData.isIndividual = !businessData.isIndividual;
+              if (businessData.isIndividual) {
+                businessData.CompanyIdentificationNumber = "";
+                businessData.CompanyTaxFileNumber = "";
+              } else {
+                businessData.IndividualIdentificationNumber = "";
+                businessData.IndividualTaxFileNumber = "";
+              }
+            }}
+          />
+          <span>{businessData.isIndividual ? "Individual" : "Business"}</span>
+        </span>
+      </div>
+      {#if businessData.isIndividual}
+        <input
+          bind:value={businessData.IndividualIdentificationNumber}
+          class="form-control mb-2"
+          placeholder="Individual Identification Number"
+        />
+        <input
+          bind:value={businessData.IndividualTaxFileNumber}
+          class="form-control mb-2"
+          placeholder="Individual Tax File Number"
+        />
+      {:else}
+        <input
+          bind:value={businessData.CompanyIdentificationNumber}
+          class="form-control mb-2"
+          placeholder="Company Identification Number"
+        />
+        <input
+          bind:value={businessData.CompanyTaxFileNumber}
+          class="form-control mb-2"
+          placeholder="Company Tax File Number"
+        />
+      {/if}
+    </div>
+    <div class="modal-footer">
+      {#if businessData.isIndividual}
+        {#if businessData.IndividualIdentificationNumber !== "" && businessData.IndividualTaxFileNumber !== ""}
+          <button class="btn btn-light border" on:click={updateBusinessListing}>
+            Add Details
+          </button>
+        {:else}
+          <button class="btn btn-light border" disabled>Add Details</button>
+        {/if}
+      {:else if businessData.CompanyIdentificationNumber !== "" && businessData.CompanyIdentificationNumber !== ""}
+        <button class="btn btn-light border" on:click={updateBusinessListing}>
+          Add Details
+        </button>
+      {:else}
+        <button class="btn btn-light border" disabled>Add Details</button>
+      {/if}
+    </div>
   </div>
 </Modal>
 

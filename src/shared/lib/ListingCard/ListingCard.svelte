@@ -56,16 +56,16 @@
               {#if listing?.rating}
                 <span style="color:#9c59df;"><Icon name="star-fill" /></span>
                 <span>{listing?.rating}</span>
-                {#if listing?.numReviews}
-                  <span class="text-muted">({listing?.numReviews})</span>
+                {#if listing?.num_reviews}
+                  <span class="text-muted">({listing?.num_reviews})</span>
                 {/if}
               {:else}
                 <span class="bg-purple text-white p-1 px-2 rounded">New</span>
               {/if}
             </span>
             <span class="h4">
-              {#if listing?.minPrice}
-                <span>${listing?.minPrice}</span>
+              {#if listing?.min_price}
+                <span>${listing?.min_price}</span>
                 <span class="fw-normal h5">/ night</span>
               {/if}
             </span>
