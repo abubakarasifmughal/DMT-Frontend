@@ -36,7 +36,16 @@
     },
   ];
 
-  let allServices = ["Accomodation", "Experience"];
+  let allServices = [
+    {
+      icon: "bi-house-fill",
+      label: "Accomodation",
+    },
+    {
+      icon: "bi-people-fill",
+      label: "Experience",
+    },
+  ];
   let serviceSelected = "";
   function getFilteredLocations(array: any[], searchString: string) {
     return array.filter((a: any) =>
@@ -98,12 +107,11 @@
                 </DropdownToggle>
                 <DropdownMenu style="width: 100%;">
                   {#each allServices as service}
-                    <DropdownItem on:click={() => (serviceSelected = service)}>
-                      <i
-                        class="bi bi-bookmarks-fill
-                      main-color"
-                      />
-                      {service}</DropdownItem
+                    <DropdownItem
+                      on:click={() => (serviceSelected = service.label)}
+                    >
+                      <i class="{service.icon} main-color" />
+                      {service.label}</DropdownItem
                     >
                   {/each}
                 </DropdownMenu>
