@@ -20,12 +20,22 @@
     alt=""
   />
   <div class="mt-3">
+    {#if room.discountedEnable}
+      <div class="text-end">
+        <span class="bg-purple px-3 text-white px-1 rounded"
+          >Dicounted <span
+            style="text-decoration-line: line-through;text-decoration-thickness: 2px;"
+            >{room.Cost}</span
+          ></span
+        >
+      </div>
+    {/if}
     <h3>{room.RoomCategory}</h3>
     <div>{room.RoomDescription}</div>
   </div>
   <hr />
   <button class="btn btn-light border" on:click={onClickAddtoCart}>
-    Reserve for {room.Cost}
+    Reserve for {room.discountedEnable ? room.DiscountedPrice : room.Cost}
     {currency} /night
   </button>
 </div>

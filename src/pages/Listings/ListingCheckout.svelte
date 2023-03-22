@@ -308,7 +308,15 @@
                       onClickAddtoCart={() => {
                         selectedRoom = [
                           ...selectedRoom,
-                          { qty: 1, room: room },
+                          {
+                            qty: 1,
+                            room: {
+                              ...room,
+                              Cost: room.discountedEnable
+                                ? room.DiscountedPrice
+                                : room.Cost,
+                            },
+                          },
                         ];
                       }}
                     />
@@ -377,6 +385,23 @@
                     </button>
                   {/if}
                 </div>
+              </div>
+            </div>
+            <div>
+              <br />
+              <br />
+              <h2>Write a Review</h2>
+              <br />
+              <textarea
+                type="text"
+                class="form-control"
+                rows="6"
+                placeholder="Write a review"
+              />
+              <div class="text-end mt-3">
+                <button disabled class="btn px-3" on:click={() => {}}
+                  >Write Review</button
+                >
               </div>
             </div>
           </div>

@@ -715,8 +715,29 @@
           />
         </div>
       </div>
+      <div class="mt-1 mb-2 ">
+        <span class="d-flex"
+          ><Input
+            type="switch"
+            checked={room.discountedEnable}
+            on:change={() => (room.discountedEnable = !room.discountedEnable)}
+            class="me-1"
+          /> Enable Discount
+        </span>
+      </div>
+      <div class="mt-1 mb-2 ">
+        <span class="d-flex"
+          ><Input
+            type="switch"
+            checked={room.Visible}
+            on:change={() => (room.Visible = !room.Visible)}
+            class="me-1"
+          /> Visible
+        </span>
+      </div>
       <div class="row">
         <div class="col-md-4">
+          <span class="text-sm">No. of Rooms</span>
           <input
             type="number"
             placeholder="Quantity"
@@ -725,6 +746,7 @@
           />
         </div>
         <div class="col-md-4">
+          <span class="text-sm">Cost/night</span>
           <input
             type="number"
             placeholder="Cost"
@@ -733,17 +755,46 @@
           />
         </div>
         <div class="col-md-4">
-          <div class="d-flex align-items-center" style="height: 90%;">
-            <input
-              id="{room.RoomCategory}_visible"
-              type="checkbox"
-              class="me-2"
-              bind:checked={room.Visible}
-            />
-            <label for="{room.RoomCategory}_visible"> Visible </label>
-          </div>
+          <span class="text-sm">Discounted Price</span>
+          <input
+            type="number"
+            placeholder="Discounted Price"
+            class="form-control mb-2"
+            bind:value={room.DiscountedPrice}
+          />
+        </div>
+        <div class="col-md-4">
+          <span class="text-sm">Occupancy</span>
+          <input
+            type="number"
+            placeholder="Max Occupancy"
+            class="form-control mb-2"
+            bind:value={room.MaxOccupancy}
+          />
+        </div>
+        <hr />
+        <div class="col-md-12">
+          <span class="text-sm">Breakfast Price</span>
+          <input
+            type="number"
+            placeholder="Breakfast Price"
+            class="form-control mb-2"
+            bind:value={room.BreakfastPrice}
+          />
+        </div>
+        <div class="col-md-12">
+          <span class="text-sm">Transfer Of Service Charges</span>
+          <input
+            type="number"
+            placeholder="Breakfast Price"
+            class="form-control mb-2"
+            bind:value={room.BreakfastPrice}
+          />
         </div>
       </div>
+      <br />
+      <h3>Photos</h3>
+      <hr />
       <div class="row">
         <div class="col-md-12">
           {#each room?.Images as image, i}
