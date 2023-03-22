@@ -16,8 +16,9 @@
               <img
                 src={`${config.SERVER_IP}${config.SERVER_PORT}${listing.listingImages[0]?.address}`}
                 alt=""
-                style="object-fit: cover;object-position: center;height: 230pt;"
+                style="object-fit: cover;object-position: center;"
                 width="100%"
+                height="280pt"
               />
             {/if}
           {/if}
@@ -35,15 +36,6 @@
               <i class="bi bi-geo-alt-fill main-color" />
               <span style="text-transform: capitalize;">{listing.address}</span>
             </span>
-            <!-- <div style="font-size: 17.5px;" class="fw-bold">
-              {listing.headline.length > 40
-                ? listing.headline.substring(0, 40) + "..."
-                : listing.headline}
-            </div> -->
-            <!-- <div class="fw-bold" style="font-size: 14px; color: #172b4d">
-              <i class="bi bi-geo-alt-fill main-color" />
-              <span>{listing.address}</span>
-            </div> -->
             <div class="mt-2">
               <span
                 class="text-secondary"
@@ -61,13 +53,21 @@
 
           <div class="text-secondary1 justify-content-between d-flex pe-2">
             <span style="font-size: 15px;">
-              <span style="color:#9c59df;"><Icon name="star-fill" /></span>
-              <span>4.9</span>
-              <span class="text-muted">(120)</span>
+              {#if listing?.rating}
+                <span style="color:#9c59df;"><Icon name="star-fill" /></span>
+                <span>{listing?.rating}</span>
+                {#if listing?.numReviews}
+                  <span class="text-muted">({listing?.numReviews})</span>
+                {/if}
+              {:else}
+                <span class="bg-purple text-white p-1 px-2 rounded">New</span>
+              {/if}
             </span>
             <span class="h4">
-              <span>$181</span>
-              <span class="fw-normal h5">/ night</span>
+              {#if listing?.minPrice}
+                <span>${listing?.minPrice}</span>
+                <span class="fw-normal h5">/ night</span>
+              {/if}
             </span>
           </div>
         </div>
