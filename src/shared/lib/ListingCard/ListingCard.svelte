@@ -23,17 +23,27 @@
           {/if}
         </div>
         <div
-          class="col-md-6 px-4 py-3 d-flex flex-column justify-content-between"
+          class="col-md-6 px-5 py-4 d-flex flex-column justify-content-between"
         >
-          <div>
-            <div style="font-size: 17.5px;color:#9427F7">
+          <div class="col-md-12" style="color: #434859;">
+            <h3 class="fw-bolder" style="text-transform: capitalize;">
               {listing.headline.length > 40
                 ? listing.headline.substring(0, 40) + "..."
                 : listing.headline}
-            </div>
-            <div class="fw-bold" style="font-size: 14px; color: #172b4d">
-              {listing.address}
-            </div>
+            </h3>
+            <span>
+              <i class="bi bi-geo-alt-fill main-color" />
+              <span style="text-transform: capitalize;">{listing.address}</span>
+            </span>
+            <!-- <div style="font-size: 17.5px;" class="fw-bold">
+              {listing.headline.length > 40
+                ? listing.headline.substring(0, 40) + "..."
+                : listing.headline}
+            </div> -->
+            <!-- <div class="fw-bold" style="font-size: 14px; color: #172b4d">
+              <i class="bi bi-geo-alt-fill main-color" />
+              <span>{listing.address}</span>
+            </div> -->
             <div class="mt-2">
               <span
                 class="text-secondary"

@@ -55,7 +55,7 @@
     map = new L.Map('map', MAP_OPTIONS).setView([27.717245, 85.323959], 11);
  -->
 {#if !loading}
-  <div style="height: 100vh;width: 100%;overflow-x: hidden;">
+  <div style="height: 100vh;width: 100%;overflow-x: hidden;overflow-y: hidden;">
     <div class="bg-white">
       <div class="container">
         <Navbar color={"text-dark"} btnTheme={""} />
@@ -63,7 +63,7 @@
       <Finder levitating={false} />
     </div>
     <div class="row" style="border-top: 1px solid gainsboro;">
-      <div class="col-lg-7 p-4" style="overflow: scroll;height: 80vh;">
+      <div class="col-lg-7 p-4" style="overflow-y: scroll;height: 100vh;">
         {#if listings.length === 0}
           <div>
             <h3>No Results</h3>
@@ -77,6 +77,7 @@
           {#each listings as listing}
             <ListingCard {listing} />
           {/each}
+          <div style="height:50vh" />
         {/if}
       </div>
       <div class="col-lg-5 sticky" style="position: relative;">

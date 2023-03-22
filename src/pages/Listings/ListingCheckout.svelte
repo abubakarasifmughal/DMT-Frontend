@@ -1,3 +1,4 @@
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <script>
   // @ts-nocheck
   import { onMount } from "svelte";
@@ -153,7 +154,248 @@
       })
       .catch((error) => error);
   };
+
+  let expandedImageUrl = "";
 </script>
+
+<div style="height: 100vh;width: 100%;overflow-x: hidden;">
+  {#if expandedImageUrl === ""}
+    {#if !loading}
+      <div class="bg-white">
+        <div class="container">
+          <Navbar color={"text-dark"} btnTheme={""} />
+        </div>
+
+        <Finder levitating={false} isPopupOpen={isCheckoutPopup} />
+
+        <div class="container mt-5">
+          <div class="row">
+            <div class="col-md-7" style="color: #434859;">
+              <h3 class="fw-bolder" style="text-transform: capitalize;">
+                {listing.headline}
+              </h3>
+              <span>
+                <i class="bi bi-geo-alt-fill main-color" />
+                <span style="text-transform: capitalize;"
+                  >{listing.address}</span
+                >
+              </span>
+            </div>
+            <div class="col-md-5 text-sm-end text-center mt-4">
+              <button class="bg-transparent main-color btn btn-sm px-4 me-3"
+                >Share</button
+              >
+              <button class="bg-transparent main-color btn btn-sm px-4"
+                >Save</button
+              >
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="">
+          <div
+            style="width: 100%;overflow-x:hidden"
+            class="container-fluid ps-lg-1 pe-lg-1"
+          >
+            <div class="row">
+              <div class="col-xl-6 mb-sm-4 mb-4" style="height: 460pt;">
+                <div
+                  on:click={() =>
+                    (expandedImageUrl = listing.listingImages[0]?.address)}
+                  class="imageSpanned"
+                  style="background-image: url({listing.listingImages?.length >
+                  0
+                    ? config.SERVER_IP +
+                      config.SERVER_PORT +
+                      listing.listingImages[0]?.address
+                    : ''});background-color:whitesmoke;"
+                />
+              </div>
+              <div class="col-xl-6">
+                <div class="row">
+                  <div
+                    class="col-sm-6"
+                    style="height: 220pt;margin-bottom: 5pt;"
+                  >
+                    <div
+                      on:click={() =>
+                        (expandedImageUrl = listing.listingImages[1]?.address)}
+                      class="imageSpanned"
+                      style="background-image: url({listing.listingImages
+                        ?.length > 1
+                        ? config.SERVER_IP +
+                          config.SERVER_PORT +
+                          listing.listingImages[1]?.address
+                        : ''});background-color:whitesmoke;"
+                    />
+                  </div>
+                  <div
+                    class="col-sm-6"
+                    style="height: 220pt;margin-bottom: 20pt;"
+                  >
+                    <div
+                      on:click={() =>
+                        (expandedImageUrl = listing.listingImages[2]?.address)}
+                      class="imageSpanned"
+                      style="background-image: url({listing.listingImages
+                        ?.length > 2
+                        ? config.SERVER_IP +
+                          config.SERVER_PORT +
+                          listing.listingImages[2]?.address
+                        : ''});background-color:whitesmoke;"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div
+                    class="col-sm-6"
+                    style="height: 220pt;margin-bottom: 10pt;"
+                  >
+                    <div
+                      on:click={() =>
+                        (expandedImageUrl = listing.listingImages[3]?.address)}
+                      class="imageSpanned "
+                      style="background-image: url({listing.listingImages
+                        ?.length > 3
+                        ? config.SERVER_IP +
+                          config.SERVER_PORT +
+                          listing.listingImages[3]?.address
+                        : ''});background-color:whitesmoke;"
+                    />
+                  </div>
+                  <div
+                    class="col-sm-6"
+                    style="height: 220pt;margin-bottom: 10pt;"
+                  >
+                    <div
+                      on:click={() =>
+                        (expandedImageUrl = listing.listingImages[4]?.address)}
+                      class="imageSpanned "
+                      style="background-image: url({listing.listingImages
+                        ?.length > 4
+                        ? config.SERVER_IP +
+                          config.SERVER_PORT +
+                          listing.listingImages[4]?.address
+                        : ''});background-color:whitesmoke;"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="container">
+          <div class="row">
+            <div class="col-md-7 p-4">
+              <hr />
+              <h2>Hotel Description</h2>
+              <div style="font-size: large;">{listing.description}</div>
+              <hr />
+              <br />
+              <h3>
+                {listing?.rooms?.length === 0
+                  ? "No Rooms available"
+                  : "Choose your room"}
+              </h3>
+
+              <div class="row mt-5">
+                {#each listing?.rooms ?? [] as room}
+                  <div class="col-lg-6 mb-3">
+                    <RoomCard
+                      {room}
+                      currency={listing.currency}
+                      onClickAddtoCart={() => {
+                        selectedRoom = [
+                          ...selectedRoom,
+                          { qty: 1, room: room },
+                        ];
+                      }}
+                    />
+                  </div>
+                {/each}
+              </div>
+            </div>
+            <div class="col-md-5 p-5">
+              <div class="sticky-top pt-5">
+                <div class="card shadow p-3 ">
+                  <h3>Selected Rooms</h3>
+                  <hr />
+                  {#if selectedRoom.length === 0}
+                    No Rooms selected
+                  {/if}
+                  {#each selectedRoom as room, index}
+                    <div class="row">
+                      <div class="col-9">
+                        <div
+                          class="d-flex align-items-start justify-content-start"
+                        >
+                          <button
+                            class="btn-close me-2"
+                            on:click={() => {
+                              selectedRoom.splice(index, 1);
+                              selectedRoom = selectedRoom;
+                            }}
+                          />
+                          <div>
+                            <div style="margin: 0pt;">
+                              <b>{room.room.RoomCategory}</b>
+                            </div>
+                            <span style="font-size: small;margin: 0pt;">
+                              {room.room.RoomDescription.length > 50
+                                ? room.room.RoomDescription.substring(0, 50) +
+                                  "..."
+                                : room.room.RoomDescription}
+                            </span>
+                            <div
+                              style="font-size: small;margin: 0pt;margin-top: 5pt;"
+                            >
+                              <div>{room.room.Cost} {listing.currency}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <input
+                          type="number"
+                          class="form-control"
+                          bind:value={room.qty}
+                          min="1"
+                          max={room.room.Quantity}
+                        />
+                      </div>
+                    </div>
+                  {/each}
+                  <hr />
+                  <div class="d-flex justify-content-between mb-2">
+                    <div><b>{"Total"}</b></div>
+                    <div>{totalCartPrice} {listing.currency}</div>
+                  </div>
+                  {#if totalCartPrice !== 0}
+                    <button class="btn btn-light border" on:click={checkout}>
+                      Book Now
+                    </button>
+                  {/if}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="height: 40vh;" />
+      </div>
+    {:else}
+      <div class="p-5">
+        <div
+          class="d-flex align-items-center justify-content-center flex-column"
+          style="height: 80vh;overflow: hidden;"
+        >
+          <div class="spinner-border text-secondary" />
+          <div class="h4 mt-4">Loading, Please wait...</div>
+        </div>
+      </div>
+    {/if}
+  {/if}
+</div>
 
 <Modal isOpen={ERROR}>
   <div class="modal-header">
@@ -395,224 +637,24 @@
   </div>
 </Modal>
 
-<div style="height: 100vh;width: 100%;overflow-x: hidden;">
-  {#if !loading}
-    <div class="bg-white">
-      <div class="container">
-        <Navbar color={"text-dark"} btnTheme={""} />
-      </div>
-      <Finder levitating={false} isPopupOpen={isCheckoutPopup} />
-      <div class="container mt-5">
-        <div class="row">
-          <div class="col-md-7" style="color: #434859;">
-            <h3 class="fw-bolder" style="text-transform: capitalize;">
-              {listing.headline}
-            </h3>
-            <span>
-              <i class="bi bi-geo-alt-fill main-color" />
-              <span style="text-transform: capitalize;">{listing.address}</span>
-            </span>
-          </div>
-          <div class="col-md-5 text-sm-end text-center mt-4">
-            <button class="bg-transparent main-color btn btn-sm px-4 me-3"
-              >Share</button
-            >
-            <button class="bg-transparent main-color btn btn-sm px-4"
-              >Save</button
-            >
-          </div>
-        </div>
-      </div>
-      <br />
-      <div class="ps-lg-5 pe-lg-5">
-        <div
-          style="width: 100%;overflow-y:hidden"
-          class="container-fluid ps-lg-5 pe-lg-5"
-        >
-          <div class="row">
-            <div class="col-xl-6 mb-sm-4 mb-4" style="height: 460pt;">
-              <div
-                class="imageSpanned"
-                style="background-image: url({listing.listingImages?.length > 0
-                  ? config.SERVER_IP +
-                    config.SERVER_PORT +
-                    listing.listingImages[0]?.address
-                  : ''});background-color:whitesmoke;"
-              />
-            </div>
-            <div class="col-xl-6">
-              <div class="row">
-                <div
-                  class="col-sm-6"
-                  style="height: 220pt;margin-bottom: 10pt;"
-                >
-                  <div
-                    class="imageSpanned"
-                    style="background-image: url({listing.listingImages
-                      ?.length > 1
-                      ? config.SERVER_IP +
-                        config.SERVER_PORT +
-                        listing.listingImages[1]?.address
-                      : ''});background-color:whitesmoke;"
-                  />
-                </div>
-                <div
-                  class="col-sm-6"
-                  style="height: 220pt;margin-bottom: 20pt;"
-                >
-                  <div
-                    class="imageSpanned"
-                    style="background-image: url({listing.listingImages
-                      ?.length > 2
-                      ? config.SERVER_IP +
-                        config.SERVER_PORT +
-                        listing.listingImages[2]?.address
-                      : ''});background-color:whitesmoke;"
-                  />
-                </div>
-              </div>
-              <div class="row">
-                <div
-                  class="col-sm-6"
-                  style="height: 220pt;margin-bottom: 10pt;"
-                >
-                  <div
-                    class="imageSpanned "
-                    style="background-image: url({listing.listingImages
-                      ?.length > 3
-                      ? config.SERVER_IP +
-                        config.SERVER_PORT +
-                        listing.listingImages[3]?.address
-                      : ''});background-color:whitesmoke;"
-                  />
-                </div>
-                <div
-                  class="col-sm-6"
-                  style="height: 220pt;margin-bottom: 10pt;"
-                >
-                  <div
-                    class="imageSpanned "
-                    style="background-image: url({listing.listingImages
-                      ?.length > 4
-                      ? config.SERVER_IP +
-                        config.SERVER_PORT +
-                        listing.listingImages[4]?.address
-                      : ''});background-color:whitesmoke;"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br />
-      <div class="container">
-        <div class="row">
-          <div class="col-md-7 p-4">
-            <hr />
-            <h2>Hotel Description</h2>
-            <div style="font-size: large;">{listing.description}</div>
-            <hr />
-            <br />
-            <h3>
-              {listing?.rooms?.length === 0
-                ? "No Rooms available"
-                : "Choose your room"}
-            </h3>
-
-            <div class="row mt-5">
-              {#each listing?.rooms ?? [] as room}
-                <div class="col-lg-6 mb-3">
-                  <RoomCard
-                    {room}
-                    currency={listing.currency}
-                    onClickAddtoCart={() => {
-                      selectedRoom = [...selectedRoom, { qty: 1, room: room }];
-                    }}
-                  />
-                </div>
-              {/each}
-            </div>
-          </div>
-          <div class="col-md-5 p-5">
-            <div class="sticky-top pt-5">
-              <div class="card shadow p-3 ">
-                <h3>Selected Rooms</h3>
-                <hr />
-                {#if selectedRoom.length === 0}
-                  No Rooms selected
-                {/if}
-                {#each selectedRoom as room, index}
-                  <div class="row">
-                    <div class="col-9">
-                      <div
-                        class="d-flex align-items-start justify-content-start"
-                      >
-                        <button
-                          class="btn-close me-2"
-                          on:click={() => {
-                            selectedRoom.splice(index, 1);
-                            selectedRoom = selectedRoom;
-                          }}
-                        />
-                        <div>
-                          <div style="margin: 0pt;">
-                            <b>{room.room.RoomCategory}</b>
-                          </div>
-                          <span style="font-size: small;margin: 0pt;">
-                            {room.room.RoomDescription.length > 50
-                              ? room.room.RoomDescription.substring(0, 50) +
-                                "..."
-                              : room.room.RoomDescription}
-                          </span>
-                          <div
-                            style="font-size: small;margin: 0pt;margin-top: 5pt;"
-                          >
-                            <div>{room.room.Cost} {listing.currency}</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-3">
-                      <input
-                        type="number"
-                        class="form-control"
-                        bind:value={room.qty}
-                        min="1"
-                        max={room.room.Quantity}
-                      />
-                    </div>
-                  </div>
-                {/each}
-                <hr />
-                <div class="d-flex justify-content-between mb-2">
-                  <div><b>{"Total"}</b></div>
-                  <div>{totalCartPrice} {listing.currency}</div>
-                </div>
-                {#if totalCartPrice !== 0}
-                  <button class="btn btn-light border" on:click={checkout}>
-                    Book Now
-                  </button>
-                {/if}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style="height: 40vh;" />
-    </div>
-  {:else}
-    <div class="p-5">
-      <div
-        class="d-flex align-items-center justify-content-center flex-column"
-        style="height: 80vh;overflow: hidden;"
-      >
-        <div class="spinner-border text-secondary" />
-        <div class="h4 mt-4">Loading, Please wait...</div>
-      </div>
-    </div>
-  {/if}
-</div>
+<Modal
+  size="xl"
+  centered
+  isOpen={expandedImageUrl !== ""}
+  style="position:absolute;z-index: 3000;"
+>
+  <div class="modal-header">
+    {expandedImageUrl}
+    <button class="btn btn-close" on:click={() => (expandedImageUrl = "")} />
+  </div>
+  <div class="modal-body overflow-hidden">
+    <img
+      src={config.SERVER_IP + config.SERVER_PORT + expandedImageUrl}
+      alt=""
+      style="width: 100%;object-fit:contain"
+    />
+  </div>
+</Modal>
 
 <style>
   .imageSpanned {
