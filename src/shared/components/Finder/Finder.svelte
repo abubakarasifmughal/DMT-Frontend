@@ -42,8 +42,12 @@
       label: "Accomodation",
     },
     {
+      icon: "bi-person-video",
+      label: "Online Experience",
+    },
+    {
       icon: "bi-people-fill",
-      label: "Experience",
+      label: "Onsite Experience",
     },
   ];
   let serviceSelected = "";
