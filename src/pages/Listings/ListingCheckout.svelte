@@ -317,6 +317,11 @@
                   </div>
                 {/each}
               </div>
+              <div>
+                <br />
+                <br />
+                <Review user_id={userid} listing={listing}/>
+              </div>
             </div>
             <div class="col-md-5 p-5">
               <div class="sticky-top pt-5">
@@ -380,11 +385,7 @@
                   {/if}
                 </div>
               </div>
-            </div>
-            <div>
-              <br />
-              <br />
-              <Review user_id={userid} listing={listing}/>
+              
             </div>
           </div>
         </div>
