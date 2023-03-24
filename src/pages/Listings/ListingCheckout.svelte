@@ -9,6 +9,7 @@
   import config from "../../../environment.json";
   import { Icon, Modal } from "sveltestrap";
   import { DateInput } from "date-picker-svelte";
+  import Review from "../../shared/Forms/Review.svelte";
   export let location;
   export let id;
   id;
@@ -181,8 +182,7 @@
                 >
               </span>
             </div>
-            <div class="col-md-5 text-sm-end text-center mt-4">
-            </div>
+            <div class="col-md-5 text-sm-end text-center mt-4" />
           </div>
         </div>
         <br />
@@ -384,19 +384,7 @@
             <div>
               <br />
               <br />
-              <h2>Write a Review</h2>
-              <br />
-              <textarea
-                type="text"
-                class="form-control"
-                rows="6"
-                placeholder="Write a review"
-              />
-              <div class="text-end mt-3">
-                <button disabled class="btn px-3" on:click={() => {}}
-                  >Write Review</button
-                >
-              </div>
+              <Review user_id={userid} listing={listing}/>
             </div>
           </div>
         </div>
