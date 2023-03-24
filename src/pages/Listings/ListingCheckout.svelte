@@ -182,12 +182,6 @@
               </span>
             </div>
             <div class="col-md-5 text-sm-end text-center mt-4">
-              <button class="bg-transparent main-color btn btn-sm px-4 me-3"
-                >Share</button
-              >
-              <button class="bg-transparent main-color btn btn-sm px-4"
-                >Save</button
-              >
             </div>
           </div>
         </div>

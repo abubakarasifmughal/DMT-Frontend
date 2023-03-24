@@ -169,7 +169,7 @@
         to="/login"
         style="text-decoration:none;color:inherit;"
       >
-        <button class="btn ps-5 pe-5 col-12"> Login Now</button>
+        <button class="btn ps-5 pe-5 col-12">Login Now</button>
       </Link>
     {/if}
   </ModalFooter>
@@ -179,7 +179,7 @@
   <Navbar color="text-black" btnTheme={""} />
   <div
     class="d-flex align-items-center justify-content-center"
-    style="min-height: 100vh;"
+    style="min-height: 89vh;"
   >
     <div class="container shadow p-5" style="background-color: #F9F8FC;">
       <div class="row">

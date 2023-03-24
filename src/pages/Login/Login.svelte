@@ -78,14 +78,14 @@
 <Modal body header="Invalid credentials" {isOpen} {toggle}>
   Sorry, you've entered incorrect email or password, You can try again.
 </Modal>
-<div class="fixed-top">
+<div>
   <Navbar color="text-black" btnTheme={""} />
 </div>
 {#if !forgotPassword}
   {#if !loggingIn}
     <div
       class="d-flex align-items-center justify-content-center"
-      style="min-height: 99vh;"
+      style="min-height: 89vh;"
     >
       <div class="container shadow " style="background-color: #F9F8FC;">
         <div class="row">

@@ -32,7 +32,7 @@
       label: "Pokhara",
     },
     {
-      label: "Baharatpur",
+      label: "Bharatpur",
     },
   ];
 

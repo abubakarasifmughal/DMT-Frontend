@@ -17,109 +17,109 @@
   };
 
   let AllAmeneties = [
-    {
-      label: "Property",
-      description: `Add room packages and information about each room.`,
-      options: [
-        {
-          label: "Smoking Area",
-          checked: false,
-          id: 1,
-        },
-        {
-          label: "Shops",
-          checked: false,
-          id: 2,
-        },
-        {
-          label: "Wedding Facilities",
-          checked: false,
-          id: 3,
-        },
-        {
-          label: "Library",
-          checked: false,
-          id: 4,
-        },
-        {
-          label: "Gym",
-          checked: false,
-          id: 5,
-        },
-        {
-          label: "Spa",
-          checked: false,
-          id: 6,
-        },
-        {
-          label: "Sauna",
-          checked: false,
-          id: 7,
-        },
-        {
-          label: "Massage",
-          checked: false,
-          id: 8,
-        },
-        {
-          label: "Poolside bar",
-          checked: false,
-          id: 9,
-        },
-      ],
-    },
-    {
-      label: "Facilities",
-      description: `Add room packages and information about each room.`,
-      options: [
-        {
-          label: "Executive floot",
-          checked: false,
-          id: 10,
-        },
-        {
-          label: "Business center",
-          checked: false,
-          id: 11,
-        },
-        {
-          label: "Meetings Facilities",
-          checked: false,
-          id: 12,
-        },
-        {
-          label: "Executive Lounge",
-          checked: false,
-          id: 13,
-        },
-      ],
-    },
-    {
-      label: "Food and Drinks",
-      description: `Add room packages and information about each room.`,
-      options: [
-        {
-          label: "Cafe",
-          checked: false,
-          id: 14,
-        },
-        {
-          label: "Restaurant",
-          checked: false,
-          id: 15,
-        },
-        {
-          label: "Bar",
-          checked: false,
-          id: 16,
-        },
-        {
-          label: "Room Service",
-          checked: false,
-          id: 17,
-        },
-      ],
-    },
+    // {
+    //   label: "Property",
+    //   description: `Add room packages and information about each room.`,
+    //   options: [
+    //     {
+    //       label: "Smoking Area",
+    //       checked: false,
+    //       id: 1,
+    //     },
+    //     {
+    //       label: "Shops",
+    //       checked: false,
+    //       id: 2,
+    //     },
+    //     {
+    //       label: "Wedding Facilities",
+    //       checked: false,
+    //       id: 3,
+    //     },
+    //     {
+    //       label: "Library",
+    //       checked: false,
+    //       id: 4,
+    //     },
+    //     {
+    //       label: "Gym",
+    //       checked: false,
+    //       id: 5,
+    //     },
+    //     {
+    //       label: "Spa",
+    //       checked: false,
+    //       id: 6,
+    //     },
+    //     {
+    //       label: "Sauna",
+    //       checked: false,
+    //       id: 7,
+    //     },
+    //     {
+    //       label: "Massage",
+    //       checked: false,
+    //       id: 8,
+    //     },
+    //     {
+    //       label: "Poolside bar",
+    //       checked: false,
+    //       id: 9,
+    //     },
+    //   ],
+    // },
+    // {
+    //   label: "Facilities",
+    //   description: `Add room packages and information about each room.`,
+    //   options: [
+    //     {
+    //       label: "Executive floot",
+    //       checked: false,
+    //       id: 10,
+    //     },
+    //     {
+    //       label: "Business center",
+    //       checked: false,
+    //       id: 11,
+    //     },
+    //     {
+    //       label: "Meetings Facilities",
+    //       checked: false,
+    //       id: 12,
+    //     },
+    //     {
+    //       label: "Executive Lounge",
+    //       checked: false,
+    //       id: 13,
+    //     },
+    //   ],
+    // },
+    // {
+    //   label: "Food and Drinks",
+    //   description: `Add room packages and information about each room.`,
+    //   options: [
+    //     {
+    //       label: "Cafe",
+    //       checked: false,
+    //       id: 14,
+    //     },
+    //     {
+    //       label: "Restaurant",
+    //       checked: false,
+    //       id: 15,
+    //     },
+    //     {
+    //       label: "Bar",
+    //       checked: false,
+    //       id: 16,
+    //     },
+    //     {
+    //       label: "Room Service",
+    //       checked: false,
+    //       id: 17,
+    //     },
+    //   ],
+    // },
     {
       label: "Room Ameneties",
       description: `Add room packages and information about each room.`,

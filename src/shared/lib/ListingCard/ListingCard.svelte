@@ -75,3 +75,9 @@
     </div>
   </Link>
 {/if}
+
+<style>
+  .main-color {
+    color: #9427f7
+  }
+</style>
