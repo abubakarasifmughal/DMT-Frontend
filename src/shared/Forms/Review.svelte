@@ -61,7 +61,7 @@
     };
 
     let response = await fetch(
-      `${config.SERVER_IP}${config.SERVER_PORT}/reviews/3/${listing?.id}`,
+      `${config.SERVER_IP}${config.SERVER_PORT}/reviews/6/${listing?.id}`,
       {
         method: "GET",
         headers: headersList,
@@ -133,8 +133,8 @@
 <div>
   <div class="row">
     {#each AllReviews as reviewItem}
-      <div class="col-md-6">
-        <div class="border col-12 p-2 rounded h-100">
+      <div class="col-md-6 mb-4 ">
+        <div class="border col-12 p-2 rounded h-100 shadow-sm">
           <div class="d-flex py-2 h-100">
             <div class="h-100 ">
               <div
