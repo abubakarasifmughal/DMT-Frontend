@@ -308,7 +308,14 @@
 
 <div class="container-fluid mt-4">
   <div class="d-flex justify-content-between">
-    <h3>{filteredByString(searchString, listingData)?.length} Listings</h3>
+    <h3>
+      {filteredByString(searchString, listingData)?.length} Listing{filteredByString(
+        searchString,
+        listingData
+      )?.length === 1
+        ? ""
+        : "s"}
+    </h3>
     <button class="btn me-4" on:click={onClickCreate}>Create Listing</button>
   </div>
   <div class="col-md-3 mt-3">
@@ -386,8 +393,14 @@
                     </DropdownItem>
                     <DropdownItem
                       class="text-danger"
-                      on:click={() => deleteListing(listing)}
-                      >Delete</DropdownItem
+                      on:click={() => {
+                        if (confirm("Are you sure you want to delete")) {
+                          alert("Listing will be deleted");
+                          deleteListing(listing);
+                        } else {
+                          alert("Listing will not be deleted");
+                        }
+                      }}>Delete</DropdownItem
                     >
                   </DropdownMenu>
                 </Dropdown>

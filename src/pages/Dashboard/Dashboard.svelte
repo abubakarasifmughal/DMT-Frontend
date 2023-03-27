@@ -3,7 +3,11 @@
   import { Link } from "svelte-routing";
   import { globalHistory } from "svelte-routing/src/history";
   import Navbar2 from "../../shared/components/Navbar2/Navbar2.svelte";
+  import Amenities from "../../shared/Forms/Amenities.svelte";
+  import AmenitiesManager from "./pages/AmenitiesManager.svelte";
+  import FeaturedAds from "./pages/FeaturedAds.svelte";
   import ListingsSubPage from "./pages/ListingsSubPage.svelte";
+  import ReservationsManager from "./pages/ReservationsManager.svelte";
   export let subpage;
   subpage;
   export let location;
@@ -17,6 +21,41 @@
       pathname = location.pathname.split("/").reverse()[0];
     });
   });
+
+  let amenities = [
+    {
+      label: "Title",
+      description: `Description`,
+      options: [
+        {
+          label: "24 Hour Reception",
+          checked: false,
+          id: 1,
+        },
+        {
+          label: "12 Hour Reception",
+          checked: false,
+          id: 1,
+        },
+      ],
+    },
+    {
+      label: "Title 2",
+      description: `Description 2`,
+      options: [
+        {
+          label: "22 Hour Reception",
+          checked: false,
+          id: 1,
+        },
+        {
+          label: "24 Hour Reception",
+          checked: false,
+          id: 1,
+        },
+      ],
+    },
+  ];
 </script>
 
 <div style="overflow-x: hidden;width: 100vw;">
@@ -43,6 +82,16 @@
           Reservations
         </div>
       </Link>
+      <Link to="/dashboard/featured" style="text-decoration:none">
+        <div class="col-12 text-dark sideBarTabs p-3 border-bottom text-start">
+          Featured
+        </div>
+      </Link>
+      <Link to="/dashboard/amenities" style="text-decoration:none">
+        <div class="col-12 text-dark sideBarTabs p-3 border-bottom text-start">
+          Amenities
+        </div>
+      </Link>
     </div>
     <div
       class="col-md-10 bg-light border-start border-bottom"
@@ -60,7 +109,11 @@
       {:else if pathname === "listings"}
         <ListingsSubPage />
       {:else if pathname === "reservations"}
-        <h1>Work in Progress</h1>
+        <ReservationsManager />
+      {:else if pathname === "featured"}
+        <FeaturedAds />
+      {:else if pathname === "amenities"}
+        <AmenitiesManager {amenities} />
       {/if}
       <div style="height: 20vh;" />
     </div>

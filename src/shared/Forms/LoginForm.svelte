@@ -425,7 +425,10 @@
   </ModalFooter>
 </Modal>
 
-<Modal body header="Invalid credentials" {isOpen} {toggle}>
+<Modal body header="Invalid credentials" {isOpen} toggle={() => {
+  loggingIn = false;
+  toggle()
+}}>
   Sorry, you've entered incorrect email or password, You can try again.
 </Modal>
 

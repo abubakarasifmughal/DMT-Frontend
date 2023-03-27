@@ -47,9 +47,7 @@
       <Nav class="ms-auto" navbar>
         <NavItem>
           <NavLink>
-            <Button on:click={onSignup} class="bg-transparent {color} border-0"
-              >Help</Button
-            >
+
           </NavLink>
         </NavItem>
       </Nav>
@@ -58,17 +56,5 @@
 </Container>
 
 <style>
-  .btn {
-    border: 1px solid #9427f7;
-    background-color: #9427f7;
-    color: white;
-  }
-  .btn:nth-child(n):hover {
-    background-color: #6801c8;
-    color: white;
-  }
 
-  .form-control {
-    border-color: #9427f7;
-  }
 </style>
