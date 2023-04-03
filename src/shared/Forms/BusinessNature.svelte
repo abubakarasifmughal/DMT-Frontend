@@ -7,6 +7,7 @@
   export let onClickNext;
 
   export let isIndividual = true;
+  export let isOnsite = true;
   export let property = true;
 
   export let IndividualIdentificationNumber = "";
@@ -96,12 +97,6 @@
           <div class="mt-2" style="font-size: large;">
             <div class="mt-2" style="font-size: large;">
               <div class="d-flex align-items-center">
-                <!-- on:click={() => {
-                    property = true;
-                    event("isPropery", {
-                      isProperty: property,
-                    });
-                  }} -->
                 <input
                   bind:group={property}
                   checked
@@ -114,12 +109,6 @@
                 <label for="welcom_property_checkbox1">Accomodation</label>
               </div>
               <div class="d-flex align-items-center">
-                <!-- on:click={() => {
-                    property = false;
-                    event("isPropery", {
-                      isProperty: property,
-                    });
-                  }} -->
                 <input
                   bind:group={property}
                   name="property"
@@ -130,6 +119,38 @@
                 />
                 <label for="welcom_service_checkbox1">Experience</label>
               </div>
+              {#if property !== true}
+                <div class="ps-2">
+                  <div class="d-flex align-items-center">
+                    <input
+                      bind:group={isOnsite}
+                      name="isOnline"
+                      value={false}
+                      class="mt-3 mb-3 me-3"
+                      id="experience_online_radio"
+                      type="radio"
+                    />
+                    <label for="experience_online_radio">
+                      <span class="bi-person-video" style="color: #6801c8;" />
+                      Online</label
+                    >
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <input
+                      bind:group={isOnsite}
+                      name="isOnline"
+                      value={true}
+                      class="mt-3 mb-3 me-3"
+                      id="experience_onsite_radio"
+                      type="radio"
+                    />
+                    <label for="experience_onsite_radio">
+                      <span class="bi-people-fill" style="color: #6801c8;" />
+                      Onsite</label
+                    >
+                  </div>
+                </div>
+              {/if}
             </div>
           </div>
         </div>
@@ -142,6 +163,7 @@
             onClickNext({
               isIndividual: isIndividual,
               property: property,
+              isOnsite: isOnsite,
               IndividualIdentificationNumber: IndividualIdentificationNumber,
               IndividualTaxFileNumber: IndividualTaxFileNumber,
               CompanyIdentificationNumber: CompanyIdentificationNumber,

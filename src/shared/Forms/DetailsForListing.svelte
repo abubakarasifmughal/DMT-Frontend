@@ -10,6 +10,9 @@
   export let headline = "";
   export let description = "";
 
+  export let isListing = true;
+  export let isOnsite = true;
+
   let isOpen = false;
 
   const toggle = () => {
@@ -139,11 +142,17 @@
 </script>
 
 <div class="bg-white shadow p-5 col-md-11">
-  <h3>Enter Listings Name</h3>
+  {#if isListing === true}
+    <h3>Enter Listings Name</h3>
+  {:else}
+    <h3>What is your experience called</h3>
+  {/if}
   <span>
-    This shows up in searches and at the top of your listing. Try to write a
-    brief line that hints at the type of space and where it is. Example:
-    Romantic Spanish villa w/hot tub — 5 min from the beach!
+    This shows up in searches and at the top of your {isListing
+      ? "Listing"
+      : "Experience"}. Try to write a brief line that hints at the type of space
+    and where it is. Example: Romantic Spanish villa w/hot tub — 5 min from the
+    beach!
   </span>
   <hr />
   <br />
@@ -152,7 +161,7 @@
       <input
         type="text"
         class="form-control"
-        placeholder="Enter your Listing Name"
+        placeholder={`Enter your ${isListing ? "Listing" : "Experience"} Name`}
         bind:value={headline}
         on:change={(data) => {
           disp("headline", {
@@ -162,13 +171,17 @@
       />
     </div>
     <div class="col-md-6 mb-3">
-      <button class="btn btn-light border" on:click={toggle}>
-        {selectedAmeneties.length <= 0 ? "Add Facilities" : "Facilities Added"}
-      </button>
+      {#if isOnsite === true}
+        <button class="btn btn-light border" on:click={toggle}>
+          {selectedAmeneties.length <= 0
+            ? "Add Facilities"
+            : "Facilities Added"}
+        </button>
+      {/if}
     </div>
   </div>
   <hr />
-  <h4>Listing Hightlights</h4>
+  <h4>{isListing ? "Listing" : "Experience"} Hightlights</h4>
   <span>
     Tell guests more about your space in your own words. Try to help them
     imagine what a stay might be like at your property.
@@ -177,7 +190,9 @@
   <textarea
     class="form-control mt-3"
     rows="10"
-    placeholder="Enter your listing's highlights"
+    placeholder={`Enter your ${
+      isListing ? "listing's" : "experience's"
+    } highlights`}
     bind:value={description}
     on:change={(data) => {
       disp("description", {

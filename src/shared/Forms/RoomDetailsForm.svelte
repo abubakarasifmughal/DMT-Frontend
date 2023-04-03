@@ -8,6 +8,8 @@
   export let currency = "USD";
   export let index = 0;
   export let onClickRemove;
+  export let isProperty = true;
+  export let isOnsite = true;
 
   let isOpen = false;
   $: amenetiesLength = room.amenities.length;

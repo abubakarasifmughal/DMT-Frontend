@@ -304,6 +304,9 @@
   };
 
   loadData();
+
+  const isOnsite = (listing) => listing.isOnsite;
+  const isExperience = (listing) => !listing.isProperty;
 </script>
 
 <div class="container-fluid mt-4">
@@ -344,7 +347,16 @@
           {#each filteredByString(searchString, listingData) as listing}
             <tr>
               <td>
-                <i>{listing.headline}</i>
+                <i>
+                  {listing.headline}
+                  {#if isExperience(listing)}
+                    <sup
+                      class="text-white px-1 rounded"
+                      style="background-color: #9427f7;"
+                      >{isOnsite(listing) ? "Onsite" : "Online"}</sup
+                    >
+                  {/if}
+                </i>
               </td>
               <td>
                 <div>
@@ -364,12 +376,18 @@
                     <DropdownItem on:click={() => toggleForEdit(listing)}>
                       Edit
                     </DropdownItem>
-                    <DropdownItem on:click={() => toggleForAddNewRoom(listing)}>
-                      Add new
-                    </DropdownItem>
-                    <DropdownItem on:click={() => toggleForRoomsEdit(listing)}>
-                      Edit Rooms
-                    </DropdownItem>
+                    {#if listing.isOnsite === true || listing.isOnsite === null}
+                      <DropdownItem
+                        on:click={() => toggleForAddNewRoom(listing)}
+                      >
+                        Add new
+                      </DropdownItem>
+                      <DropdownItem
+                        on:click={() => toggleForRoomsEdit(listing)}
+                      >
+                        Edit Rooms
+                      </DropdownItem>
+                    {/if}
                     <DropdownItem on:click={() => toggleForBookings(listing)}>
                       Bookings
                     </DropdownItem>

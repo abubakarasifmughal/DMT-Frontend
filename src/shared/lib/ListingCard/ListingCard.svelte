@@ -31,11 +31,26 @@
               {listing.headline.length > 40
                 ? listing.headline.substring(0, 40) + "..."
                 : listing.headline}
+              {#if !listing.isProperty}
+                <sup
+                  style="font-size: small;font-weight: normal;background-color: #9427f7;"
+                  class="text-white px-2 rounded"
+                >
+                  <span
+                    class={listing.isOnsite
+                      ? "bi-house-fill"
+                      : "bi-person-video"}
+                  />
+                  {listing.isOnsite ? "Onsite" : "Online"}
+                </sup>
+              {/if}
             </h3>
+
             <span>
               <i class="bi bi-geo-alt-fill main-color" />
               <span style="text-transform: capitalize;">{listing.address}</span>
             </span>
+
             <div class="mt-2">
               <span
                 class="text-secondary"
@@ -78,6 +93,6 @@
 
 <style>
   .main-color {
-    color: #9427f7
+    color: #9427f7;
   }
 </style>

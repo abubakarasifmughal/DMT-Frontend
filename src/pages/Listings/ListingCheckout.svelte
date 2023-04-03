@@ -17,6 +17,9 @@
   let pathname;
   let unsub;
   let selectedRoom = [];
+
+  let numOfDevices = 1;
+
   $: listing = {};
 
   let loading = true;
@@ -197,8 +200,8 @@
                   on:click={() =>
                     (expandedImageUrl = listing.listingImages[0]?.address)}
                   class="imageSpanned"
-                  style="background-image: url({listing.listingImages?.length >
-                  0
+                  style="cursor: pointer;background-image: url({listing
+                    .listingImages?.length > 0
                     ? config.SERVER_IP +
                       config.SERVER_PORT +
                       listing.listingImages[0]?.address
@@ -215,8 +218,8 @@
                       on:click={() =>
                         (expandedImageUrl = listing.listingImages[1]?.address)}
                       class="imageSpanned"
-                      style="background-image: url({listing.listingImages
-                        ?.length > 1
+                      style="cursor: pointer;background-image: url({listing
+                        .listingImages?.length > 1
                         ? config.SERVER_IP +
                           config.SERVER_PORT +
                           listing.listingImages[1]?.address
@@ -231,8 +234,8 @@
                       on:click={() =>
                         (expandedImageUrl = listing.listingImages[2]?.address)}
                       class="imageSpanned"
-                      style="background-image: url({listing.listingImages
-                        ?.length > 2
+                      style="cursor: pointer;background-image: url({listing
+                        .listingImages?.length > 2
                         ? config.SERVER_IP +
                           config.SERVER_PORT +
                           listing.listingImages[2]?.address
@@ -249,8 +252,8 @@
                       on:click={() =>
                         (expandedImageUrl = listing.listingImages[3]?.address)}
                       class="imageSpanned "
-                      style="background-image: url({listing.listingImages
-                        ?.length > 3
+                      style="cursor: pointer;background-image: url({listing
+                        .listingImages?.length > 3
                         ? config.SERVER_IP +
                           config.SERVER_PORT +
                           listing.listingImages[3]?.address
@@ -265,8 +268,8 @@
                       on:click={() =>
                         (expandedImageUrl = listing.listingImages[4]?.address)}
                       class="imageSpanned "
-                      style="background-image: url({listing.listingImages
-                        ?.length > 4
+                      style="cursor: pointer;background-image: url({listing
+                        .listingImages?.length > 4
                         ? config.SERVER_IP +
                           config.SERVER_PORT +
                           listing.listingImages[4]?.address
@@ -287,105 +290,137 @@
               <div style="font-size: large;">{listing.description}</div>
               <hr />
               <br />
-              <h3>
-                {listing?.rooms?.length === 0
-                  ? "No Rooms available"
-                  : "Choose your room"}
-              </h3>
+              {#if listing.isOnsite}
+                <h3>
+                  {listing?.rooms?.length === 0
+                    ? "No Rooms available"
+                    : "Choose your room"}
+                </h3>
 
-              <div class="row mt-5">
-                {#each listing?.rooms ?? [] as room}
-                  <div class="col-lg-6 mb-3">
-                    <RoomCard
-                      {room}
-                      currency={listing.currency}
-                      onClickAddtoCart={() => {
-                        selectedRoom = [
-                          ...selectedRoom,
-                          {
-                            qty: 1,
-                            room: {
-                              ...room,
-                              Cost: room.discountedEnable
-                                ? room.DiscountedPrice
-                                : room.Cost,
+                <div class="row mt-5">
+                  {#each listing?.rooms ?? [] as room}
+                    <div class="col-lg-6 mb-3">
+                      <RoomCard
+                        {room}
+                        currency={listing.currency}
+                        onClickAddtoCart={() => {
+                          selectedRoom = [
+                            ...selectedRoom,
+                            {
+                              qty: 1,
+                              room: {
+                                ...room,
+                                Cost: room.discountedEnable
+                                  ? room.DiscountedPrice
+                                  : room.Cost,
+                              },
                             },
-                          },
-                        ];
-                      }}
-                    />
-                  </div>
-                {/each}
-              </div>
+                          ];
+                        }}
+                      />
+                    </div>
+                  {/each}
+                </div>
+              {:else}
+                <h2>Online Experience</h2>
+                <div>{listing.headline}</div>
+                <div>{listing.description}</div>
+                <hr />
+                <div>
+                  <i class="bi bi-geo-alt-fill main-color" />
+                  Happening at
+                </div>
+                <div>{listing.address}</div>
+              {/if}
+
               <div>
                 <br />
                 <br />
-                <Review user_id={userid} listing={listing}/>
+                <Review user_id={userid} {listing} />
               </div>
             </div>
             <div class="col-md-5 p-5">
               <div class="sticky-top pt-5">
                 <div class="card shadow p-3 ">
-                  <h3>Selected Rooms</h3>
-                  <hr />
-                  {#if selectedRoom.length === 0}
-                    No Rooms selected
-                  {/if}
-                  {#each selectedRoom as room, index}
-                    <div class="row">
-                      <div class="col-9">
-                        <div
-                          class="d-flex align-items-start justify-content-start"
-                        >
-                          <button
-                            class="btn-close me-2"
-                            on:click={() => {
-                              selectedRoom.splice(index, 1);
-                              selectedRoom = selectedRoom;
-                            }}
-                          />
-                          <div>
-                            <div style="margin: 0pt;">
-                              <b>{room.room.RoomCategory}</b>
-                            </div>
-                            <span style="font-size: small;margin: 0pt;">
-                              {room.room.RoomDescription.length > 50
-                                ? room.room.RoomDescription.substring(0, 50) +
-                                  "..."
-                                : room.room.RoomDescription}
-                            </span>
-                            <div
-                              style="font-size: small;margin: 0pt;margin-top: 5pt;"
-                            >
-                              <div>{room.room.Cost} {listing.currency}</div>
+                  {#if listing.isOnsite}
+                    <h3>Selected Rooms</h3>
+                    <hr />
+                    {#if selectedRoom.length === 0}
+                      No Rooms selected
+                    {/if}
+                    {#each selectedRoom as room, index}
+                      <div class="row">
+                        <div class="col-9">
+                          <div
+                            class="d-flex align-items-start justify-content-start"
+                          >
+                            <button
+                              class="btn-close me-2"
+                              on:click={() => {
+                                selectedRoom.splice(index, 1);
+                                selectedRoom = selectedRoom;
+                              }}
+                            />
+                            <div>
+                              <div style="margin: 0pt;">
+                                <b>{room.room.RoomCategory}</b>
+                              </div>
+                              <span style="font-size: small;margin: 0pt;">
+                                {room.room.RoomDescription.length > 50
+                                  ? room.room.RoomDescription.substring(0, 50) +
+                                    "..."
+                                  : room.room.RoomDescription}
+                              </span>
+                              <div
+                                style="font-size: small;margin: 0pt;margin-top: 5pt;"
+                              >
+                                <div>{room.room.Cost} {listing.currency}</div>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <div class="col-3">
+                          <input
+                            type="number"
+                            class="form-control"
+                            bind:value={room.qty}
+                            min="1"
+                            max={room.room.Quantity}
+                          />
+                        </div>
                       </div>
-                      <div class="col-3">
-                        <input
-                          type="number"
-                          class="form-control"
-                          bind:value={room.qty}
-                          min="1"
-                          max={room.room.Quantity}
-                        />
-                      </div>
+                    {/each}
+                    <hr />
+                    <div class="d-flex justify-content-between mb-2">
+                      <div><b>{"Total"}</b></div>
+                      <div>{totalCartPrice} {listing.currency}</div>
                     </div>
-                  {/each}
-                  <hr />
-                  <div class="d-flex justify-content-between mb-2">
-                    <div><b>{"Total"}</b></div>
-                    <div>{totalCartPrice} {listing.currency}</div>
-                  </div>
-                  {#if totalCartPrice !== 0}
-                    <button class="btn btn-light border" on:click={checkout}>
-                      Book Now
-                    </button>
+                    {#if totalCartPrice !== 0}
+                      <button class="btn btn-light border" on:click={checkout}>
+                        Book Now
+                      </button>
+                    {/if}
+                  {:else}
+                    <h3>Book Experience</h3>
+                    <span>
+                      {listing.pricePerDevice}
+                      {listing.currency} / device
+                    </span>
+                    <input
+                      bind:value={numOfDevices}
+                      type="number"
+                      placeholder="No. of devices"
+                      class="form-control mt-2"
+                      min="1"
+                    />
+                    <div class="py-3 text-end">
+                      Grand Total: {numOfDevices * listing.pricePerDevice}
+                      {listing.currency}
+                    </div>
+                    <button class="btn mt-1"> Book now </button>
                   {/if}
                 </div>
               </div>
-              
             </div>
           </div>
         </div>

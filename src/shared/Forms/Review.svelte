@@ -70,7 +70,6 @@
 
     let data = await response.json();
     AllReviews = data;
-    console.log(AllReviews);
   }
 
   fetchReviewsOfListing();

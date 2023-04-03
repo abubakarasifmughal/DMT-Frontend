@@ -4,13 +4,13 @@
 <div class="container-fluid">
   <div class="row mx-md-5">
     <div class="col-md-6 col-sm-12 py-4 px-4 getAppBackground">
-      <h3>
-        Elevate your experience, Download our app now & manage your trips with a
-        tap!
-      </h3>
-      <p>
-        Save 10% on tours and activities is as easy as booking with the DMT App.
-      </p>
+      <h3>Tourism Experience at your fingertips</h3>
+      <p>With just 3% platform charge you can now book or sell from DMT app</p>
+      <p>Uncover this Great Value</p>
+      <div>
+        <button class="btn btn-light mb-3 border">Download our app Now!</button>
+        <div>(Offer applies only for DMT users)</div>
+      </div>
 
       <div class="flex align-items-start">
         <div class="me-4">

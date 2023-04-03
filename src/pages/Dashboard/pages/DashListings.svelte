@@ -19,11 +19,13 @@
   let user_id = sessionStorage.getItem("di");
   $: newListing = {
     isProperty: true,
+    isOnsite: true,
     address: "",
     address_lat: "nan",
     address_lon: "nan",
     headline: "",
     description: "",
+    pricePerDevice: 0,
     accomodationType: "",
     currency: "",
     rooms: [],
@@ -60,10 +62,12 @@
         // -----
         newListing = {
           isProperty: true,
+          isOnsite: true,
           address: "",
           address_lat: "nan",
           address_lon: "nan",
           amenities: [],
+          pricePerDevice: 0,
           headline: "",
           description: "",
           accomodationType: "",
@@ -146,6 +150,7 @@
             {:else if currentPage === 3}
               <BusinessNature
                 IndividualTaxFileNumber={newListing.IndividualTaxFileNumber}
+                isOnsite={newListing.isOnsite}
                 IndividualIdentificationNumber={newListing.IndividualIdentificationNumber}
                 CompanyIdentificationNumber={newListing.CompanyIdentificationNumber}
                 CompanyTaxFileNumber={newListing.CompanyTaxFileNumber}
@@ -153,6 +158,7 @@
                 property={newListing.isProperty}
                 on:isPropery={(data) => {
                   newListing.isProperty = data.detail.isProperty;
+                  newListing.isOnsite = data.detail.isOnsite;
                 }}
                 onClickBack={() => (currentPage = currentPage - 1)}
                 onClickNext={({
@@ -162,9 +168,14 @@
                   IndividualTaxFileNumber,
                   CompanyIdentificationNumber,
                   CompanyTaxFileNumber,
+                  isOnsite,
                 }) => {
                   newListing.isIndividual = isIndividual;
                   newListing.isProperty = property;
+                  newListing.isOnsite = isOnsite;
+                  if (newListing.isProperty) {
+                    newListing.isOnsite = true;
+                  }
                   newListing.IndividualIdentificationNumber =
                     IndividualIdentificationNumber;
                   newListing.IndividualTaxFileNumber = IndividualTaxFileNumber;
@@ -177,6 +188,8 @@
               />
             {:else if currentPage === 4}
               <DetailsForListing
+                isOnsite={newListing.isOnsite}
+                isListing={newListing.isProperty}
                 selectedAmeneties={newListing.amenities}
                 headline={newListing.headline}
                 description={newListing.description}
@@ -191,6 +204,9 @@
               />
             {:else if currentPage === 5}
               <HotelDetails
+                pricePerDevice={newListing.pricePerDevice}
+                isOnsite={newListing.isOnsite}
+                isProperty={newListing.isProperty}
                 currency={newListing.currency}
                 on:currency={(data) => {
                   newListing.currency = data.detail.currency;
@@ -202,6 +218,9 @@
                 rooms={newListing.rooms}
                 on:rooms={(data) => {
                   newListing.rooms = data.detail.rooms;
+                }}
+                on:pricePerDevice={(data) => {
+                  newListing.pricePerDevice = data.detail.pricePerDevice;
                 }}
                 onClickBack={() => (currentPage = currentPage - 1)}
                 onClickNext={() => (currentPage = currentPage + 1)}
@@ -236,8 +255,10 @@
                   if (newListing.headline === "") {
                     errors = [...errors, "Please provide a headline"];
                   }
-                  if (newListing.address === "") {
-                    errors = [...errors, "Address cannot be empty"];
+                  if (newListing.isProperty) {
+                    if (newListing.address === "") {
+                      errors = [...errors, "Address cannot be empty"];
+                    }
                   }
                   if (newListing.description === "") {
                     errors = [...errors, "You did not enter any description"];
@@ -251,8 +272,10 @@
                   if (newListing.currency === "") {
                     errors = [...errors, "Select your currency"];
                   }
-                  if (newListing.rooms.length <= 0) {
-                    errors = [...errors, "No rooms were added"];
+                  if (newListing.isProperty) {
+                    if (newListing.rooms.length <= 0) {
+                      errors = [...errors, "No rooms were added"];
+                    }
                   }
                   if (newListing.listingImages.length <= 0) {
                     errors = [
@@ -260,11 +283,13 @@
                       "The images for you listing, please add a few",
                     ];
                   }
-                  if (newListing.amenities.length <= 0) {
-                    errors = [
-                      ...errors,
-                      "There are not facilities for you listing, please add a few",
-                    ];
+                  if (newListing.isOnsite) {
+                    if (newListing.amenities.length <= 0) {
+                      errors = [
+                        ...errors,
+                        "There are no facilities for you listing, please add a few",
+                      ];
+                    }
                   }
                   if (errors.length <= 0) {
                     apiCall();
