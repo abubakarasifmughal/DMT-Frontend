@@ -4,6 +4,7 @@
   import Footer from "../../shared/components/Footer/Footer.svelte";
   import GetApp from "../../shared/components/GetApp/GetApp.svelte";
   import Navbar from "../../shared/components/Navbar/Navbar.svelte";
+
   export let location;
   location;
   import {
@@ -46,10 +47,10 @@
 </Modal>
 
 <div>
-  <div class="home_top_section ">
+  <div class="home_top_section">
     <div
       style="position: fixed; top: 0pt; width: 100%; z-index: 2700;"
-      class="bg-light "
+      class="bg-light"
     >
       <Navbar btnTheme={"btn-outline-light"} />
     </div>
@@ -153,7 +154,7 @@
   </div> -->
   <br />
   <div class="container mt-5 p-2 p-sm-5">
-    <div class="row mb-5 p-2 ">
+    <div class="row mb-5 p-2">
       <div class="col-xl-1" />
       <div class="col-xl-5 mb-5 me-0 me-sm-2">
         <div
@@ -192,7 +193,7 @@
   </div>
   <br />
   <div
-    class="mt-2 p-3 text-center 
+    class="mt-2 p-3 text-center
     d-flex justify-content-center align-items-center flex-column"
   >
     <h1 class="fw-bolder mb-5 text-dark">Offers and Discount</h1>

@@ -114,7 +114,7 @@
     <div>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-2 ">
+          <div class="col-lg-2">
             <Stepper
               title={"Listings"}
               steps={[
@@ -233,25 +233,25 @@
                 images={newListing.listingImages}
                 onClickBack={() => (currentPage = currentPage - 1)}
                 onClickNext={() => {
-                  let a = {
-                    isProperty: true,
-                    address: "",
-                    address_lat: "nan",
-                    address_lon: "nan",
-                    headline: "",
-                    description: "",
-                    accomodationType: "",
-                    currency: "",
-                    rooms: [],
-                    listingImages: [],
-                    weeklyDiscount: 10,
-                    nightlyDiscount: 0,
-                    isIndividual: true,
-                    IndividualIdentificationNumber: "",
-                    IndividualTaxFileNumber: "",
-                    CompanyIdentificationNumber: "",
-                    CompanyTaxFileNumber: "",
-                  };
+                  // let a = {
+                  //   isProperty: true,
+                  //   address: "",
+                  //   address_lat: "nan",
+                  //   address_lon: "nan",
+                  //   headline: "",
+                  //   description: "",
+                  //   accomodationType: "",
+                  //   currency: "",
+                  //   rooms: [],
+                  //   listingImages: [],
+                  //   weeklyDiscount: 10,
+                  //   nightlyDiscount: 0,
+                  //   isIndividual: true,
+                  //   IndividualIdentificationNumber: "",
+                  //   IndividualTaxFileNumber: "",
+                  //   CompanyIdentificationNumber: "",
+                  //   CompanyTaxFileNumber: "",
+                  // };
                   if (newListing.headline === "") {
                     errors = [...errors, "Please provide a headline"];
                   }
@@ -305,8 +305,8 @@
     <Modal isOpen={errors.length > 0} backdrop="static">
       <ModalHeader class="row">
         <div class="row col-12">
-          <div class="col-11 ">Please fix the following errors</div>
-          <div class="col-1 ">
+          <div class="col-11">Please fix the following errors</div>
+          <div class="col-1">
             <button
               class="btn btn-close"
               on:click={() => {

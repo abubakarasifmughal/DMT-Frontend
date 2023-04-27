@@ -192,7 +192,7 @@
           rooms: rooms,
         });
         dispatch3("pricePerDevice", {
-          rooms: rooms,
+          pricePerDevice: pricePerDevice,
         });
         if (isOnsite === false) {
           dispatch("AccomodationType", {
@@ -206,7 +206,7 @@
     <button
       on:click={() => {
         dispatch("rooms", {
-          pricePerDevice: pricePerDevice,
+          rooms: rooms,
         });
         dispatch("pricePerDevice", {
           pricePerDevice: pricePerDevice,

@@ -1,42 +1,45 @@
 <script>
-  export let slides = [
-    {
-      image: "/assets/static/images/global/Accommodation.jpg",
-      text: "Accommodation",
-      rating: 4.9,
-      icon: "bi-house-fill",
-      review: 10,
-      label: "A cozy gem overlooking Bwindi Impenetrable National Park",
-      address: "Bugambira, Uganda, Africa",
-    },
-    {
-      image: "/assets/static/images/global/Swayambhunath.jpg",
-      text: "Online",
-      rating: 4.9,
-      icon: "bi-person-video",
-      review: 10,
-      label: "Guided Virtual Tour around Swayambhunath",
-      address: "Live from Nepal, Asia",
-    },
-    {
-      image: "/assets/static/images/global/Bartender.jpg",
-      text: "Online",
-      rating: 4.9,
-      icon: "bi-person-video",
-      review: 10,
-      label: "Learn to make your special shot with the top Bartender",
-      address: "Live from Uganda, Africa",
-    },
-    {
-      image: "/assets/static/images/global/Bhaktapur.jpg",
-      text: "Onsite",
-      rating: 4.9,
-      icon: "bi-people-fill",
-      review: 10,
-      label: "Guided World Heritage Tour around Bhaktapur",
-      address: "Bhaktapur, Nepal, Asia",
-    },
+  import { Icon } from "sveltestrap";
+  import config from "../../../../environment.json";
+  import { Link } from "svelte-routing";
 
+  export let slides = [
+    // {
+    //   image: "/assets/static/images/global/Accommodation.jpg",
+    //   text: "Accommodation",
+    //   rating: 4.9,
+    //   icon: "bi-house-fill",
+    //   review: 10,
+    //   label: "A cozy gem overlooking Bwindi Impenetrable National Park",
+    //   address: "Bugambira, Uganda, Africa",
+    // },
+    // {
+    //   image: "/assets/static/images/global/Swayambhunath.jpg",
+    //   text: "Online",
+    //   rating: 4.9,
+    //   icon: "bi-person-video",
+    //   review: 10,
+    //   label: "Guided Virtual Tour around Swayambhunath",
+    //   address: "Live from Nepal, Asia",
+    // },
+    // {
+    //   image: "/assets/static/images/global/Bartender.jpg",
+    //   text: "Online",
+    //   rating: 4.9,
+    //   icon: "bi-person-video",
+    //   review: 10,
+    //   label: "Learn to make your special shot with the top Bartender",
+    //   address: "Live from Uganda, Africa",
+    // },
+    // {
+    //   image: "/assets/static/images/global/Bhaktapur.jpg",
+    //   text: "Onsite",
+    //   rating: 4.9,
+    //   icon: "bi-people-fill",
+    //   review: 10,
+    //   label: "Guided World Heritage Tour around Bhaktapur",
+    //   address: "Bhaktapur, Nepal, Asia",
+    // },
     // {
     //   image: "/assets/static/images/global/galleria_umberto.png",
     //   text: "Accommodation",
@@ -64,78 +67,140 @@
   ];
 
   let cards = [
-    ...slides,
     // ------------------
     {
+      id: "",
       image: "",
       text: "",
       rating: null,
       review: null,
       label: "",
-      category: "",
     },
     {
+      id: "",
+      image: "",
+      text: "",
+      rating: null,
+      review: null,
+      label: "",
+    },
+    {
+      id: "",
       image: null,
       text: "",
       rating: null,
       review: null,
       label: "",
-      category: "",
     },
   ];
   let currentCardIndex = 0;
+  const loadData = async () => {
+    let headersList = {
+      Accept: "*/*",
+      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    };
+
+    let response = await fetch(`${config.SERVER_IP}/listings/featured`, {
+      method: "GET",
+      headers: headersList,
+    });
+
+    let data = await response.json();
+    data?.forEach((element) => {
+      cards = [
+        {
+          id: element.id,
+          image: config.SERVER_IP + element.listingImages[0].address,
+          text: element.isOnsite
+            ? "Onsite"
+            : element.isProperty
+            ? "Accomodation"
+            : "Online",
+          rating: element.rating,
+          icon: element.isOnsite
+            ? "bi-house-fill"
+            : element.isProperty
+            ? "bi-house-fill"
+            : "bi-person-video",
+          review: element.num_reviews,
+          label: element.headline,
+          address: element.address,
+        },
+        ...cards,
+      ];
+      console.log(slides);
+    });
+  };
+  loadData()
+    .then((val) => val)
+    .catch((err) => err);
 </script>
 
 <div class="">
-  <div class="carousel ">
+  <div class="carousel">
     <div class="row pt-5 pb-5" style="flex-wrap: nowrap;overflow: hidden;">
-      <div class="col-md-5  ms-sm-0 ms-md-4">
-        <div
-          class="card-slide d-flex text-center p-3 align-items-center justify-content-end flex-column rounded m-md-0 m-3"
-          style="background-image: url({cards[currentCardIndex].image});"
-        >
-          <div class="bg-white w-100 rounded p-3 text-start">
-            <div>
+      <div class="col-md-5 ms-sm-0 ms-md-4">
+        <Link to={"/listing/" + cards[currentCardIndex].id}>
+          <div
+            class="card-slide d-flex text-center p-3 align-items-center justify-content-end flex-column rounded m-md-0 m-3"
+            style="background-image: url({cards[currentCardIndex].image});"
+          >
+            <div class="bg-white w-100 rounded p-3 text-start">
               <div>
-                <span class="text-secondary1 justify-content-between"
-                  ><div>
-                    <b>
-                      <span
-                        class={`${cards[currentCardIndex].icon}`}
-                        style="color: #9427f7;"
-                      />
-                      {cards[currentCardIndex].text}</b
-                    >
-                  </div>
-                  <div class="rat">
-                    <div><b>{cards[currentCardIndex].rating}</b></div>
-                    <div>
-                      <b class="ms-1">({cards[currentCardIndex].review})</b>
+                <div>
+                  <span class="text-secondary1 justify-content-between"
+                    ><div>
+                      <b>
+                        <span
+                          class={`${cards[currentCardIndex].icon}`}
+                          style="color: #9427f7;"
+                        />
+                        {cards[currentCardIndex].text}</b
+                      >
                     </div>
-                  </div></span
-                >
-              </div>
-              <div />
-              <div class="label">
-                <div class="text-black">{cards[currentCardIndex].label}</div>
-              </div>
-              <div class="text-secondary">
-                <i class="bi bi-geo-alt-fill" />
-                {cards[currentCardIndex].address}
+                    <div class="rat">
+                      <span style="font-size: 15px;">
+                        {#if cards[currentCardIndex]?.rating}
+                          <span style="color:#9c59df;"
+                            ><Icon name="star-fill" /></span
+                          >
+                          <span>{cards[currentCardIndex]?.rating}</span>
+                          {#if cards[currentCardIndex]?.num_reviews}
+                            <span class="text-muted"
+                              >({cards[currentCardIndex]?.num_reviews})</span
+                            >
+                          {/if}
+                        {:else}
+                          <span class="bg-purple text-white p-1 px-2 rounded"
+                            >New</span
+                          >
+                        {/if}
+                      </span>
+                    </div></span
+                  >
+                </div>
+                <div />
+                <div class="label">
+                  <div class="text-black">{cards[currentCardIndex].label}</div>
+                </div>
+                <div class="text-secondary">
+                  <i class="bi bi-geo-alt-fill" />
+                  {cards[currentCardIndex].address}
+                </div>
               </div>
             </div>
+            {#if cards[currentCardIndex].image === "" && false}
+              <h4>Search for Location</h4>
+              <span>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Consectetur, nemo. Nihil, non saepe ratione aliquid libero
+                impedit! Id explicabo in officia? Nesciunt consequatur
+                consequuntur esse ducimus atque a numquam eligendi.
+              </span>
+              <button class="btn ps-4 pe-4 mt-4"> Explore </button>
+            {/if}
           </div>
-          {#if cards[currentCardIndex].image === "" && false}
-            <h4>Search for Location</h4>
-            <span>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Consectetur, nemo. Nihil, non saepe ratione aliquid libero
-              impedit! Id explicabo in officia? Nesciunt consequatur
-              consequuntur esse ducimus atque a numquam eligendi.
-            </span>
-            <button class="btn ps-4 pe-4 mt-4"> Explore </button>
-          {/if}
-        </div>
+        </Link>
 
         <div class="d-flex justify-content-end p-3">
           <button
@@ -171,38 +236,42 @@
         </div>
       </div>
       <div class="col-md-5">
-        <div
-          class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5 rounded"
-          style="background-image: url({cards[currentCardIndex + 1].image});"
-        >
-          {#if cards[currentCardIndex + 1].image === "" && false}
-            <h4>Search for Location</h4>
-            <span>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Consectetur, nemo. Nihil, non saepe ratione aliquid libero
-              impedit! Id explicabo in officia? Nesciunt consequatur
-              consequuntur esse ducimus atque a numquam eligendi.
-            </span>
-            <button class="btn ps-4 pe-4 mt-4"> Exlore </button>
-          {/if}
-        </div>
+        <Link to={"/listing/" + cards[currentCardIndex + 1].id}>
+          <div
+            class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5 rounded"
+            style="background-image: url({cards[currentCardIndex + 1].image});"
+          >
+            {#if cards[currentCardIndex + 1].image === "" && false}
+              <h4>Search for Location</h4>
+              <span>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Consectetur, nemo. Nihil, non saepe ratione aliquid libero
+                impedit! Id explicabo in officia? Nesciunt consequatur
+                consequuntur esse ducimus atque a numquam eligendi.
+              </span>
+              <button class="btn ps-4 pe-4 mt-4"> Exlore </button>
+            {/if}
+          </div>
+        </Link>
       </div>
       <div class="col-md-5">
-        <div
-          class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5 rounded"
-          style="background-image: url({cards[currentCardIndex + 2].image});"
-        >
-          {#if cards[currentCardIndex + 2].image === "" && false}
-            <h4>Search for Location</h4>
-            <span>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Consectetur, nemo. Nihil, non saepe ratione aliquid libero
-              impedit! Id explicabo in officia? Nesciunt consequatur
-              consequuntur esse ducimus atque a numquam eligendi.
-            </span>
-            <button class="btn ps-4 pe-4 mt-4"> Exlore </button>
-          {/if}
-        </div>
+        <Link to={"/listing/" + cards[currentCardIndex + 2].id}>
+          <div
+            class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5 rounded"
+            style="background-image: url({cards[currentCardIndex + 2].image});"
+          >
+            {#if cards[currentCardIndex + 2].image === "" && false}
+              <h4>Search for Location</h4>
+              <span>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Consectetur, nemo. Nihil, non saepe ratione aliquid libero
+                impedit! Id explicabo in officia? Nesciunt consequatur
+                consequuntur esse ducimus atque a numquam eligendi.
+              </span>
+              <button class="btn ps-4 pe-4 mt-4"> Exlore </button>
+            {/if}
+          </div>
+        </Link>
       </div>
     </div>
   </div>

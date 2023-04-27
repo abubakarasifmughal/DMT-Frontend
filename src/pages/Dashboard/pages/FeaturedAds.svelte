@@ -3,6 +3,10 @@
   import config from "../../../../environment.json";
   let listingData = [];
   let searchString = "";
+
+  let featureListingTill;
+  let choosingFeature = false;
+
   let userid = sessionStorage.getItem("di");
   var requestOptions = {
     method: "GET",
@@ -42,24 +46,27 @@
 </script>
 
 <div class="p-3">
-  <div class="d-flex justify-content-between">
-    <h2>Choose listing for featured</h2>
-    <button class="btn btn-primary border px-4 fw-bold" on:click={selectPlan}
-      >Featured Plans</button
-    >
-  </div>
-  <div>
-    These images will appear on the home page of DMT Tourism, so choose the best
-    images for your listing
-  </div>
-  <span>
-    Charges are applied for this feature, <button
-      class="btn-link border-0 bg-transparent"
-      on:click={selectPlan}
-    >
-      choose your plan
-    </button>
-  </span>
+  <h3>Feature your listing</h3>
+  <!-- <div>
+    <div class="d-flex justify-content-between">
+      <h2>Choose listing for featured</h2>
+      <button class="btn btn-primary border px-4 fw-bold" on:click={selectPlan}
+        >Featured Plans</button
+      >
+    </div>
+    <div>
+      These images will appear on the home page of DMT Tourism, so choose the
+      best images for your listing
+    </div>
+    <span>
+      Charges are applied for this feature, <button
+        class="btn-link border-0 bg-transparent"
+        on:click={selectPlan}
+      >
+        choose your plan
+      </button>
+    </span>
+  </div> -->
   <!-- Listings here -->
 
   <div class="container-fluid mt-4">
@@ -111,9 +118,48 @@
                 </td>
                 <td> {listing?.rooms?.length}</td>
                 <td>
-                  <button class="btn btn-light border">
-                    Feature Listing
-                  </button>
+                  {#if listing?.featuredTill > Date.now()}
+                    <button
+                      class="btn btn-danger border"
+                      on:click={async () => {
+                        if (
+                          confirm("Are you sure you want to cancel featured?")
+                        ) {
+                          let headersList = {
+                            Accept: "*/*",
+                            "User-Agent":
+                              "Thunder Client (https://www.thunderclient.com)",
+                            "Content-Type": "application/json",
+                          };
+
+                          let bodyContent = JSON.stringify({
+                            featureTill: 0,
+                          });
+
+                          let response = await fetch(
+                            `${config.SERVER_IP}/listings/feature/1`,
+                            {
+                              method: "POST",
+                              body: bodyContent,
+                              headers: headersList,
+                            }
+                          );
+
+                          let data = await response.text();
+                          loadData();
+                        }
+                      }}
+                    >
+                      Cancel Feature
+                    </button>
+                  {:else}
+                    <button
+                      class="btn btn-light border"
+                      on:click={() => (choosingFeature = true)}
+                    >
+                      Feature Listing
+                    </button>
+                  {/if}
                 </td>
               </tr>
             {/each}
@@ -130,6 +176,49 @@
     </div>
   </div>
 </div>
+
+<Modal centered backdrop="static" isOpen={choosingFeature}>
+  <div class="modal-header">Choose featuring span</div>
+  <div class="modal-body">
+    <div><b>Feature your listing till</b></div>
+    <input
+      type="date"
+      class="form-control my-2"
+      bind:value={featureListingTill}
+    />
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" on:click={() => (choosingFeature = false)}>
+      Close
+    </button>
+    <button
+      class="btn btn-primary"
+      on:click={async () => {
+        let headersList = {
+          Accept: "*/*",
+          "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+          "Content-Type": "application/json",
+        };
+
+        let bodyContent = JSON.stringify({
+          featureTill: new Date(featureListingTill).getTime(),
+        });
+
+        let response = await fetch(`${config.SERVER_IP}/listings/feature/1`, {
+          method: "POST",
+          body: bodyContent,
+          headers: headersList,
+        });
+
+        let data = await response.text();
+        choosingFeature = false;
+        loadData();
+      }}
+    >
+      Feature
+    </button>
+  </div>
+</Modal>
 
 <Modal centered size="xl" backdrop="static" isOpen={choosingPlan}>
   <div class="modal-header">Choose you featuring Plan</div>
