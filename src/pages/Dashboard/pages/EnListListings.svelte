@@ -218,6 +218,7 @@
   };
 
   let onUpdateRoomsDetail = () => {
+    console.log(listingToBeEdited);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var requestOptions = {
@@ -746,7 +747,7 @@
           />
         </div>
       </div>
-      <div class="mt-1 mb-2 ">
+      <div class="mt-1 mb-2">
         <span class="d-flex"
           ><Input
             type="switch"
@@ -756,7 +757,7 @@
           /> Enable Discount
         </span>
       </div>
-      <div class="mt-1 mb-2 ">
+      <div class="mt-1 mb-2">
         <span class="d-flex"
           ><Input
             type="switch"
@@ -819,13 +820,24 @@
             type="number"
             placeholder="Breakfast Price"
             class="form-control mb-2"
-            bind:value={room.BreakfastPrice}
+            bind:value={room.TransferOfServicePrice}
           />
         </div>
       </div>
       <br />
       <h3>Photos</h3>
-      <hr />
+
+      {#if !room?.Images.length}
+        <button
+          class="btn btn-sm"
+          on:click={() => {
+            room.Images = [...room.Images, { address: "" }];
+          }}
+        >
+          Add Photo
+        </button>
+      {/if}
+      <br />
       <div class="row">
         <div class="col-md-12">
           {#each room?.Images as image, i}
@@ -840,12 +852,11 @@
                   reader.addEventListener("load", () => {
                     image.address = reader.result;
                   });
-
                   reader.readAsDataURL(image.tempBlob[0]);
                 }}
               />
               <div class="border rounded">
-                {#if image.address.substring(0, 4) === "data"}
+                {#if image?.address?.substring(0, 4) === "data"}
                   <img
                     src={`${image.address}`}
                     alt=""
@@ -863,6 +874,7 @@
           {/each}
         </div>
       </div>
+      <hr />
     {/each}
   </div>
   <div class="modal-footer">
