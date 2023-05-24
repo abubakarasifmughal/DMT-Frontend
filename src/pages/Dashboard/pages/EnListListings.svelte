@@ -218,7 +218,6 @@
   };
 
   let onUpdateRoomsDetail = () => {
-    console.log(listingToBeEdited);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var requestOptions = {

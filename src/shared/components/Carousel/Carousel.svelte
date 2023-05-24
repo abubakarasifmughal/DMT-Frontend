@@ -106,7 +106,6 @@
     });
 
     let data = await response.json();
-    console.log("data", data);
     data?.forEach((element) => {
       cards = [
         {
@@ -129,7 +128,6 @@
         },
         ...cards,
       ];
-      console.log(cards);
     });
   };
   loadData()
