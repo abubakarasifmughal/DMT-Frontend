@@ -106,6 +106,7 @@
     });
 
     let data = await response.json();
+    console.log("data", data);
     data?.forEach((element) => {
       cards = [
         {
@@ -128,7 +129,7 @@
         },
         ...cards,
       ];
-      console.log(slides);
+      console.log(cards);
     });
   };
   loadData()
@@ -137,144 +138,158 @@
 </script>
 
 <div class="">
-  <div class="carousel">
-    <div class="row pt-5 pb-5" style="flex-wrap: nowrap;overflow: hidden;">
-      <div class="col-md-5 ms-sm-0 ms-md-4">
-        <Link to={"/listing/" + cards[currentCardIndex].id}>
-          <div
-            class="card-slide d-flex text-center p-3 align-items-center justify-content-end flex-column rounded m-md-0 m-3"
-            style="background-image: url({cards[currentCardIndex].image});"
-          >
-            <div class="bg-white w-100 rounded p-3 text-start">
-              <div>
+  {#if cards?.length >= 3}
+    <div class="carousel">
+      <div class="row pt-5 pb-5" style="flex-wrap: nowrap;overflow: hidden;">
+        <div class="col-md-5 ms-sm-0 ms-md-4">
+          <Link to={"/listing/" + cards[currentCardIndex].id}>
+            <div
+              class="card-slide d-flex text-center p-3 align-items-center justify-content-end flex-column rounded m-md-0 m-3"
+              style="background-image: url({cards[currentCardIndex].image});"
+            >
+              <div class="bg-white w-100 rounded p-3 text-start">
                 <div>
-                  <span class="text-secondary1 justify-content-between"
-                    ><div>
-                      <b>
-                        <span
-                          class={`${cards[currentCardIndex].icon}`}
-                          style="color: #9427f7;"
-                        />
-                        {cards[currentCardIndex].text}</b
-                      >
-                    </div>
-                    <div class="rat">
-                      <span style="font-size: 15px;">
-                        {#if cards[currentCardIndex]?.rating}
-                          <span style="color:#9c59df;"
-                            ><Icon name="star-fill" /></span
-                          >
-                          <span>{cards[currentCardIndex]?.rating}</span>
-                          {#if cards[currentCardIndex]?.num_reviews}
-                            <span class="text-muted"
-                              >({cards[currentCardIndex]?.num_reviews})</span
+                  <div>
+                    <span class="text-secondary1 justify-content-between"
+                      ><div>
+                        <b>
+                          <span
+                            class={`${cards[currentCardIndex].icon}`}
+                            style="color: #9427f7;"
+                          />
+                          {cards[currentCardIndex].text}</b
+                        >
+                      </div>
+                      <div class="rat">
+                        <span style="font-size: 15px;">
+                          {#if cards[currentCardIndex]?.rating}
+                            <span style="color:#9c59df;"
+                              ><Icon name="star-fill" /></span
+                            >
+                            <span>{cards[currentCardIndex]?.rating}</span>
+                            {#if cards[currentCardIndex]?.num_reviews}
+                              <span class="text-muted"
+                                >({cards[currentCardIndex]?.num_reviews})</span
+                              >
+                            {/if}
+                          {:else}
+                            <span class="bg-purple text-white p-1 px-2 rounded"
+                              >New</span
                             >
                           {/if}
-                        {:else}
-                          <span class="bg-purple text-white p-1 px-2 rounded"
-                            >New</span
-                          >
-                        {/if}
-                      </span>
-                    </div></span
-                  >
-                </div>
-                <div />
-                <div class="label">
-                  <div class="text-black">{cards[currentCardIndex].label}</div>
-                </div>
-                <div class="text-secondary">
-                  <i class="bi bi-geo-alt-fill" />
-                  {cards[currentCardIndex].address}
+                        </span>
+                      </div></span
+                    >
+                  </div>
+                  <div />
+                  <div class="label">
+                    <div class="text-black">
+                      {cards[currentCardIndex].label}
+                    </div>
+                  </div>
+                  <div class="text-secondary">
+                    <i class="bi bi-geo-alt-fill" />
+                    {cards[currentCardIndex].address}
+                  </div>
                 </div>
               </div>
+              {#if cards[currentCardIndex].image === "" && false}
+                <h4>Search for Location</h4>
+                <span>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Consectetur, nemo. Nihil, non saepe ratione aliquid libero
+                  impedit! Id explicabo in officia? Nesciunt consequatur
+                  consequuntur esse ducimus atque a numquam eligendi.
+                </span>
+                <button class="btn ps-4 pe-4 mt-4"> Explore </button>
+              {/if}
             </div>
-            {#if cards[currentCardIndex].image === "" && false}
-              <h4>Search for Location</h4>
-              <span>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Consectetur, nemo. Nihil, non saepe ratione aliquid libero
-                impedit! Id explicabo in officia? Nesciunt consequatur
-                consequuntur esse ducimus atque a numquam eligendi.
-              </span>
-              <button class="btn ps-4 pe-4 mt-4"> Explore </button>
-            {/if}
-          </div>
-        </Link>
+          </Link>
 
-        <div class="d-flex justify-content-end p-3">
-          <button
-            class="me-3 roundBtn btn"
-            on:click={() =>
-              currentCardIndex === 0
-                ? currentCardIndex
-                : (currentCardIndex = currentCardIndex - 1)}
-          >
-            <img
-              src="/assets/static/icon/arrow.png"
-              style="object-fit: contain;transform: rotate(0deg);object-position: center;"
-              alt=""
-              height="60%"
-              width="60%"
-            />
-          </button>
-          <button
-            class="roundBtn btn"
-            on:click={() =>
-              currentCardIndex + 3 === cards.length
-                ? currentCardIndex
-                : (currentCardIndex = currentCardIndex + 1)}
-          >
-            <img
-              src="/assets/static/icon/arrow.png"
-              style="object-fit: contain;transform: rotate(180deg);object-position: center;"
-              alt=""
-              height="60%"
-              width="60%"
-            />
-          </button>
+          <div class="d-flex justify-content-end p-3">
+            <button
+              class="me-3 roundBtn btn"
+              on:click={() =>
+                currentCardIndex === 0
+                  ? currentCardIndex
+                  : (currentCardIndex = currentCardIndex - 1)}
+            >
+              <img
+                src="/assets/static/icon/arrow.png"
+                style="object-fit: contain;transform: rotate(0deg);object-position: center;"
+                alt=""
+                height="60%"
+                width="60%"
+              />
+            </button>
+            <button
+              class="roundBtn btn"
+              on:click={() =>
+                currentCardIndex + 3 === cards.length
+                  ? currentCardIndex
+                  : (currentCardIndex = currentCardIndex + 1)}
+            >
+              <img
+                src="/assets/static/icon/arrow.png"
+                style="object-fit: contain;transform: rotate(180deg);object-position: center;"
+                alt=""
+                height="60%"
+                width="60%"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="col-md-5">
+          {#if cards[currentCardIndex + 1].id}
+            <Link to={"/listing/" + cards[currentCardIndex + 1].id}>
+              <div
+                class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5 rounded"
+                style="background-image: url({cards[currentCardIndex + 1]
+                  .image});"
+              >
+                {#if cards[currentCardIndex + 1].image === "" && false}
+                  <h4>Search for Location</h4>
+                  <span>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Consectetur, nemo. Nihil, non saepe ratione aliquid libero
+                    impedit! Id explicabo in officia? Nesciunt consequatur
+                    consequuntur esse ducimus atque a numquam eligendi.
+                  </span>
+                  <button class="btn ps-4 pe-4 mt-4"> Exlore </button>
+                {/if}
+              </div>
+            </Link>
+          {/if}
+        </div>
+        <div class="col-md-5">
+          {#if cards[currentCardIndex + 2].id}
+            <Link to={"/listing/" + cards[currentCardIndex + 2].id}>
+              <div
+                class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5 rounded"
+                style="background-image: url({cards[currentCardIndex + 2]
+                  .image});"
+              >
+                {#if cards[currentCardIndex + 2].image === "" && false}
+                  <h4>Search for Location</h4>
+                  <span>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Consectetur, nemo. Nihil, non saepe ratione aliquid libero
+                    impedit! Id explicabo in officia? Nesciunt consequatur
+                    consequuntur esse ducimus atque a numquam eligendi.
+                  </span>
+                  <button class="btn ps-4 pe-4 mt-4"> Exlore </button>
+                {/if}
+              </div>
+            </Link>
+          {/if}
         </div>
       </div>
-      <div class="col-md-5">
-        <Link to={"/listing/" + cards[currentCardIndex + 1].id}>
-          <div
-            class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5 rounded"
-            style="background-image: url({cards[currentCardIndex + 1].image});"
-          >
-            {#if cards[currentCardIndex + 1].image === "" && false}
-              <h4>Search for Location</h4>
-              <span>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Consectetur, nemo. Nihil, non saepe ratione aliquid libero
-                impedit! Id explicabo in officia? Nesciunt consequatur
-                consequuntur esse ducimus atque a numquam eligendi.
-              </span>
-              <button class="btn ps-4 pe-4 mt-4"> Exlore </button>
-            {/if}
-          </div>
-        </Link>
-      </div>
-      <div class="col-md-5">
-        <Link to={"/listing/" + cards[currentCardIndex + 2].id}>
-          <div
-            class="card-slide d-flex text-center align-items-center justify-content-center flex-column p-5 rounded"
-            style="background-image: url({cards[currentCardIndex + 2].image});"
-          >
-            {#if cards[currentCardIndex + 2].image === "" && false}
-              <h4>Search for Location</h4>
-              <span>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Consectetur, nemo. Nihil, non saepe ratione aliquid libero
-                impedit! Id explicabo in officia? Nesciunt consequatur
-                consequuntur esse ducimus atque a numquam eligendi.
-              </span>
-              <button class="btn ps-4 pe-4 mt-4"> Exlore </button>
-            {/if}
-          </div>
-        </Link>
-      </div>
     </div>
-  </div>
+  {:else}
+    <div class="d-flex justify-content-center p-5" style="height: 100%;">
+      No Listing to show
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -301,6 +316,7 @@
     background-position-x: center;
     background-position-y: top;
     background-repeat: no-repeat;
+    box-shadow: 0px 0px 20px gainsboro;
   }
   .roundBtn {
     height: 30pt;

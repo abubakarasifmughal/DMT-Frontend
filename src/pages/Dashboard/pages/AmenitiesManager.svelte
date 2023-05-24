@@ -1,163 +1,194 @@
 <script>
-  import { Modal } from "sveltestrap";
+  import {
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+  } from "sveltestrap";
+  import config from "../../../../environment.json";
+  import Amenities from "../../../shared/Forms/Amenities.svelte";
+  import AmenitiesPanel from "../../../shared/Forms/AmenitiesPanel.svelte";
+  export let facilityItems = [];
 
-  export let amenities = [];
-  let newAmentityTitle = "";
-  let newAmentityDesc = "";
-  let newAmentityAspectTitle = "";
+  let amenitiesList = [];
 
-  let addToListingWithIndex = -1;
+  let label = "";
+  let name = "";
+  let visibleTo = "Room";
+  // {
+  //   "label": "Facility P",
+  //   "facilityItems": [
+  //       {
+  //           "name": "S F1",
+  //           "visibleTo": "Listing"
+  //       },
+  //       {
+  //           "name": "S F2",
+  //           "visibleTo": "Room"
+  //       }
+  //   ]
+  // }
 
-  let isOpen = false;
+  const addFacilities = async () => {
+    let headersList = {
+      Accept: "*/*",
+      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+      "Content-Type": "application/json",
+    };
+
+    let bodyContent = JSON.stringify({
+      label: label,
+      facilityItems: facilityItems,
+    });
+    {
+    }
+    let response = await fetch(
+      `${config.SERVER_IP}${config.SERVER_PORT}/facilities`,
+      {
+        method: "POST",
+        body: bodyContent,
+        headers: headersList,
+      }
+    );
+
+    let data = await response.text();
+    loadData();
+    facilityItems = [];
+  };
+
+  function loadData() {
+    let headersList = {
+      Accept: "*/*",
+      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    };
+
+    fetch(`${config.SERVER_IP}${config.SERVER_PORT}/facilities`, {
+      method: "GET",
+      headers: headersList,
+    }).then((data) =>
+      data.json().then((data) => {
+        console.log(data);
+        amenitiesList = data;
+      })
+    );
+  }
+  loadData();
 </script>
 
 <div class="p-3">
   <br />
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
       <div class="d-flex justify-content-between">
         <h2>Manage Amenities here</h2>
-        <button class="btn btn-light border" on:click={() => (isOpen = !isOpen)}
-          >Add New</button
-        >
       </div>
       <br />
-      <div class="card" style="max-height: 70vh;overflow-y: scroll;">
-        <div class="card-title ">
-          <div class="card-header text-center bg-white">
-            <h3 class="pt-2">Amenities</h3>
-          </div>
-          <div class="card-body">
-            {#if amenities.length === 0}
-              <div class="text-center">No Amenities, try adding a few</div>
-            {/if}
-            {#each amenities as amenity, a_index}
-              <div>
-                <div class="d-flex">
-                  <button
-                    class="btn btn-close me-2"
-                    on:click={() => {
-                      amenities = amenities.filter(
-                        (a) => a.label !== amenity.label
-                      );
-                    }}
-                  />
-                  <div class="d-flex flex-column">
-                    <span class="fw-bold">{amenity.label}</span>
-                    <span>{amenity.description}</span>
+      <div style="">
+        <div class="container-fluid card">
+          <div class="row">
+            <div class="col-lg-7">
+              <div class="p-3">
+                <div style="font-size: 2vh;" class="py-3">
+                  Manage Facilities
+                </div>
+                <input
+                  type="text"
+                  placeholder="Enter facility Name"
+                  class="form-control"
+                  bind:value={label}
+                />
+
+                <hr />
+                <h4 class="text-center">Add Aspects</h4>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <input
+                      bind:value={name}
+                      type="text"
+                      class="form-control"
+                      placeholder="Aspect label"
+                    />
+                  </div>
+                  <div class="col-md-3 mb-3">
+                    <Dropdown>
+                      <DropdownToggle class="col-12">{visibleTo}</DropdownToggle
+                      >
+                      <DropdownMenu>
+                        <DropdownItem on:click={() => (visibleTo = "Listing")}
+                          >Listings</DropdownItem
+                        >
+                        <DropdownItem on:click={() => (visibleTo = "Room")}
+                          >Rooms</DropdownItem
+                        >
+                      </DropdownMenu>
+                    </Dropdown>
+                  </div>
+                  <div class="col-md-3 mb-3">
+                    <button
+                      class="btn btn-primary col-12"
+                      on:click={() => {
+                        facilityItems = [
+                          { name: name, visibleTo: visibleTo },
+                          ...facilityItems,
+                        ];
+                        name = "";
+                        visibleTo = "Room";
+                      }}
+                    >
+                      Add
+                    </button>
                   </div>
                 </div>
-                <ul class="py-2">
-                  {#each amenity?.options as option}
-                    <li>
-                      <div class="btn-group mt-2 w-100">
-                        <button
-                          style="width: min-content;"
-                          class="btn-sm btn btn-danger"
-                          on:click={() => {
-                            amenity.options = amenity?.options.filter(
-                              (a) => a !== option
-                            );
-                          }}
-                        >
-                          Remove
-                        </button>
-                        <button
-                          class="btn btn-sm btn-light border w-100"
-                          disabled
-                        >
-                          {option.label}
-                        </button>
-                      </div>
-                    </li>
+                <br />
+                <button
+                  class="btn btn-light border my-3 col-12"
+                  on:click={addFacilities}
+                >
+                  Add to Systen
+                </button>
+                <hr />
+                <h4 class="text-center">Your new Facility</h4>
+                <div>
+                  <div class="text-center">
+                    Label: {label}
+                  </div>
+                  {#each facilityItems as item, i}
+                    <div class="my-2 input-group">
+                      <button
+                        class="btn bordered btn-outline-danger w-25"
+                        on:click={() => {
+                          facilityItems.splice(i, 1);
+                          facilityItems = facilityItems;
+                        }}
+                      >
+                        Remove
+                      </button>
+                      <button class="btn border btn-light w-75" disabled>
+                        - {item.name} for {item.visibleTo}
+                      </button>
+                    </div>
                   {/each}
-                  <li class="mt-2" style="list-style: none;">
-                    <button
-                      class="btn btn-sm btn-success px-4"
-                      on:click={() => {
-                        addToListingWithIndex = a_index;
-                      }}>New</button
-                    >
-                  </li>
-                </ul>
+                  <div />
+                </div>
               </div>
-            {/each}
+              <br />
+            </div>
+            <div class="col-lg-5 mt-2 pt-3">
+              <div style="font-size: 2vh;">Amenities</div>
+              {#if !amenitiesList.length}
+                <AmenitiesPanel {amenitiesList} />
+              {:else}
+                <div
+                  class="h-100 d-flex flex-column justify-content-center align-items-center"
+                >
+                  <div class="spinner spinner-border" />
+                  <div class="mt-2">Loading...</div>
+                </div>
+              {/if}
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<Modal isOpen={addToListingWithIndex !== -1} backdrop="static" centered>
-  <div class="modal-header">Add New Aspect</div>
-  <div class="modal-body">
-    <input
-      type="text"
-      class="form-control"
-      bind:value={newAmentityAspectTitle}
-    />
-    <button
-      class="mt-3 btn-danger btn"
-      on:click={() => {
-        addToListingWithIndex = -1;
-      }}>Cancel</button
-    >
-    <button
-      class="mt-3 btn-primary btn"
-      on:click={() => {
-        amenities[addToListingWithIndex].options = [
-          {
-            label: newAmentityAspectTitle,
-            checked: false,
-            id: 1,
-          },
-          ...amenities[addToListingWithIndex].options,
-        ];
-        addToListingWithIndex = -1;
-      }}>Done</button
-    >
-  </div>
-</Modal>
-
-<Modal {isOpen} centered backdrop="static">
-  <div class="modal-header">Add New Amenity to system</div>
-  <div class="modal-body">
-    <div class="container">
-      <input
-        type="text"
-        bind:value={newAmentityTitle}
-        class="form-control"
-        placeholder="New Amenity Title"
-      />
-      <textarea
-        bind:value={newAmentityDesc}
-        class="form-control mt-2"
-        placeholder="New Amenity Description"
-      />
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-danger" on:click={() => (isOpen = !isOpen)}>
-      Close
-    </button>
-    {#if newAmentityTitle}
-      <button
-        class="btn btn-primary"
-        on:click={() => {
-          amenities = [
-            {
-              label: newAmentityTitle,
-              description: newAmentityDesc,
-              options: [],
-            },
-            ...amenities,
-          ];
-          isOpen = !isOpen
-        }}
-      >
-        Add Amenity
-      </button>
-    {/if}
-  </div>
-</Modal>
