@@ -7,7 +7,7 @@
 </script>
 
 <div style="width: 100%;overflow:hidden">
-  <RounterOutlet {loginToken} />
+  <RounterOutlet />
 </div>
 
 <Styles />

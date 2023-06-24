@@ -6,6 +6,7 @@
 
   let featureListingTill;
   let choosingFeature = false;
+  let featuredListingID = "";
 
   let userid = sessionStorage.getItem("di");
   var requestOptions = {
@@ -47,27 +48,6 @@
 
 <div class="p-3">
   <h3>Feature your listing</h3>
-  <!-- <div>
-    <div class="d-flex justify-content-between">
-      <h2>Choose listing for featured</h2>
-      <button class="btn btn-primary border px-4 fw-bold" on:click={selectPlan}
-        >Featured Plans</button
-      >
-    </div>
-    <div>
-      These images will appear on the home page of DMT Tourism, so choose the
-      best images for your listing
-    </div>
-    <span>
-      Charges are applied for this feature, <button
-        class="btn-link border-0 bg-transparent"
-        on:click={selectPlan}
-      >
-        choose your plan
-      </button>
-    </span>
-  </div> -->
-  <!-- Listings here -->
 
   <div class="container-fluid mt-4">
     <div class="d-flex justify-content-between">
@@ -137,7 +117,7 @@
                           });
 
                           let response = await fetch(
-                            `${config.SERVER_IP}/listings/feature/1`,
+                            `${config.SERVER_IP}/listings/feature/${listing.id}`,
                             {
                               method: "POST",
                               body: bodyContent,
@@ -155,7 +135,10 @@
                   {:else}
                     <button
                       class="btn btn-light border"
-                      on:click={() => (choosingFeature = true)}
+                      on:click={() => {
+                        choosingFeature = true;
+                        featuredListingID = listing.id;
+                      }}
                     >
                       Feature Listing
                     </button>
@@ -204,14 +187,18 @@
           featureTill: new Date(featureListingTill).getTime(),
         });
 
-        let response = await fetch(`${config.SERVER_IP}/listings/feature/1`, {
-          method: "POST",
-          body: bodyContent,
-          headers: headersList,
-        });
+        let response = await fetch(
+          `${config.SERVER_IP}/listings/feature/${featuredListingID}`,
+          {
+            method: "POST",
+            body: bodyContent,
+            headers: headersList,
+          }
+        );
 
         let data = await response.text();
         choosingFeature = false;
+        featuredListingID = "";
         loadData();
       }}
     >

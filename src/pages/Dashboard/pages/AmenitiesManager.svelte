@@ -15,19 +15,6 @@
   let label = "";
   let name = "";
   let visibleTo = "Room";
-  // {
-  //   "label": "Facility P",
-  //   "facilityItems": [
-  //       {
-  //           "name": "S F1",
-  //           "visibleTo": "Listing"
-  //       },
-  //       {
-  //           "name": "S F2",
-  //           "visibleTo": "Room"
-  //       }
-  //   ]
-  // }
 
   const addFacilities = async () => {
     let headersList = {
@@ -174,14 +161,19 @@
             </div>
             <div class="col-lg-5 mt-2 pt-3">
               <div style="font-size: 2vh;">Amenities</div>
-              {#if !amenitiesList.length}
-                <AmenitiesPanel {amenitiesList} />
+              {#if amenitiesList.length}
+                <AmenitiesPanel
+                  admin
+                  {amenitiesList}
+                  on:update={() => {
+                    loadData();
+                  }}
+                />
               {:else}
                 <div
                   class="h-100 d-flex flex-column justify-content-center align-items-center"
                 >
-                  <div class="spinner spinner-border" />
-                  <div class="mt-2">Loading...</div>
+                  <div class="mt-2">No Data Yet</div>
                 </div>
               {/if}
             </div>

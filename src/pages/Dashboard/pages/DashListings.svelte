@@ -20,23 +20,22 @@
   $: newListing = {
     isProperty: true,
     isOnsite: true,
-    address: "",
+    address: "6th Niger Street",
     address_lat: "nan",
     address_lon: "nan",
-    headline: "",
-    description: "",
-    pricePerDevice: 0,
-    accomodationType: "",
-    currency: "",
+    headline: "New headline",
+    description: "Some good headline description",
+    pricePerDevice: 100,
+    accomodationType: "Hotel",
+    currency: "USD",
     rooms: [],
     listingImages: [],
     amenities: [],
     weeklyDiscount: 10,
-    nightlyDiscount: 0,
-    // New props, not in db or nest yet
+    nightlyDiscount: 10,
     isIndividual: true,
-    IndividualIdentificationNumber: "",
-    IndividualTaxFileNumber: "",
+    IndividualIdentificationNumber: "123",
+    IndividualTaxFileNumber: "33",
     CompanyIdentificationNumber: "",
     CompanyTaxFileNumber: "",
   };
@@ -82,11 +81,8 @@
           CompanyIdentificationNumber: "",
           CompanyTaxFileNumber: "",
         };
-        // -----
         currentPage = 1;
         done = true;
-
-        // revert back to the listing page
       })
       .catch((error) => error);
   }
@@ -233,25 +229,6 @@
                 images={newListing.listingImages}
                 onClickBack={() => (currentPage = currentPage - 1)}
                 onClickNext={() => {
-                  // let a = {
-                  //   isProperty: true,
-                  //   address: "",
-                  //   address_lat: "nan",
-                  //   address_lon: "nan",
-                  //   headline: "",
-                  //   description: "",
-                  //   accomodationType: "",
-                  //   currency: "",
-                  //   rooms: [],
-                  //   listingImages: [],
-                  //   weeklyDiscount: 10,
-                  //   nightlyDiscount: 0,
-                  //   isIndividual: true,
-                  //   IndividualIdentificationNumber: "",
-                  //   IndividualTaxFileNumber: "",
-                  //   CompanyIdentificationNumber: "",
-                  //   CompanyTaxFileNumber: "",
-                  // };
                   if (newListing.headline === "") {
                     errors = [...errors, "Please provide a headline"];
                   }

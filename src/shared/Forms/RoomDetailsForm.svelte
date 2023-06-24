@@ -2,6 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import { Offcanvas, Tooltip } from "sveltestrap";
   import Amenities from "./Amenities.svelte";
+  import config from "../../../environment.json";
 
   let dispatch = createEventDispatcher();
   export let room;
@@ -18,222 +19,27 @@
     isOpen = !isOpen;
   };
 
-  let AllAmeneties = [
-    // {
-    //   label: "Property",
-    //   description: `Add room packages and information about each room.`,
-    //   options: [
-    //     {
-    //       label: "Smoking Area",
-    //       checked: false,
-    //       id: 1,
-    //     },
-    //     {
-    //       label: "Shops",
-    //       checked: false,
-    //       id: 2,
-    //     },
-    //     {
-    //       label: "Wedding Facilities",
-    //       checked: false,
-    //       id: 3,
-    //     },
-    //     {
-    //       label: "Library",
-    //       checked: false,
-    //       id: 4,
-    //     },
-    //     {
-    //       label: "Gym",
-    //       checked: false,
-    //       id: 5,
-    //     },
-    //     {
-    //       label: "Spa",
-    //       checked: false,
-    //       id: 6,
-    //     },
-    //     {
-    //       label: "Sauna",
-    //       checked: false,
-    //       id: 7,
-    //     },
-    //     {
-    //       label: "Massage",
-    //       checked: false,
-    //       id: 8,
-    //     },
-    //     {
-    //       label: "Poolside bar",
-    //       checked: false,
-    //       id: 9,
-    //     },
-    //   ],
-    // },
-    // {
-    //   label: "Facilities",
-    //   description: `Add room packages and information about each room.`,
-    //   options: [
-    //     {
-    //       label: "Executive floot",
-    //       checked: false,
-    //       id: 10,
-    //     },
-    //     {
-    //       label: "Business center",
-    //       checked: false,
-    //       id: 11,
-    //     },
-    //     {
-    //       label: "Meetings Facilities",
-    //       checked: false,
-    //       id: 12,
-    //     },
-    //     {
-    //       label: "Executive Lounge",
-    //       checked: false,
-    //       id: 13,
-    //     },
-    //   ],
-    // },
-    // {
-    //   label: "Food and Drinks",
-    //   description: `Add room packages and information about each room.`,
-    //   options: [
-    //     {
-    //       label: "Cafe",
-    //       checked: false,
-    //       id: 14,
-    //     },
-    //     {
-    //       label: "Restaurant",
-    //       checked: false,
-    //       id: 15,
-    //     },
-    //     {
-    //       label: "Bar",
-    //       checked: false,
-    //       id: 16,
-    //     },
-    //     {
-    //       label: "Room Service",
-    //       checked: false,
-    //       id: 17,
-    //     },
-    //   ],
-    // },
-    {
-      label: "Room Ameneties",
-      description: `Add room packages and information about each room.`,
-      options: [
-        {
-          label: "Air Conditioning",
-          checked: false,
-          id: 18,
-        },
-        {
-          label: "Alarm Clock",
-          checked: false,
-          id: 19,
-        },
-        {
-          label: "Bathrobe",
-          checked: false,
-          id: 20,
-        },
-        {
-          label: "Bathroom Amenities",
-          checked: false,
-          id: 21,
-        },
-        {
-          label: "Bathtub",
-          checked: false,
-          id: 22,
-        },
-        {
-          label: "Hair Dryer",
-          checked: false,
-          id: 23,
-        },
-        {
-          label: "Hotel Key Cards",
-          checked: false,
-          id: 24,
-        },
-        {
-          label: "In-Room Safe",
-          checked: false,
-          id: 25,
-        },
-        {
-          label: "Minibar",
-          checked: false,
-          id: 26,
-        },
-        {
-          label: "Slippers",
-          checked: false,
-          id: 27,
-        },
-        {
-          label: "Smart TV",
-          checked: false,
-          id: 28,
-        },
-        {
-          label: "Smoke Detector",
-          checked: false,
-          id: 29,
-        },
-        {
-          label: "Sofa Couch",
-          checked: false,
-          id: 30,
-        },
-        {
-          label: "Stationary Kit",
-          checked: false,
-          id: 31,
-        },
-        {
-          label: "Study Table",
-          checked: false,
-          id: 32,
-        },
-        {
-          label: "Telephone",
-          checked: false,
-          id: 33,
-        },
-        {
-          label: "Tea/Coffee Maker",
-          checked: false,
-          id: 34,
-        },
-        {
-          label: "Tea/Coffee Sachet",
-          checked: false,
-          id: 35,
-        },
-        {
-          label: "Towel",
-          checked: false,
-          id: 36,
-        },
-        {
-          label: "Wardrobe",
-          checked: false,
-          id: 37,
-        },
-        {
-          label: "WIFI",
-          checked: false,
-          id: 38,
-        },
-      ],
-    },
-  ];
+  let AllAmeneties = [];
+
+  const getFacilities = async () => {
+    let headersList = {
+      Accept: "*/*",
+      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    };
+
+    let response = await fetch(
+      `${config.SERVER_IP}${config.SERVER_PORT}/facilities`,
+      {
+        method: "GET",
+        headers: headersList,
+      }
+    );
+
+    let data = await response.json();
+    AllAmeneties = data;
+  };
+
+  getFacilities().then((v) => {});
 
   let discountAvailable = false;
   let breakfastNotIncluded = false;

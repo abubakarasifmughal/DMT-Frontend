@@ -19,6 +19,7 @@
   let selectedRoom = [];
 
   let numOfDevices = 1;
+  let currentImageIndex = -1;
 
   $: listing = {};
 
@@ -198,7 +199,8 @@
               <div class="col-xl-6 mb-sm-4 mb-4" style="height: 460pt;">
                 <div
                   on:click={() =>
-                    (expandedImageUrl = listing.listingImages[0]?.address)}
+                    // (expandedImageUrl = listing.listingImages[0]?.address)}
+                    (currentImageIndex = 0)}
                   class="imageSpanned"
                   style="cursor: pointer;background-image: url({listing
                     .listingImages?.length > 0
@@ -216,7 +218,8 @@
                   >
                     <div
                       on:click={() =>
-                        (expandedImageUrl = listing.listingImages[1]?.address)}
+                        // (expandedImageUrl = listing.listingImages[1]?.address)}
+                        (currentImageIndex = 1)}
                       class="imageSpanned"
                       style="cursor: pointer;background-image: url({listing
                         .listingImages?.length > 1
@@ -232,7 +235,8 @@
                   >
                     <div
                       on:click={() =>
-                        (expandedImageUrl = listing.listingImages[2]?.address)}
+                        // (expandedImageUrl = listing.listingImages[2]?.address)}
+                        (currentImageIndex = 2)}
                       class="imageSpanned"
                       style="cursor: pointer;background-image: url({listing
                         .listingImages?.length > 2
@@ -249,9 +253,8 @@
                     style="height: 220pt;margin-bottom: 10pt;"
                   >
                     <div
-                      on:click={() =>
-                        (expandedImageUrl = listing.listingImages[3]?.address)}
-                      class="imageSpanned "
+                      on:click={() => (currentImageIndex = 3)}
+                      class="imageSpanned"
                       style="cursor: pointer;background-image: url({listing
                         .listingImages?.length > 3
                         ? config.SERVER_IP +
@@ -265,9 +268,8 @@
                     style="height: 220pt;margin-bottom: 10pt;"
                   >
                     <div
-                      on:click={() =>
-                        (expandedImageUrl = listing.listingImages[4]?.address)}
-                      class="imageSpanned "
+                      on:click={() => (currentImageIndex = 4)}
+                      class="imageSpanned"
                       style="cursor: pointer;background-image: url({listing
                         .listingImages?.length > 4
                         ? config.SERVER_IP +
@@ -341,7 +343,7 @@
             </div>
             <div class="col-md-5 p-5">
               <div class="sticky-top pt-5">
-                <div class="card shadow p-3 ">
+                <div class="card shadow p-3">
                   {#if listing.isOnsite}
                     <h3>Selected Rooms</h3>
                     <hr />
@@ -683,19 +685,36 @@
 <Modal
   size="xl"
   centered
-  isOpen={expandedImageUrl !== ""}
-  style="position:absolute;z-index: 3000;"
+  isOpen={currentImageIndex !== -1}
+  style="position:absolute;z-index: 3000;-webkit-user-select: none;user-select: none;"
 >
   <div class="modal-header">
-    {expandedImageUrl}
-    <button class="btn btn-close" on:click={() => (expandedImageUrl = "")} />
+    <button class="btn btn-close" on:click={() => (currentImageIndex = -1)} />
   </div>
   <div class="modal-body overflow-hidden">
+    ::{currentImageIndex}::
     <img
-      src={config.SERVER_IP + config.SERVER_PORT + expandedImageUrl}
+      src={config.SERVER_IP +
+        config.SERVER_PORT +
+        listing.listingImages[currentImageIndex]?.address}
       alt=""
-      style="width: 100%;object-fit:contain"
+      style="width: 100%;object-fit:contain;border-radius:10pt;"
     />
+  </div>
+  <div class="modal-foooter">
+    <div class="d-flex justify-content-end p-3">
+      <button
+        disabled={currentImageIndex === 0}
+        on:click={() => (currentImageIndex = currentImageIndex - 1)}
+        class="px-3 btn btn-light border me-3">Previous</button
+      >
+      <button
+        class="px-3 btn btn-light border"
+        disabled={currentImageIndex === 4}
+        on:click={() => (currentImageIndex = currentImageIndex + 1)}
+        >Next</button
+      >
+    </div>
   </div>
 </Modal>
 

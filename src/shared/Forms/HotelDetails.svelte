@@ -39,10 +39,10 @@
     rooms = [
       ...rooms,
       {
-        RoomCategory: "",
-        RoomDescription: "",
-        Quantity: 1,
-        Cost: 1,
+        RoomCategory: "My new Category",
+        RoomDescription: "Room Description",
+        Quantity: 2,
+        Cost: 100,
         DiscountedPrice: 0,
         Images: [],
         meta: [],

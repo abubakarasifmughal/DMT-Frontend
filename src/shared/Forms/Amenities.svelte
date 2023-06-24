@@ -4,8 +4,8 @@
   let dispatch = createEventDispatcher();
 
   export let title = "property";
-  export let amenitiesList = [];
-  export let selectedAmeneties = [];
+  export let amenitiesList;
+  export let selectedAmeneties;
 
   $: isPresent = (id) => selectedAmeneties.findIndex((a) => a === id) !== -1;
 </script>
@@ -22,10 +22,9 @@
   {#each amenitiesList as filter}
     <div class="mb-5">
       <h3>{filter.label}</h3>
-      <span>{filter.description}</span>
-      {#each filter.options as option}
+      {#each filter.facilityItems as option}
         <div>
-          <div class="mt-2 ">
+          <div class="mt-2">
             <button
               class="btn btn-light border col-12 text-start"
               style={(isPresent(option.id)
@@ -44,7 +43,7 @@
                 });
               }}
             >
-              {option.label}
+              {option.name}
             </button>
           </div>
         </div>

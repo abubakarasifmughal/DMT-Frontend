@@ -8,7 +8,7 @@
   import Listings from "../../../pages/Listings/Listings.svelte";
   import Login from "../../../pages/Login/Login.svelte";
   import Register from "../../../pages/Register/Register.svelte";
-  export let loginToken: string = "";
+  $: loggedIn = sessionStorage.getItem("loggedIn") === "1";
 </script>
 
 <div>
@@ -19,8 +19,11 @@
     <Route path="/listing" component={Listings} />
     <Route path="/listing/:id" component={ListingCheckout} />
     <Route path="/contact" component={Contact} />
-    <Route path="/dashboard" component={Dashboard} />
-    <Route path="/dashboard/:subpage" component={Dashboard} />
     <Route path="/faqs" component={FaQs} />
+    {#if loggedIn}
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/dashboard/:subpage" component={Dashboard} />
+    {/if}
+    <Route path="/**/*" component={Home} />
   </Router>
 </div>
