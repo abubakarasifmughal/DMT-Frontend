@@ -8,6 +8,7 @@
   import FeaturedAds from "./pages/FeaturedAds.svelte";
   import ListingsSubPage from "./pages/ListingsSubPage.svelte";
   import ReservationsManager from "./pages/ReservationsManager.svelte";
+  import { Modal } from "sveltestrap";
   export let subpage;
   subpage;
   export let location;
@@ -56,68 +57,90 @@
       ],
     },
   ];
+  $: loggedIn = sessionStorage.getItem("loggedIn") === "1";
 </script>
 
 <div style="overflow-x: hidden;width: 100vw;">
-  <Navbar2 color={"text-dark"} />
-  <div class="row border-top">
-    <div class="col-md-2 " style="font-size: large;">
-      <Link to="/dashboard/home" style="text-decoration:none">
-        <div class="col-12  text-dark sideBarTabs p-3 border-bottom text-start">
-          Home
-        </div>
-      </Link>
-      <Link to="/dashboard/inbox" style="text-decoration:none">
-        <div class="col-12 text-dark sideBarTabs p-3 border-bottom text-start">
-          Inbox
-        </div>
-      </Link>
-      <Link to="/dashboard/listings" style="text-decoration:none">
-        <div class="col-12 text-dark sideBarTabs p-3 border-bottom text-start">
-          Listings
-        </div>
-      </Link>
-      <Link to="/dashboard/reservations" style="text-decoration:none">
-        <div class="col-12 text-dark sideBarTabs p-3 border-bottom text-start">
-          Reservations
-        </div>
-      </Link>
-      <Link to="/dashboard/featured" style="text-decoration:none">
-        <div class="col-12 text-dark sideBarTabs p-3 border-bottom text-start">
-          Featured
-        </div>
-      </Link>
-      <Link to="/dashboard/amenities" style="text-decoration:none">
-        <div class="col-12 text-dark sideBarTabs p-3 border-bottom text-start">
-          Amenities
-        </div>
-      </Link>
+  {#if loggedIn}
+    <Navbar2 color={"text-dark"} />
+    <div class="row border-top">
+      <div class="col-md-2" style="font-size: large;">
+        <Link to="/dashboard/home" style="text-decoration:none">
+          <div
+            class="col-12 text-dark sideBarTabs p-3 border-bottom text-start"
+          >
+            Home
+          </div>
+        </Link>
+        <Link to="/dashboard/inbox" style="text-decoration:none">
+          <div
+            class="col-12 text-dark sideBarTabs p-3 border-bottom text-start"
+          >
+            Inbox
+          </div>
+        </Link>
+        <Link to="/dashboard/listings" style="text-decoration:none">
+          <div
+            class="col-12 text-dark sideBarTabs p-3 border-bottom text-start"
+          >
+            Listings
+          </div>
+        </Link>
+        <Link to="/dashboard/reservations" style="text-decoration:none">
+          <div
+            class="col-12 text-dark sideBarTabs p-3 border-bottom text-start"
+          >
+            Reservations
+          </div>
+        </Link>
+        <Link to="/dashboard/featured" style="text-decoration:none">
+          <div
+            class="col-12 text-dark sideBarTabs p-3 border-bottom text-start"
+          >
+            Featured
+          </div>
+        </Link>
+        <Link to="/dashboard/amenities" style="text-decoration:none">
+          <div
+            class="col-12 text-dark sideBarTabs p-3 border-bottom text-start"
+          >
+            Amenities
+          </div>
+        </Link>
+      </div>
+      <div
+        class="col-md-10 bg-light border-start border-bottom"
+        style="min-height: 90vh;"
+      >
+        {#if pathname === "home"}
+          <div class="text-center p-5">
+            <h3>Dashboards</h3>
+          </div>
+        {:else if pathname === "inbox"}
+          <div class="text-center p-5">
+            <h3>No Messages Yet</h3>
+            <span>All your messages will appear here</span>
+          </div>
+        {:else if pathname === "listings"}
+          <ListingsSubPage />
+        {:else if pathname === "reservations"}
+          <ReservationsManager />
+        {:else if pathname === "featured"}
+          <FeaturedAds />
+        {:else if pathname === "amenities"}
+          <AmenitiesManager {amenities} />
+        {/if}
+        <div style="height: 20vh;" />
+      </div>
     </div>
+  {:else}
     <div
-      class="col-md-10 bg-light border-start border-bottom"
-      style="min-height: 90vh;"
+      style="height: 100vh;display: flex;justify-content: center; align-items: center;flex-direction: column;"
     >
-      {#if pathname === "home"}
-        <div class="text-center p-5">
-          <h3>Dashboards</h3>
-        </div>
-      {:else if pathname === "inbox"}
-        <div class="text-center p-5">
-          <h3>No Messages Yet</h3>
-          <span>All your messages will appear here</span>
-        </div>
-      {:else if pathname === "listings"}
-        <ListingsSubPage />
-      {:else if pathname === "reservations"}
-        <ReservationsManager />
-      {:else if pathname === "featured"}
-        <FeaturedAds />
-      {:else if pathname === "amenities"}
-        <AmenitiesManager {amenities} />
-      {/if}
-      <div style="height: 20vh;" />
+      <h3>You need to Log in first</h3>
+      <Link to="/" class="btn btn-light border px-4">Go Back</Link>
     </div>
-  </div>
+  {/if}
 </div>
 
 <style>

@@ -20,10 +20,8 @@
     <Route path="/listing/:id" component={ListingCheckout} />
     <Route path="/contact" component={Contact} />
     <Route path="/faqs" component={FaQs} />
-    {#if loggedIn}
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/dashboard/:subpage" component={Dashboard} />
-    {/if}
+    <Route path="/dashboard" component={Dashboard} />
+    <Route path="/dashboard/:subpage" component={Dashboard} />
     <Route path="/**/*" component={Home} />
   </Router>
 </div>
