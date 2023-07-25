@@ -1,5 +1,7 @@
 {
-    "SERVER_IP": "http://162.254.35.133:3000",
-    "SERVER_IPO": "http://162.254.35.133:3000",
-    "SERVER_PORT": ""
+    "SERVER_IP": "http://127.0.0.1:3000",
+    "SERVER_IPO": "http://127.0.0.1:3000",
+    "SERVER_PORT": "",
+    "PP_CLIENT_ID": "AZSAMHysC9j9YzWFFNoWknfxVN46ERA70c1x1aUd0Lv_nFJO8PMRkKxUPrsPjxMRnjz5q9CWpawha372",
+    "PP_SECRET": "EBMkCUuXUANuM2TkiDYSPeZ5DIshpvczY9AYyjkyOnrDWryRwnY0VfTbTvKM_fiyOgG46EHztnrD-Zoh"
 }

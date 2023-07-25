@@ -21,6 +21,7 @@
     "vite": "^4.0.0"
   },
   "dependencies": {
+    "@paypal/paypal-js": "^6.0.0",
     "date-picker-svelte": "^2.2.5",
     "leaflet": "^1.9.3",
     "svelte-routing": "^1.6.0",

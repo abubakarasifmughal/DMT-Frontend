@@ -31,6 +31,12 @@
       </div>
     {/if}
     <h3>{room.RoomCategory}</h3>
+
+    <h5>Facilities</h5>
+    {#each room.facilities as amenity}
+      <div style="font-size: 13pt;">✓ {amenity.name}</div>
+    {/each}
+
     <div>{room.RoomDescription}</div>
   </div>
   <hr />

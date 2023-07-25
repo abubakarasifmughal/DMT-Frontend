@@ -1,5 +1,5 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<script>
+<script lang="ts">
   // @ts-nocheck
   import { onMount } from "svelte";
   import Finder from "../../shared/components/Finder/Finder.svelte";
@@ -10,6 +10,20 @@
   import { Icon, Modal } from "sveltestrap";
   import { DateInput } from "date-picker-svelte";
   import Review from "../../shared/Forms/Review.svelte";
+  import { loadScript, type PayPalNamespace } from "@paypal/paypal-js";
+  import Amenities from "../../shared/Forms/Amenities.svelte";
+
+  let paypal: PayPalNamespace;
+  function getPaypal(callback) {
+    loadScript({ clientId: config.PP_CLIENT_ID })
+      .then((paypal) => {
+        return callback(paypal);
+      })
+      .catch((err) => {
+        return callback(err);
+      });
+  }
+
   export let location;
   export let id;
   id;
@@ -58,7 +72,18 @@
   });
 
   function checkout() {
-    isCheckoutPopup = true;
+    getPaypal(async (pp: PayPalNamespace) => {
+      isCheckoutPopup = true;
+      try {
+        setTimeout(async () => {
+          console.log(document.getElementById("paypal-buttons"));
+          paypal = pp;
+          await paypal.Buttons().render("#paypal-buttons");
+        }, 2000);
+      } catch (error) {
+        console.log(error);
+      }
+    });
   }
 
   let isCheckoutPopup = false;
@@ -162,6 +187,12 @@
 
   let expandedImageUrl = "";
 </script>
+
+<svelte:head>
+  <script
+    src={`https://www.paypal.com/sdk/js?client-id=${config.PP_CLIENT_ID}&locale=en_US`}
+  ></script>
+</svelte:head>
 
 <div style="height: 100vh;width: 100%;overflow-x: hidden;">
   {#if expandedImageUrl === ""}
@@ -291,6 +322,12 @@
               <h2>Hotel Description</h2>
               <div style="font-size: large;">{listing.description}</div>
               <hr />
+              {#if listing.amenities.length}
+                <h2>Facilities</h2>
+                {#each listing.amenities as amenity}
+                  <div style="font-size: 15pt;">✓ {amenity.name}</div>
+                {/each}
+              {/if}
               <br />
               {#if listing.isOnsite}
                 <h3>
@@ -670,15 +707,24 @@
         <div style="font-size: 20pt;margin-top: 5pt;">Checking out...</div>
       </div>
     {/if}
+    <div
+      hidden={!(
+        information.people > 0 &&
+        information.firstname !== "" &&
+        information.lastname !== "" &&
+        information.contact_tel !== "" &&
+        information.contact_email !== "" &&
+        information.checkin_date !== "" &&
+        information.checkout_date !== ""
+      )}
+      id="paypal-buttons"
+    />
   </div>
   <div class="modal-footer">
     <button
       class="btn btn-sm"
       on:click={() => (isCheckoutPopup = !isCheckoutPopup)}>Cancel</button
     >
-    {#if information.people > 0 && information.firstname !== "" && information.lastname !== "" && information.contact_tel !== "" && information.contact_email !== "" && information.checkin_date !== "" && information.checkout_date !== ""}
-      <button class="btn btn-sm" on:click={finaliseOrder}>Checkout</button>
-    {/if}
   </div>
 </Modal>
 
